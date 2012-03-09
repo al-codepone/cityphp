@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>View Hierarchy</title>
+        <meta name="description" content=""/>
+        <meta charset="utf-8"/>
+        <link type="text/css" rel="stylesheet" href="styles.css"/>
+    </head>
+    <body>
+        <a href="index.html">< Home</a>
+        <h2>View Hierarchy</h2>
+        <p>The view hierarchy is the system you use to render structured documents like HTML documents. In this section we cover the view hierarchy concepts and then we use example applications to introduce the views that come with the framework. At the end of this section we will go over a more intricate view example so that you can better understand the view hierarchy. The source code for the examples in this section is available in the sample_applications directory as examples four through seven.</p>
+        <p>A view hierarchy is a tree of view objects. You build up your view hierarchy using object composition. Each view in a view hierarchy must implement the IView interface. The IView interface is located at /cityphp/IView.php. The IView interface defines a single public draw() method. Each view's draw() method must return the text that represents the view. Inside its draw() method, a parent view object should call draw() on all of its immediate child view objects. You get the complete document text by calling draw() on the root view object. It's important to realize that each view isn't necessarily a visual view that appears on screen; each view is actually a chunk of text that is part of a whole text document. For example, the HTML head tag is a view and the entire HTML document itself is a view.</p>
+        <p>The framework comes with three view classes: HtmlDoc, HtmlHead and HtmlBody. These three classes are in /cityphp/html/. HtmlDoc and HtmlHead can be both instantiated and extended. HtmlBody is an abstract class so you must extend it if you want to use it. When you're rendering an HTML document you should always use HtmlDoc or extend HtmlDoc for your root view class. On the other hand you don't have to use HtmlHead and HtmlBody; you can write your own HTML head and body classes but make sure they implement IView.</p>
+        <p>Let's do a simple example application that demonstrates how to use the view hierarchy. In this example we use HtmlDoc and HtmlHead from the framework and we write an HTML body class that does not extend HtmlBody. We need to write three files for this example application: constants.php, MessageHtmlBody.php and index.php. Here is constants.php:</p>
+        <pre>&lt;?php
+
+define('CITY_PHP', '/somedir/cityphp/');
+define('EXAMPLE4_PHP', '/somedir/example4php/');
+
+?&gt;</pre>
+        <p>MessageHtmlBody.php:</p>
+        <pre>&lt;?php
+
+require_once(CITY_PHP . 'IView.php');
+
+class MessageHtmlBody implements IView {
+    private $message;
+
+    public function __construct($message) {
+        $this-&gt;message = $message;
+    }
+
+    public function draw() {
+        return sprintf('&lt;body&gt;%s&lt;/body&gt;', $this-&gt;message);
+    }
+}
+
+?&gt;</pre>
+        <p>index.php:</p>
+        <pre>&lt;?php
+
+require_once('./constants.php');
+require_once(CITY_PHP . 'html/HtmlDoc.php');
+require_once(CITY_PHP . 'html/HtmlHead.php');
+require_once(EXAMPLE4_PHP . 'html/MessageHtmlBody.php');
+
+$tags = array('&lt;title&gt;My Message&lt;/title&gt;',
+    '&lt;meta name="description" content=""/&gt;');
+
+$htmlHead = new HtmlHead($tags);
+$htmlBody = new MessageHtmlBody('This is my message.');
+$htmlDoc = new HtmlDoc($htmlHead, $htmlBody);
+print $htmlDoc-&gt;draw();
+
+?&gt;</pre>
+        <p>Let's review the above example application. The constants.php file contains the required CITY_PHP constant and an EXAMPLE4_PHP application directory constant. Next is the MessageHtmlBody class. MessageHtmlBody is an HTML body class. You should think of HTML body classes as your base webpage templates. You can see that MessageHtmlBody simply wraps body tags around a message. Last is the index.php file. In index.php we first require_once() constants.php and all the classes we need for the script. Then we setup a tags array for our HTML head. Next we instantiate an HTML head and body. Next we instantiate an HtmlDoc object using our HTML head and body objects. Then we call draw() on the root HtmlDoc object to render the entire HTML document.</p>
+        <p>In the previous example application we saw how to use HtmlDoc and HtmlHead without extending them. In this next example application we will extend HtmlDoc and HtmlHead. We extend HtmlDoc in order to specify the document language. We extend HtmlHead in order to specify the document character set. This next example application is the same as the previous example except for our new HtmlDoc and HtmlHead child classes. For the next example we need to write five files: constants.php, MyHtmlDoc.php, MyHtmlHead.php, MessageHtmlBody.php and index.php. Here is constants.php:</p>
+        <pre>&lt;?php
+
+define('CITY_PHP', '/somedir/cityphp/');
+define('EXAMPLE5_PHP', '/somedir/example5php/');
+
+?&gt;</pre>
+        <p>MyHtmlDoc.php:</p>
+        <pre>&lt;?php
+
+require_once(CITY_PHP . 'html/HtmlDoc.php');
+
+class MyHtmlDoc extends HtmlDoc {
+    public function draw() {
+        return '&lt;!DOCTYPE html&gt;&lt;html lang="en"&gt;'
+            . $this-&gt;getHead()-&gt;draw()
+            . $this-&gt;getBody()-&gt;draw()
+            . '&lt;/html&gt;';
+    }
+}
+
+?&gt;</pre>
+        <p>MyHtmlHead.php:</p>
+        <pre>&lt;?php
+
+require_once(CITY_PHP . 'html/HtmlHead.php');
+
+class MyHtmlHead extends HtmlHead {
+    public function draw() {
+        return '&lt;head&gt;'
+            . $this-&gt;getTags()
+            . '&lt;meta charset="utf-8"/&gt;'
+            . '&lt;/head&gt;';
+    }
+}
+
+?&gt;</pre>
+        <p>MessageHtmlBody.php(exactly the same as in the previous example):</p>
+        <pre>&lt;?php
+
+require_once(CITY_PHP . 'IView.php');
+
+class MessageHtmlBody implements IView {
+    private $message;
+
+    public function __construct($message) {
+        $this-&gt;message = $message;
+    }
+
+    public function draw() {
+        return sprintf('&lt;body&gt;%s&lt;/body&gt;', $this-&gt;message);
+    }
+}
+
+?&gt;</pre>
+        <p>index.php:</p>
+        <pre>&lt;?php
+
+require_once('./constants.php');
+require_once(EXAMPLE5_PHP . 'html/MessageHtmlBody.php');
+require_once(EXAMPLE5_PHP . 'html/MyHtmlDoc.php');
+require_once(EXAMPLE5_PHP . 'html/MyHtmlHead.php');
+
+$tags = array('&lt;title&gt;My Message&lt;/title&gt;',
+    '&lt;meta name="description" content=""/&gt;');
+
+$htmlHead = new MyHtmlHead($tags);
+$htmlBody = new MessageHtmlBody('This is my message.');
+$htmlDoc = new MyHtmlDoc($htmlHead, $htmlBody);
+print $htmlDoc-&gt;draw();
+
+?&gt;</pre>
+        <p>The above constants.php is practically the same as in the previous example; the only difference is the EXAMPLE5_PHP constant. Let's look at the above MyHtmlDoc class. MyHtmlDoc extends HtmlDoc. The main reason to extend HtmlDoc is to override the draw() method and provide your own document type tag and html tag. When you override the HtmlDoc draw() method be sure to call draw() on the head and body objects by using the head and body getters like in the above MyHtmlDoc class. The only difference between the HtmlDoc draw() method and the MyHtmlDoc draw() method is the html tag lang attribute; the lang attribute is absent in HtmlDoc.</p>
+        <p>Now let's go over the above MyHtmlHead class. MyHtmlHead extends HtmlHead. The HtmlHead class is simple; HtmlHead takes an array of HTML tags via its constructor and wraps the head tag around all the passed in tags. MyHtmlHead extends HtmlHead in order to override draw() and hardcode in the charset tag. The reason why we hardcode in the charset tag is because it is used in all of our scripts and we don't want to have to duplicate passing it into HtmlHead in each script. When you override the HtmlHead draw() method be sure to call getTags() so that the passed in tags will continue to function properly. The only difference between HtmlHead and MyHtmlHead is the hard coded charset tag that exists in MyHtmlHead.</p>
+        <p>The above index.php is similar to the previous example. The only difference in index.php is that we use MyHtmlDoc and MyHtmlHead instead of HtmlDoc and HtmlHead.</p>
+        <p>The previous two examples did not use the built-in HtmlBody class. In this next example we will demonstrate how to use and extend HtmlBody. HtmlBody only has one special feature and it is an opening body tag. You should use HtmlBody when you need to conditionally set the HTML opening body tag. You set the opening body tag using the constructor. There is also a protected getter for the opening body tag. In your HtmlBody child class, the draw() method text must always begin with the opening body tag getter. The most common reason to use HtmlBody is for autofocusing an HTML form input. Thus, we will demonstrate HtmlBody by doing an autofocus example. For this example we need three files: constants.php, FormHtmlBody.php and index.php. Here is constants.php:</p>
+        <pre>&lt;?php
+
+define('CITY_PHP', '/somedir/cityphp/');
+define('EXAMPLE6_PHP', '/somedir/example6php/');
+define('ROOT', '/somedir/');
+
+?&gt;</pre>
+        <p>FormHtmlBody.php:</p>
+        <pre>&lt;?php
+
+require_once(CITY_PHP . 'html/HtmlBody.php');
+
+class FormHtmlBody extends HtmlBody {
+    public function draw() {
+        ob_start();
+        echo $this-&gt;getBodyTag();
+
+?&gt;
+&lt;form action="&lt;?php echo ROOT; ?&gt;" method="post"&gt;
+    &lt;div&gt;&lt;input type="text" id="xinput"/&gt;&lt;/div&gt;
+    &lt;div&gt;&lt;input type="submit" value="Submit"/&gt;&lt;/div&gt;
+&lt;/form&gt;&lt;/body&gt;
+&lt;?php
+
+        $ob = ob_get_contents();
+        ob_end_clean();
+        return $ob;
+    }
+}
+
+?&gt;</pre>
+        <p>index.php:</p>
+        <pre>&lt;?php
+
+require_once('./constants.php');
+require_once(CITY_PHP . 'html/HtmlDoc.php');
+require_once(CITY_PHP . 'html/HtmlHead.php');
+require_once(EXAMPLE6_PHP . 'html/FormHtmlBody.php');
+
+$bodyTag = $_GET['word'] == 'focus'
+    ? '&lt;body onLoad="document.getElementById(\'xinput\').focus();"&gt;'
+    : '&lt;body&gt;';
+
+$tags = array('&lt;title&gt;Autofocus Test&lt;/title&gt;',
+    '&lt;meta name="description" content=""/&gt;');
+
+$htmlHead = new HtmlHead($tags);
+$htmlBody = new FormHtmlBody($bodyTag);
+$htmlDoc = new HtmlDoc($htmlHead, $htmlBody);
+print $htmlDoc-&gt;draw();
+
+?&gt;</pre>
+        <p>Here's an example URL that will autofocus:</p>
+        <pre>http://mysite.com/root/?word=focus</pre>
+        <p>Let's review the above example application. The purpose of the above example is only to demonstrate the HtmlBody opening body tag. The example does use an HTML form, but we are not validating or processing the form at all; we're only autofocusing the form input using the opening body tag. From the above example URL you can see that the form input will autofocus if the GET 'word' variable is equal to 'focus'.</p>
+        <p>constants.php has the required CITY_PHP constant and an EXAMPLE6_PHP application directory constant. There is also a ROOT constant that must point to the application root. ROOT is used in FormHtmlBody as the form tag action attribute.</p>
+        <p>In FormHtmlBody the draw() method text begins with the getBodyTag() getter; your HtmlBody child class draw() method text must begin with getBodyTag(). The form submits to ROOT which is the application root. The text input has an 'xinput' id; we use this id in the HTML opening body tag in order to autofocus the form text input.</p>
+        <p>In index.php we first require_once() constants.php and all the classes we need for the script. Next we use the ternary operator to set the opening body tag; if GET 'word' is equal to 'focus' then we use JavaScript and the 'xinput' identifier to autofocus the text input. Finally we setup the HTML head, body and document objects. Note how we pass the bodyTag into the FormHtmlBody constructor.</p>
+        <p>Now that we've gone over three simple view examples, let's do a more complex example so that you can better understand the full capabilities of the view hierarchy system. In the following example we demonstrate how to build up more intricate view hierarchies and how to reuse views across multiple public facing PHP scripts. This next example web application is a website with three pages: home, gallery and contact. We need 10 files for this application: constants.php, styles.css, Example7HtmlHead.php, Example7HtmlBody.php, TextView.php, GalleryView.php, ContactFormView.php, index.php, gallery.php and contact.php. Here is constants.php:</p>
+        <pre>&lt;?php
+
+define('CITY_PHP', '/somedir/cityphp/');
+define('EXAMPLE7_PHP', '/somedir/example7php/');
+define('ROOT', '/somedir/');
+define('CONTACT', ROOT . 'contact.php');
+define('CSS', ROOT . 'css/');
+define('IMAGE', ROOT . 'image/');
+
+?&gt;</pre>
+        <p>styles.css:</p>
+        <pre>.gallery img {
+    float:left;
+    padding-right:12px;
+    padding-bottom:12px;
+}
+
+form &gt; div {
+    margin-bottom:14px;
+}
+
+#navigation {
+    padding-left:0px;
+    margin-left:0px;
+}
+
+#navigation li {
+    display:inline;
+    list-style-type:none;
+    padding-right:32px;
+}</pre>
+        <p>Example7HtmlHead.php:</p>
+        <pre>&lt;?php
+
+require_once(CITY_PHP . 'IView.php');
+
+class Example7HtmlHead implements IView {
+    private $title;
+
+    public function __construct($title) {
+        $this-&gt;title = $title;
+    }
+
+    public function draw() {
+        ob_start();
+
+?&gt;
+&lt;head&gt;
+    &lt;title&gt;&lt;?php echo $this-&gt;title; ?&gt;&lt;/title&gt;
+    &lt;meta name="description" content=""/&gt;
+    &lt;link type="text/css" rel="stylesheet" href="&lt;?php echo CSS; ?&gt;styles.css"/&gt;
+&lt;/head&gt;
+&lt;?php
+
+        $ob = ob_get_contents();
+        ob_end_clean();
+        return $ob;
+    }
+}
+
+?&gt;</pre>
+        <p>Example7HtmlBody.php:</p>
+        <pre>&lt;?php
+
+require_once(CITY_PHP . 'html/HtmlBody.php');
+require_once(CITY_PHP . 'IView.php');
+
+class Example7HtmlBody extends HtmlBody {
+    private $view;
+
+    public function __construct($bodyTag, IView $view) {
+        parent::__construct($bodyTag);
+        $this-&gt;view = $view;
+    }
+
+    public function draw() {
+        return sprintf('%s&lt;div&gt;%s%s&lt;/div&gt;&lt;/body&gt;',
+           $this-&gt;getBodyTag(),
+           $this-&gt;getNavigation(),
+           $this-&gt;view-&gt;draw());
+    }
+
+    private function getNavigation() {
+        $ob = '&lt;div&gt;&lt;ul id="navigation"&gt;';
+        $titles = array('Home', 'Gallery', 'Contact');
+        $scripts = array('', 'gallery.php', 'contact.php');
+
+        foreach($titles as $i =&gt; $title) {
+            $ob .= sprintf('&lt;li&gt;&lt;a href="%s%s"&gt;%s&lt;/a&gt;&lt;/li&gt;',
+               ROOT, $scripts[$i], $title);
+        }
+
+        $ob .= '&lt;/ul&gt;&lt;/div&gt;';
+        return $ob;
+    }
+}
+
+?&gt;</pre>
+        <p>TextView.php:</p>
+        <pre>&lt;?php
+
+require_once(CITY_PHP . 'IView.php');
+
+class TextView implements IView {
+    private $text;
+
+    public function __construct($text) {
+        $this-&gt;text = $text;
+    }
+
+    public function draw() {
+        return sprintf('&lt;div&gt;%s&lt;/div&gt;', $this-&gt;text);
+    }
+}
+
+?&gt;</pre>
+        <p>GalleryView.php:</p>
+        <pre>&lt;?php
+
+require_once(CITY_PHP . 'IView.php');
+
+class GalleryView implements IView {
+    private $imageUris;
+
+    public function __construct(array $imageUris) {
+        $this-&gt;imageUris = $imageUris;
+    }
+
+    public function draw() {
+        $ob = '&lt;div class="gallery"&gt;';
+
+        foreach($this-&gt;imageUris as $imageUri) {
+            $ob .= sprintf('&lt;img src="%s"/&gt;', $imageUri);
+        }
+
+        $ob .= '&lt;/div&gt;';
+        return $ob;
+    }
+}
+
+?&gt;</pre>
+        <p>ContactFormView.php:</p>
+        <pre>&lt;?php
+
+require_once(CITY_PHP . 'IView.php');
+
+class ContactFormView implements IView {
+    public function draw() {
+        ob_start();
+
+?&gt;
+&lt;div&gt;&lt;form action="&lt;?php echo CONTACT; ?&gt;" method="post"&gt;
+    &lt;div&gt;Name&lt;br/&gt;&lt;input type="text" id="xname"/&gt;&lt;/div&gt;
+    &lt;div&gt;Email&lt;br/&gt;&lt;input type="email"/&gt;&lt;/div&gt;
+    &lt;div&gt;Message&lt;br/&gt;&lt;textarea&gt;&lt;/textarea&gt;&lt;/div&gt;
+    &lt;div&gt;&lt;input type="submit" value="Send"/&gt;&lt;/div&gt;
+&lt;/form&gt;&lt;/div&gt;
+&lt;?php
+
+        $ob = ob_get_contents();
+        ob_end_clean();
+        return $ob;
+    }
+}
+
+?&gt;</pre>
+        <p>index.php:</p>
+        <pre>&lt;?php
+
+require_once('./constants.php');
+require_once(CITY_PHP . 'html/HtmlDoc.php');
+require_once(EXAMPLE7_PHP . 'html/Example7HtmlBody.php');
+require_once(EXAMPLE7_PHP . 'html/Example7HtmlHead.php');
+require_once(EXAMPLE7_PHP . 'html/TextView.php');
+
+$homeView = new TextView('Hi, welcome to my website.');
+$htmlHead = new Example7HtmlHead('Home');
+$htmlBody = new Example7HtmlBody('&lt;body&gt;', $homeView);
+$htmlDoc = new HtmlDoc($htmlHead, $htmlBody);
+print $htmlDoc-&gt;draw();
+
+?&gt;</pre>
+        <p>gallery.php:</p>
+        <pre>&lt;?php
+
+require_once('./constants.php');
+require_once(CITY_PHP . 'html/HtmlDoc.php');
+require_once(EXAMPLE7_PHP . 'html/Example7HtmlBody.php');
+require_once(EXAMPLE7_PHP . 'html/Example7HtmlHead.php');
+require_once(EXAMPLE7_PHP . 'html/GalleryView.php');
+
+$imageUris = array(IMAGE . 'm31.jpg',
+    IMAGE . 'bunny.jpg',
+    IMAGE . 'mona_lisa.jpg');
+
+$galleryView = new GalleryView($imageUris);
+$htmlHead = new Example7HtmlHead('Photo Gallery');
+$htmlBody = new Example7HtmlBody('&lt;body&gt;', $galleryView);
+$htmlDoc = new HtmlDoc($htmlHead, $htmlBody);
+print $htmlDoc-&gt;draw();
+
+?&gt;</pre>
+        <p>contact.php:</p>
+        <pre>&lt;?php
+
+require_once('./constants.php');
+require_once(CITY_PHP . 'html/HtmlDoc.php');
+require_once(EXAMPLE7_PHP . 'html/ContactFormView.php');
+require_once(EXAMPLE7_PHP . 'html/Example7HtmlBody.php');
+require_once(EXAMPLE7_PHP . 'html/Example7HtmlHead.php');
+
+$bodyTag = '&lt;body onLoad="document.getElementById(\'xname\').focus();"&gt;';
+$contactFormView = new ContactFormView();
+$htmlHead = new Example7HtmlHead('Contact Us');
+$htmlBody = new Example7HtmlBody($bodyTag, $contactFormView);
+$htmlDoc = new HtmlDoc($htmlHead, $htmlBody);
+print $htmlDoc-&gt;draw();
+
+?&gt;</pre>
+        <p>The above example application only serves as a view hierarchy demonstration. There is an HTML form in the above example but we don't validate or process the form at all. The above application architecture is mediocre at best. You can make the above application more extensible by using abstract classes. And you can make the above application easier to maintain by building a CMS.</p>
+        <p>In the above constants.php, there is the required CITY_PHP constant as well as an EXAMPLE7_PHP application directory constant. There's a ROOT constant that points to the application root; ROOT is used to build the three remaining constants. CONTACT is for the contact form action attribute. CSS points to the directory for CSS files and IMAGE points to the directory for image files. The next file, styles.css, has CSS for the image gallery, the contact form and the navigation.</p>
+        <p>In the first three example applications of this section we always used or extended the built-in HtmlHead class. Example7HtmlHead is a custom HTML head class that implements IView but does not extend HtmlHead. The reason why we do this is to simplify the instantiation of HTML head objects. With Example7HtmlHead we only need to pass the HTML title text to the constructor; we don't have to build up a tags array like in the previous examples. There is also an empty meta description and a style sheet hard coded into Example7HtmlHead.</p>
+        <p>Example7HtmlBody is the webpage template for index.php, gallery.php and contact.php. Example7HtmlBody extends HtmlBody so that the opening body tag is available. We need the opening body tag so that we can autofocus the contact form inputs. In the constructor we pass the opening body tag up to the parent constructor and we also define an additional view parameter. If you examine the Example7HtmlBody draw() method you can see how the webpage template is structured. First there is the body tag and inside the body tag there is a top level div. Inside the top level div there is a navigation div and a view div. Each view that we pass into the Example7HtmlBody constructor must be wrapped in a div.</p>
+        <p>There are three view types that we can pass into the Example7HtmlBody constructor: TextView, GalleryView and ContactFormView. TextView simply wraps a div around freeform HTML text. Even though we're only using TextView in index.php, we could use it again if for example there was an 'about us' page. GalleryView wraps a div around a set of image tags. Again GalleryView is only used in gallery.php, but if we had another gallery page we could reuse GalleryView. ContactFormView is the contact form and it is used in contact.php.</p>
+        <p>Last are the three public facing PHP scripts: index.php, gallery.php and contact.php. These scripts are similar but there are a couple differences to point out. First, each script passes a different view type to the Example7HtmlBody constructor as discussed above. Second, each script uses a different title parameter for the Example7HtmlHead constructor in order to indicate a fitting browser bar title. And last, contact.php uses a JavaScript opening body tag whereas index.php and gallery.php use a plain opening body tag.</p>
+        <p>This is the end of the view hierarchy section.</p>
+    </body>
+</html>

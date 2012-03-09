@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>File Structure</title>
+        <meta name="description" content=""/>
+        <meta charset="utf-8"/>
+        <link type="text/css" rel="stylesheet" href="styles.css"/>
+    </head>
+    <body>
+        <a href="index.html">< Home</a>
+        <h2>File Structure</h2>
+        <p>This section describes how to setup the file and directory structure for a cityphp web application. The first concept we cover is the application root. The application root is the directory your web application uses. For example if your web application is at http://mysite.com/myappdir/ then the application root is /myappdir/. If your web application is at http://mysite.com/ then the application root is /. If your web application is at http://mysite.com/dir1/dir2/dir3/ then the application root is /dir1/dir2/dir3/. It is important to realize that all cityphp web applications can use any application root. In other words a cityphp web application can live anywhere within your website.</p>
+        <p>Now let's take a look at the minimum required files needed for a cityphp web application. The easiest way to visualize this is to put all the required files and directories in the application root. Here is the minimum requirement:</p>
+        <pre>cityphp/
+myappphp/
+constants.php
+index.php</pre>
+        <p>The cityphp directory is the cityphp framework - we obviously need this. The cityphp framework directory contains all the classes and interfaces for the framework. You do not want to modify anything inside the cityphp framework directory. The myappphp directory is an application directory. An application directory contains all the classes and interfaces for a specific application or library. You always need at least one application directory because you always need to write at least one of your own classes when building a cityphp web application. constants.php is for application wide constants(more on this below). Lastly, you always need at least one public facing PHP script that your users can visit. In this case the public facing PHP script is index.php. Public facing PHP scripts bring together classes from the cityphp framework directory and application directories in order to render HTML documents, handle forms, perform database calls and more.</p>
+        <p>It is usually a bad idea to put the cityphp framework directory and your application directories in the application root. Instead you should put these directories somewhere outside the public web directory. Just realize that you can put the cityphp framework directory and your application directories anywhere. You point to the cityphp framework directory and your application directories using constants.php. Here is the minimum constants.php file:</p>
+        <pre>&lt;?php
+
+define('CITY_PHP', '/somedir/cityphp/');
+define('MY_APP_PHP', '/somedir/myappphp/');
+
+?&gt;</pre>
+        <p>You must always use the CITY_PHP constant and it must point to the cityphp framework directory using an absolute URI. You should always use at least one application directory constant. In this case we have a MY_APP_PHP application directory constant. Application directory constants should always point to the respective application directory using an absolute URI. The above constants.php is the minimum you need but here is a more typical example of what a constants.php file looks like:</p>
+        <pre>&lt;?php
+
+define('CITY_PHP', '/somedir/cityphp/');
+define('MY_APP_PHP', '/somedir/myappphp/');
+
+define('ROOT', '/');
+define('JAVASCRIPT', ROOT . 'javascript/');
+define('CSS', ROOT . 'css/');
+
+define('MYSQL_DATABASE_HOST', 'host');
+define('MYSQL_DATABASE_USERNAME', 'username');
+define('MYSQL_DATABASE_PASSWORD', 'password');
+define('MYSQL_DATABASE_NAME', 'databaseName');
+
+?&gt;</pre>
+        <p>In the above constants.php example we added a ROOT constant that points to the application root. We've also defined constants for JavaScript and CSS directories. Notice how the JavaScript and CSS directory constants use the ROOT constant. And finally we have defined some constants for database credentials. It's important that you use database credential constants because they help to improve the application architecture.</p>
+        <p>Now let's address the source code structure for class and interface files. Here is the source code structure your class and interface files should almost always use:</p>
+        <pre>&lt;?php
+
+//require_once() all the classes and interfaces used in this class or interface
+
+//write your class or interface here
+
+?&gt;</pre>
+        <p>From the above pseudocode you can see that the source code structure for class and interface files is simple. First require_once() all the classes and interfaces that the class or interface explicitly uses. Then write the class or interface below that. You should only implement one class or interface per file. The constants in constants.php will be available to your class and interface files without having to require_once() constants.php in the file. Take a look at the sample_applications directory for examples of class and interface files.</p>
+        <p>Let's discuss the source code structure for public facing PHP scripts. Here is the most basic source code structure for public facing PHP scripts:</p>
+        <pre>&lt;?php
+
+require_once('./constants.php');
+
+//require_once() your classes
+
+//perform logic for document rendering, form handling, database access etc..
+
+?&gt;</pre>
+        <p>From the above public facing PHP script, you can see that the first thing you want to do is require_once() constants.php. Next require_once() all the classes used in the script. Finally you want to use your classes to perform the logic for your PHP script. Check out the sample_applications directory for examples of public facing PHP scripts.</p>
+        <p>This concludes the section on file structure.</p>
+    </body>
+</html>

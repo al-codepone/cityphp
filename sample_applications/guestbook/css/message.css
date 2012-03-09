@@ -1,0 +1,21 @@
+body {
+    margin:0px;
+    padding:0px;
+    background-color:#ffffff;
+    font-family:verdana,arial,helvetica,sans-serif;
+}
+
+p.valid {
+    margin:46px 0px 0px 110px;
+    width:500px;
+    font-size:28px;
+}
+
+p.valid span {
+    color:#999999;
+}
+
+p.invalid {
+    margin:12px;
+    font-size:12px;
+}
