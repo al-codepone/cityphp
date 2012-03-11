@@ -10,7 +10,13 @@ class PostgreSqlDatabaseHandle extends DatabaseHandle {
         parent::__construct($errorMessage, $conn);
     }
 
-    public function readQuery($query) {
+    public function query($query) {
+        if(!pg_query($this->getConn(), $query)) {
+            $this->databaseError();
+        }
+    }
+
+    public function fetchQuery($query) {
         $i = -1;
         $rows = array();
         $result = pg_query($this->getConn(), $query);
@@ -29,12 +35,6 @@ class PostgreSqlDatabaseHandle extends DatabaseHandle {
         }
 
         return $rows;
-    }
-
-    public function writeQuery($query) {
-        if(!pg_query($this->getConn(), $query)) {
-            $this->databaseError();
-        }
     }
 
     public function escapeString($string) {

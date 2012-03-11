@@ -14,7 +14,13 @@ class MySqlDatabaseHandle extends DatabaseHandle {
         parent::__construct($errorMessage, $conn);
     }
 
-    public function readQuery($query) {
+    public function query($query) {
+        if(!mysqli_query($this->getConn(), $query)) {
+            $this->databaseError();
+        }
+    }
+
+    public function fetchQuery($query) {
         $i = -1;
         $rows = array();
         $result = mysqli_query($this->getConn(), $query);
@@ -33,12 +39,6 @@ class MySqlDatabaseHandle extends DatabaseHandle {
         }
 
         return $rows;
-    }
-
-    public function writeQuery($query) {
-        if(!mysqli_query($this->getConn(), $query)) {
-            $this->databaseError();
-        }
     }
 
     public function escapeString($string) {
