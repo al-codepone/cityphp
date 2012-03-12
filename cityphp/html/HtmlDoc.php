@@ -12,10 +12,9 @@ class HtmlDoc implements IView {
     }
 
     public function draw() {
-        return '<!DOCTYPE html><html>'
-            . $this->getHead()->draw()
-            . $this->getBody()->draw()
-            . '</html>';
+        return sprintf('<!DOCTYPE html><html>%s%s</html>',
+            $this->getHead()->draw(),
+            $this->getBody()->draw());
     }
 
     protected function getHead() {

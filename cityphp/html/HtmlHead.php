@@ -10,9 +10,7 @@ class HtmlHead implements IView {
     }
 
     public function draw() {
-        return '<head>'
-            . $this->getTags()
-            . '</head>';
+        return sprintf('<head>%s</head>', $this->getTags());
     }
 
     protected function getTags() {
