@@ -4,15 +4,15 @@
 require_once('./constants.php');
 require_once(CITY_PHP . 'html/HtmlDoc.php');
 require_once(CITY_PHP . 'pagination/Paginator.php');
-require_once(GUEST_BOOK_PHP . 'database/GuestBookDatabaseApiFactory.php');
+require_once(GUEST_BOOK_PHP . 'database/DatabaseApi.php');
 require_once(GUEST_BOOK_PHP . 'forms/NewMessageFormHandler.php');
 require_once(GUEST_BOOK_PHP . 'html/DefaultIndexHtmlBody.php');
 require_once(GUEST_BOOK_PHP . 'html/GuestBookHtmlHead.php');
 
 //
-$databaseApi = GuestBookDatabaseApiFactory::getDatabaseApi();
+$databaseApi = new DatabaseApi();
 $formHandler = new NewMessageFormHandler();
-$bodyTag = '<body onLoad="document.getElementById(\'xmessage\').focus();">';
+$isAutofocus = true;
 $formError = '';
 $formMessage = '';
 
@@ -21,7 +21,7 @@ if($formHandler->isReady()) {
     $message = $formHandler->getValue('xmessage');
 
     if(count($errors) > 0) {
-        $bodyTag = '<body>';
+        $isAutofocus = false;
         $formError = current($errors);
         $formMessage = $message;
     }
@@ -38,8 +38,9 @@ $headTags = array('<title>Guest Book</title>',
 
 //
 $htmlHead = new GuestBookHtmlHead($headTags);
-$htmlBody = new DefaultIndexHtmlBody($bodyTag,
-    $paginator,
+$htmlBody = new DefaultIndexHtmlBody($isAutofocus,
+    $paginator->getNumPages(),
+	$paginator->getCurrentPageNum(),
     $databaseApi->getMessages($paginator->getCurrentPageNum()),
     $formError,
     $formMessage);

@@ -4,11 +4,11 @@ require_once(GUEST_BOOK_PHP . 'html/IndexHtmlBody.php');
 
 class DefaultIndexHtmlBody extends IndexHtmlBody {
     public function draw() {
-        return sprintf('%s<div>%s%s%s</div></body>',
-            $this->getBodyTag(),
+        return sprintf('<body><div>%s%s%s</div>%s</body>',
             $this->getForm(),
             $this->getMessageList(),
-            $this->getPagination());
+            $this->getPagination(),
+            $this->getAutofocusScript());
     }
 
     protected function getForm() {
@@ -19,10 +19,9 @@ class DefaultIndexHtmlBody extends IndexHtmlBody {
             printf('<div class="error">%s</div>', $this->getFormError());
         }
 
-
 ?>
-<form action="<?php echo ROOT; ?>" method="post">
-    Message<br/><textarea name="xmessage" id="xmessage"><?php echo htmlspecialchars($this->getFormMessage()); ?></textarea><br/>
+<form action="<?=ROOT?>" method="post">
+    Message<br/><textarea name="xmessage" id="xmessage"><?=htmlspecialchars($this->getFormMessage())?></textarea><br/>
     <input type="submit" value="Post"/>
 </form></div>
 <?php
@@ -38,8 +37,7 @@ class DefaultIndexHtmlBody extends IndexHtmlBody {
 
             foreach($this->getMessages() as $message) {
                 $ob .= sprintf('<p><a href="%s?id=%s">%s</a>&nbsp;&nbsp;%s</p>',
-                    MESSAGE,
-                    $message->message_id,
+                    MESSAGE, $message->message_id,
                     date('M j, Y', $message->creation_date),
                     htmlspecialchars($message->message));
             }
@@ -55,11 +53,11 @@ class DefaultIndexHtmlBody extends IndexHtmlBody {
     protected function getPagination() {
         $ob = '';
 
-        if($this->getPaginator()->getNumPages() > 1) {
+        if($this->getNumPages() > 1) {
             $ob .= '<div>';
 
-            for($i = 1; $i <= $this->getPaginator()->getNumPages(); ++$i) {
-                $isCurrent = ($i == $this->getPaginator()->getCurrentPageNum());
+            for($i = 1; $i <= $this->getNumPages(); ++$i) {
+                $isCurrent = ($i == $this->getCurrentPageNum());
 
                 if($isCurrent) {
                     $ob .= $i;
@@ -77,6 +75,12 @@ class DefaultIndexHtmlBody extends IndexHtmlBody {
         }
 
         return $ob;
+    }
+
+    protected function getAutofocusScript() {
+        return $this->getIsAutoFocus()
+            ? "<script>document.getElementById('xmessage').focus();</script>"
+            : '';
     }
 }
 

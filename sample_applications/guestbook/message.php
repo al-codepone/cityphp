@@ -3,13 +3,13 @@
 //
 require_once('./constants.php');
 require_once(CITY_PHP . 'html/HtmlDoc.php');
-require_once(GUEST_BOOK_PHP . 'database/GuestBookDatabaseApiFactory.php');
+require_once(GUEST_BOOK_PHP . 'database/DatabaseApi.php');
 require_once(GUEST_BOOK_PHP . 'html/DefaultMessageHtmlBody.php');
 require_once(GUEST_BOOK_PHP . 'html/GuestBookHtmlHead.php');
 
 //
 $messageID = intval($_GET['id']);
-$databaseApi = GuestBookDatabaseApiFactory::getDatabaseApi();
+$databaseApi = new DatabaseApi();
 $currentMessage = $databaseApi->getMessage($messageID);
 $titleTag = $currentMessage->message_id != -1
     ? '<title>Message #' . $currentMessage->message_id . '</title>'
