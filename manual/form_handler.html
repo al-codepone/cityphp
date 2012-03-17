@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Form Handler</title>
+        <meta name="description" content=""/>
+        <meta charset="utf-8"/>
+        <link type="text/css" rel="stylesheet" href="styles.css"/>
+    </head>
+    <body>
+        <a href="index.html">< Home</a>
+        <h2>Form Handler</h2>
+        <p>To handle forms you extend the FormHandler class. You extend FormHandler in order to specify the form input names, the form input default values and the validator methods. Let's do a form handler example. First we have our MyFormHandler:</p>
+        <pre>&lt;?php
+
+require_once(CITY_PHP . 'forms/FormHandler.php');
+
+class MyFormHandler extends FormHandler {
+
+    //set the input names and their default values
+    public function __construct() {
+        $elementValues = array('input1' =&gt; '',
+                               'input2' =&gt; '',
+                               'input3' =&gt; '');
+
+        parent::__construct($elementValues);
+    }
+
+    /*
+    Write a validate_ method for each input name. Return
+    the empty string if the value is valid or an error
+    message otherwise. If you omit the validate_ method
+    then the respective input will always be valid. Validate
+    methods should only validate the individual input value.
+    */
+
+    protected function validate_input1($value) {
+        if(preg_match("/^[a-z0-9]{1,10}$/i", $value)) {
+            return '';
+        }
+
+        return 'input 1 is invalid';
+    }
+
+    protected function validate_input2($value) {
+        if(strlen($value) &gt;= 6) {
+            return '';
+        }
+
+        return 'input 2 is invalid';
+    }
+
+    //input3 is always valid since there is no validate_input3()
+}
+
+?&gt;</pre>
+        <p>Next is our form view:</p>
+        <pre>&lt;?php
+
+require_once(CITY_PHP . 'IView.php');
+
+class FormBody implements IView {
+    private $formValues;
+    private $error;
+
+    public function __construct(array $formValues, $error = '') {
+        $this-&gt;formValues = $formValues;
+        $this-&gt;error = $error;
+    }
+
+    public function draw() {
+        ob_start();
+        print('&lt;body&gt;');
+
+        if($this-&gt;error != '') {
+            printf('&lt;div&gt;%s&lt;/div&gt;', $this-&gt;error);
+        }
+
+?&gt;
+&lt;form action="&lt;?=$_SERVER['PHP_SELF']?&gt;" method="post"&gt;
+    &lt;div&gt;input1&lt;br/&gt;&lt;input type="text" name="input1" value="&lt;?=$this-&gt;shrink('input1')?&gt;"/&gt;&lt;/div&gt;
+    &lt;div&gt;input2&lt;br/&gt;&lt;input type="text" name="input2" value="&lt;?=$this-&gt;shrink('input2')?&gt;"/&gt;&lt;/div&gt;
+    &lt;div&gt;input3&lt;br/&gt;&lt;input type="text" name="input3" value="&lt;?=$this-&gt;shrink('input3')?&gt;"/&gt;&lt;/div&gt;
+    &lt;div&gt;&lt;input type="submit" value="Submit"/&gt;&lt;/div&gt;
+&lt;/form&gt;&lt;/body&gt;
+&lt;?php
+
+        $ob = ob_get_contents();
+        ob_end_clean();
+        return $ob;
+    }
+
+    private function shrink($inputName) {
+        return htmlspecialchars($this-&gt;formValues[$inputName]);
+    }
+}
+
+?&gt;</pre>
+        <p>A simple success view for a successful form submission:</p>
+        <pre>&lt;?php
+
+require_once(CITY_PHP . 'IView.php');
+
+class SuccessBody implements IView {
+    public function draw() {
+        return '&lt;body&gt;Form successfully submitted.&lt;/body&gt;';
+    }
+}
+
+?&gt;</pre>
+        <p>And finally the index.php which brings it all together:</p>
+        <pre>&lt;?php
+
+require_once('./constants.php');
+require_once('./classes/FormBody.php');
+require_once('./classes/MyFormHandler.php');
+require_once('./classes/SuccessBody.php');
+require_once(CITY_PHP . 'html/HtmlDoc.php');
+require_once(CITY_PHP . 'html/HtmlHead.php');
+
+$formHandler = new MyFormHandler();
+$htmlBody = null;
+
+//always check isReady() before calling validate()
+if($formHandler-&gt;isReady()) {
+
+    /*
+    Calling validate() will return an array of errors
+    keyed on the input name. validate() will also populate
+    the form handler values with the submitted values.
+    */
+    $errors = $formHandler-&gt;validate();
+
+    if(count($errors) &gt; 0) {
+
+        /*
+        Calling getValue() or getValues() after calling
+        validate() will yield the submitted form values
+        */
+        $htmlBody = new FormBody($formHandler-&gt;getValues(), current($errors));
+    }
+    else {
+        $htmlBody = new SuccessBody();
+    }
+}
+else {
+
+    /*
+    Calling getValue() or getValues() without first calling
+    validate() will yield the default form values
+    */
+    $htmlBody = new FormBody($formHandler-&gt;getValues());
+}
+
+$htmlHead = new HtmlHead(array('&lt;title&gt;Form Example&lt;/title&gt;'));
+$htmlDoc = new HtmlDoc($htmlHead, $htmlBody);
+print $htmlDoc-&gt;draw();
+
+?&gt;</pre>
+        <p><a href="paginator.html">Go to the next page: Paginator</a></p>
+    </body>
+</html>

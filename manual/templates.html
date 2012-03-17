@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Templates</title>
+        <meta name="description" content=""/>
+        <meta charset="utf-8"/>
+        <link type="text/css" rel="stylesheet" href="styles.css"/>
+    </head>
+    <body>
+        <a href="index.html">< Home</a>
+        <h2>Templates</h2>
+        <p>The template system is based on a single PHP interface that looks like this:</p>
+        <pre>&lt;?php
+
+interface IView {
+    public function draw();
+}
+
+?&gt;</pre>
+        <p>The draw method always returns a string that represents the view. A simple template would be a static template like this:</p>
+        <pre>&lt;?php
+
+require_once(CITY_PHP . 'IView.php');
+
+class MyDocument implements IView {
+    public function draw() {
+        return 'hello world';
+    }
+}
+
+?&gt;</pre>
+        <p>Then to use it our index.php would look like:</p>
+        <pre>&lt;?php
+
+//assume constants.php has CITY_PHP defined
+require_once('./constants.php');
+require_once('./classes/MyDocument.php');
+
+$myDocument = new MyDocument();
+print $myDocument-&gt;draw();
+
+?&gt;</pre>
+        <p>Let's try an HTML example. We'll use an HTML template that takes a title string and a body view:</p>
+        <pre>&lt;?php
+
+require_once(CITY_PHP . 'IView.php');
+
+class MyHtmlDoc implements IView {
+    private $title;
+    private $body;
+
+    public function __construct($title, IView $body) {
+        $this-&gt;title = $title;
+        $this-&gt;body = $body;
+    }
+
+    public function draw() {
+        return sprintf('&lt;!DOCTYPE html&gt;&lt;html&gt;
+            &lt;head&gt;&lt;title&gt;%s&lt;/title&gt;&lt;/head&gt;%s&lt;/html&gt;',
+            $this-&gt;title, $this-&gt;body-&gt;draw());
+    }
+}
+
+?&gt;</pre>
+        <p>Let's make a simple body view to use with it:</p>
+        <pre>&lt;?php
+
+require_once(CITY_PHP . 'IView.php');
+
+class MyBody implements IView {
+    public function draw() {
+        return '&lt;body&gt;hello world&lt;/body&gt;';
+    }
+}
+
+?&gt;</pre>
+        <p>Now we can go:</p>
+        <pre>&lt;?php
+
+require_once('./constants.php');
+require_once('./classes/MyBody.php');
+require_once('./classes/MyHtmlDoc.php');
+
+$myBody = new MyBody();
+$myDoc = new MyHtmlDoc('Hello', $myBody);
+print $myDoc-&gt;draw();
+
+?&gt;</pre>
+        <p>It turns out the framework comes with two views that are useful for rendering HTML documents: HtmlDoc and HtmlHead. Let's see how to use those. First let's make a simple body view to use with them:</p>
+        <pre>&lt;?php
+
+require_once(CITY_PHP . 'IView.php');
+
+class MyBody implements IView {
+    private $message;
+
+    public function __construct($message) {
+        $this-&gt;message = $message;
+    }
+
+    public function draw() {
+        return sprintf('&lt;body&gt;%s&lt;/body&gt;', $this-&gt;message);
+    }
+}
+
+?&gt;</pre>
+        <p>Now let's use HtmlDoc and HtmlHead with our body view:</p>
+        <pre>&lt;?php
+
+require_once('./constants.php');
+require_once('./classes/MyBody.php');
+require_once(CITY_PHP . 'html/HtmlDoc.php');
+require_once(CITY_PHP . 'html/HtmlHead.php');
+
+$headTags = array('&lt;title&gt;hello&lt;/title&gt;',
+    '&lt;meta charset="utf-8"/&gt;',
+    '&lt;meta name="description" content="hello world test"/&gt;');
+
+$head = new HtmlHead($headTags);
+$body = new MyBody('hello world');
+$doc = new HtmlDoc($head, $body);
+print $doc-&gt;draw();
+
+?&gt;</pre>
+        <p>It's useful to extend HtmlDoc and HtmlHead. Let's see how to extend both. Extend HtmlDoc to add a lang attribute:</p>
+        <pre>&lt;?php
+
+require_once(CITY_PHP . 'html/HtmlDoc.php');
+
+class MyHtmlDoc extends HtmlDoc {
+    private $lang;
+
+    public function __construct(IView $head, IView $body, $lang = 'en') {
+        parent::__construct($head, $body);
+        $this-&gt;lang = $lang;
+    }
+
+    public function draw() {
+        return sprintf('&lt;!DOCTYPE html&gt;&lt;html lang="%s"&gt;%s%s&lt;/html&gt;',
+            $this-&gt;lang,
+            $this-&gt;getHead()-&gt;draw(),
+            $this-&gt;getBody()-&gt;draw());
+    }
+}
+
+?&gt;</pre>
+        <p>Extend HtmlHead to permanently set the charset:</p>
+        <pre>&lt;?php
+
+require_once(CITY_PHP . 'html/HtmlHead.php');
+
+class MyHtmlHead extends HtmlHead {
+    public function draw() {
+        return sprintf('&lt;head&gt;&lt;meta charset="utf-8"/&gt;%s&lt;/head&gt;',
+           $this-&gt;getTags());
+    }
+}
+
+?&gt;</pre>
+        <p><a href="database_system.html">Go to the next page: Database System</a></p>
+    </body>
+</html>
