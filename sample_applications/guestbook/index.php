@@ -6,8 +6,8 @@ require_once(CITY_PHP . 'html/HtmlDoc.php');
 require_once(CITY_PHP . 'pagination/Paginator.php');
 require_once(GUEST_BOOK_PHP . 'database/DatabaseApi.php');
 require_once(GUEST_BOOK_PHP . 'forms/NewMessageFormHandler.php');
-require_once(GUEST_BOOK_PHP . 'html/DefaultIndexHtmlBody.php');
 require_once(GUEST_BOOK_PHP . 'html/GuestBookHtmlHead.php');
+require_once(GUEST_BOOK_PHP . 'html/IndexHtmlBody.php');
 
 //
 $databaseApi = new DatabaseApi();
@@ -38,7 +38,7 @@ $headTags = array('<title>Guest Book</title>',
 
 //
 $htmlHead = new GuestBookHtmlHead($headTags);
-$htmlBody = new DefaultIndexHtmlBody($isAutofocus,
+$htmlBody = new IndexHtmlBody($isAutofocus,
     $paginator->getNumPages(),
 	$paginator->getCurrentPageNum(),
     $databaseApi->getMessages($paginator->getCurrentPageNum()),

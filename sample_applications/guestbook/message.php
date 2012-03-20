@@ -4,8 +4,8 @@
 require_once('./constants.php');
 require_once(CITY_PHP . 'html/HtmlDoc.php');
 require_once(GUEST_BOOK_PHP . 'database/DatabaseApi.php');
-require_once(GUEST_BOOK_PHP . 'html/DefaultMessageHtmlBody.php');
 require_once(GUEST_BOOK_PHP . 'html/GuestBookHtmlHead.php');
+require_once(GUEST_BOOK_PHP . 'html/MessageHtmlBody.php');
 
 //
 $messageID = intval($_GET['id']);
@@ -21,7 +21,7 @@ $headTags = array($titleTag,
 
 //
 $htmlHead = new GuestBookHtmlHead($headTags);
-$htmlBody = new DefaultMessageHtmlBody($currentMessage);
+$htmlBody = new MessageHtmlBody($currentMessage);
 $htmlDoc = new HtmlDoc($htmlHead, $htmlBody);
 print $htmlDoc->draw();
 
