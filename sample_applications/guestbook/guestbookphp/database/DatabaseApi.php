@@ -12,15 +12,26 @@ class DatabaseApi extends MySqlDatabaseHandle {
     }
 
     public function install() {
-        $query = sprintf('CREATE TABLE %s (
+        $queries = array();
+
+        $queries[] = 'CREATE TABLE ' . TABLE_MESSAGES . ' (
             message_id MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
-            creation_date INT UNSIGNED NOT NULL DEFAULT 0,
+            user_id MEDIUMINT UNSIGNED NOT NULL,
+            creation_date DATETIME,
             message TEXT NOT NULL DEFAULT "",
             PRIMARY KEY (message_id))
-            ENGINE = MYISAM',
-            TABLE_MESSAGES);
+            ENGINE = MYISAM';
 
-        $this->query($query);
+        $queries[] = 'CREATE TABLE ' . TABLE_USERS . ' (
+            user_id MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
+			username VARCHAR(32) NOT NULL DEFAULT "",
+            password VARCHAR(128) NOT NULL DEFAULT "",
+            PRIMARY KEY (user_id))
+            ENGINE = MYISAM';
+
+        foreach($queries as $query) {
+            $this->query($query);
+        }
     }
 
     public function getNumMessages() {
@@ -50,11 +61,42 @@ class DatabaseApi extends MySqlDatabaseHandle {
         return $messages;
     }
 
-    public function addMessage($message) {
-        $query = sprintf('INSERT INTO %s (message_id, creation_date, message) VALUES(NULL, %d, "%s")',
-            TABLE_MESSAGES, time(), $this->escapeString($message));
+    public function addMessage($message, $userID) {
+        $query = sprintf('INSERT INTO %s (message_id, user_id, creation_date, message) VALUES(NULL, %d, "%s", "%s")',
+            TABLE_MESSAGES, $userID, date('Y-m-d H:i:s'), $this->escapeString($message));
 
         $this->query($query);
+    }
+
+    public function getUserWithUsername($username) {
+        $query = sprintf('SELECT user_id, username, password FROM %s WHERE username = "%s"',
+            TABLE_USERS, $this->escapeString($username));
+
+        $queryData = $this->fetchQuery($query);
+        return $queryData[0];
+    }
+
+    public function addUser($username, $password) {
+        $query = sprintf('INSERT INTO %s (user_id, username, password) VALUES(NULL, "%s", "%s")',
+            TABLE_USERS, $this->escapeString($username), $this->escapeString($password));
+
+        $this->query($query);
+    }
+
+    public function updateUsername($username, $userID) {
+        $query = sprintf('UPDATE %s SET username = "%s" WHERE user_id = %d',
+            TABLE_USERS, $this->escapeString($username), $userID);
+
+        $this->query($query);
+    }
+
+    public function getLoggedInUser() {
+        if(isset($_SESSION[SESSION_USER_ID])) {
+            return array('user_id' => $_SESSION[SESSION_USER_ID],
+                         'username' => $_SESSION[SESSION_USERNAME]);
+        }
+
+        return NULL;
     }
 
     private function getMessageData(array $data) {
