@@ -5,21 +5,21 @@ require_once(CITY_PHP . 'IView.php');
 class Pagination implements IView {
     private $numPages;
     private $currentPageNum;
-	private $urlBase;
+    private $urlBase;
     private $urlFragment;
 
     public function __construct($numPages, $currentPageNum, $urlBase, $urlFragment) {
         $this->numPages = $numPages;
         $this->currentPageNum = $currentPageNum;
-		$this->urlBase = $urlBase;
-		$this->urlFragment = $urlFragment;
+        $this->urlBase = $urlBase;
+        $this->urlFragment = $urlFragment;
     }
 
     public function draw() {
         $ob = '';
 
         if($this->numPages > 1) {
-            $ob .= '<div>';
+            $ob .= '<div class="pagination">';
 
             for($i = 1; $i <= $this->numPages; ++$i) {
                 $isCurrent = ($i == $this->currentPageNum);

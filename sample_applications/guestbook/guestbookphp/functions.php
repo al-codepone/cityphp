@@ -14,4 +14,12 @@ function getHash($input, $salt = NULL) {
     return crypt($input, $salt);
 }
 
+function getRoute(array $routes, $key = 'r') {
+    foreach($routes as $route => $script) {
+        if($route == $_GET[$key]) {
+            return $script;
+        }
+    }
+}
+
 ?>

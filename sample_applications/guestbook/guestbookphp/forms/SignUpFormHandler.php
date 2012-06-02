@@ -15,7 +15,7 @@ class SignUpFormHandler extends FormHandler {
             return '';
         }
 
-        return 'invalid username';
+        return 'Invalid username';
     }
 
     protected function validate_xpassword($value) {
@@ -23,7 +23,7 @@ class SignUpFormHandler extends FormHandler {
             return '';
         }
 
-        return 'invalid password';
+        return 'Invalid password';
     }
 }
 

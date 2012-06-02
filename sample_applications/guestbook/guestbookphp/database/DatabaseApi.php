@@ -1,7 +1,6 @@
 <?php
 
 require_once(CITY_PHP . 'database/MySqlDatabaseHandle.php');
-require_once(GUEST_BOOK_PHP . 'database/MessageData.php');
 
 class DatabaseApi extends MySqlDatabaseHandle {
     public function __construct() {
@@ -45,20 +44,14 @@ class DatabaseApi extends MySqlDatabaseHandle {
             TABLE_MESSAGES, $messageID);
 
         $queryData = $this->fetchQuery($query);
-        return (count($queryData) == 1) ? $this->getMessageData($queryData[0]) : new MessageData();
+        return $queryData[0];
     }
 
     public function getMessages($pageNum) {
         $query = sprintf('SELECT message_id, creation_date, message FROM %s ORDER BY creation_date DESC LIMIT %d, %d',
             TABLE_MESSAGES, ($pageNum - 1)*MESSAGES_PER_PAGE, MESSAGES_PER_PAGE);
 
-        $queryData = $this->fetchQuery($query);
-        $messages = array();
-        foreach($queryData as $data) {
-            $messages[] = $this->getMessageData($data);
-        }
-
-        return $messages;
+        return $this->fetchQuery($query);
     }
 
     public function addMessage($message, $userID) {
@@ -95,12 +88,6 @@ class DatabaseApi extends MySqlDatabaseHandle {
             return array('user_id' => $_SESSION[SESSION_USER_ID],
                          'username' => $_SESSION[SESSION_USERNAME]);
         }
-
-        return NULL;
-    }
-
-    private function getMessageData(array $data) {
-        return new MessageData($data['message_id'], $data['creation_date'], $data['message']);
     }
 }
 

@@ -21,12 +21,12 @@ class GuestBookHtmlBody implements IView {
         $ob = '<div id="navigation"><ul>';
 
         if($this->user) {
-            $ob .= sprintf('<li><a href="%s">%s</a></li>
-                <li><a href="%s">home</a></li>
+            $ob .= sprintf('<li><a href="%s">home</a></li>
                 <li><a href="%s">settings</a></li>
-                <li><a href="%s">log out</a></li>',
-                ROOT . $this->user['username'], $this->user['username'],
-                ROOT, SETTINGS, LOG_OUT);
+                <li><a href="%s">log out</a></li>
+                <li><a href="%s">%s</a></li>',
+                ROOT, SETTINGS, LOG_OUT,
+                USER . $this->user['username'], $this->user['username']);
         }
         else {
             $ob .= sprintf('<li><a href="%s">home</a></li>

@@ -6,14 +6,16 @@ class Home implements IView {
     private $user;
     private $messageList;
     private $pagination;
-    private $formError;
+    private $error;
 
-    public function __construct($user, IView $messageList,
-                                IView $pagination, $formError) {
+    public function __construct($user,
+                                MessageList $messageList,
+                                Pagination $pagination,
+                                $error) {
         $this->user = $user;
         $this->messageList = $messageList;
         $this->pagination = $pagination;
-        $this->formError = $formError;
+        $this->error = $error;
     }
 
     public function draw() {
@@ -30,8 +32,8 @@ class Home implements IView {
         ob_start();
         print '<div>';
 
-        if($this->formError) {
-            printf('<div class="error">%s</div>', $this->formError);
+        if($this->error) {
+            printf('<div class="error">%s</div>', $this->error);
         }
 
 ?>
@@ -41,9 +43,7 @@ class Home implements IView {
 </form></div>
 <?php
 
-        $ob = ob_get_contents();
-        ob_end_clean();
-        return $ob;
+        return ob_get_clean();
     }
 }
 

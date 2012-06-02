@@ -13,7 +13,7 @@ class SettingsFormHandler extends FormHandler {
             return '';
         }
 
-        return 'invalid username';
+        return 'Invalid username';
     }
 }
 

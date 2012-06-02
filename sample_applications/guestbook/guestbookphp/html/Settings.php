@@ -14,7 +14,7 @@ class Settings implements IView {
     public function draw() {
         ob_start();
 
-        if($this->error != '') {
+        if($this->error) {
             printf('<div class="error">%s</div>', $this->error);
         }
 
@@ -25,9 +25,7 @@ class Settings implements IView {
 </form>
 <?php
 
-        $ob = ob_get_contents();
-        ob_end_clean();
-        return $ob;
+        return ob_get_clean();
     }
 }
 

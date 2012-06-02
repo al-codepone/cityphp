@@ -1,0 +1,4 @@
+RewriteEngine On
+RewriteRule ^(signup|login|settings)$ ./?r=$1 [NC,L]
+RewriteRule ^message/(\d+)$ ./?r=message&id=$1 [NC,L]
+RewriteRule ^logout$ ./logout.php [NC,L]

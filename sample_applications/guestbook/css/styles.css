@@ -1,0 +1,50 @@
+body {
+    background-color:#ffffff;
+}
+
+#main {
+    width:400px;
+}
+
+#navigation {
+    padding:3px;
+    background-color:#eeeeee;
+}
+
+#navigation ul {
+    padding:0;
+    margin:0;
+    list-style-type:none;
+}
+
+#navigation ul li {
+    display: inline;
+    padding-right: 20px;
+}
+
+.error {
+    color:#ff0000;
+    margin-bottom:14px;
+}
+
+#xmessage {
+    width:360px;
+    height:56px;
+}
+
+.message {
+    margin-top:14px;
+}
+
+.lonemessage {
+    font-size:28px;
+}
+
+.lonemessage span {
+    color:#999999;
+	margin-right:10px;
+}
+
+.pagination {
+    margin-top:16px;
+}

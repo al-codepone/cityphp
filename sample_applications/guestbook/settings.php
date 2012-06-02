@@ -1,23 +1,12 @@
 <?php
 
 //
-session_start();
-
-//
-require_once('./constants.php');
-require_once(CITY_PHP . 'html/HtmlDoc.php');
-require_once(GUEST_BOOK_PHP . 'database/DatabaseApi.php');
 require_once(GUEST_BOOK_PHP . 'forms/SettingsFormHandler.php');
 require_once(GUEST_BOOK_PHP . 'html/DisplayMessage.php');
-require_once(GUEST_BOOK_PHP . 'html/GuestBookHtmlBody.php');
-require_once(GUEST_BOOK_PHP . 'html/GuestBookHtmlHead.php');
 require_once(GUEST_BOOK_PHP . 'html/Settings.php');
 
 //
-$databaseApi = new DatabaseApi();
-$user = $databaseApi->getLoggedInUser();
 $formHandler = new SettingsFormHandler();
-$content = NULL;
 
 if(!$user) {
     $content = new DisplayMessage('Login to access the settings page.');
@@ -46,11 +35,7 @@ else {
     $content = new Settings($user['username']);
 }
 
-//
-$htmlHead = new GuestBookHtmlHead();
-$htmlBody = new GuestBookHtmlBody($user, $content);
-$htmlDoc = new HtmlDoc($htmlHead, $htmlBody);
-
-print $htmlDoc->draw();
+array_push($headTags, '<title>Settings</title>',
+   '<meta name="description" content=""/>');
 
 ?>

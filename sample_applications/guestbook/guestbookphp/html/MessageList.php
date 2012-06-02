@@ -10,21 +10,21 @@ class MessageList implements IView {
     }
 
     public function draw() {
-        if(count($this->messages) > 0) {
+        if($this->messages) {
             $ob = '<div>';
 
             foreach($this->messages as $message) {
-                $ob .= sprintf('<p><a href="%s?id=%s">%s</a>&nbsp;&nbsp;%s</p>',
-                    MESSAGE, $message->message_id,
-                    date('M j, Y', strtotime($message->creation_date)),
-                    htmlspecialchars($message->message));
+                $ob .= sprintf('<div class="message"><a href="%s%s">%s</a> %s</div>',
+                    MESSAGE, $message['message_id'],
+                    date('M j, Y', strtotime($message['creation_date'])),
+                    htmlspecialchars($message['message']));
             }
 
             $ob .= '</div>';
             return $ob;
         }
         else {
-            return '<div><p>There\'s nothing here.</p></div>';
+            return "<div>There's nothing here.</div>";
         }
     }
 }
