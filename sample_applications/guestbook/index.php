@@ -21,6 +21,7 @@ $routes = array(NULL => 'home.php',
 'signup' => 'signup.php',
 'login' => 'login.php',
 'settings' => 'settings.php',
+'chngpass' => 'change_password.php',
 'message' => 'message.php');
 
 require_once(getRoute($routes));

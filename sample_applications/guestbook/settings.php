@@ -27,7 +27,7 @@ else if($formHandler->isReady()) {
         else {
             $databaseApi->updateUsername($username, $user['user_id']);
             $_SESSION[SESSION_USERNAME] = $user['username'] = $username;
-            $content = new DisplayMessage('Your username has been changed.');
+            $content = new DisplayMessage('Your username has been changed.', true);
         }
     }
 }

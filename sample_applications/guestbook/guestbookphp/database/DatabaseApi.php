@@ -83,6 +83,13 @@ class DatabaseApi extends MySqlDatabaseHandle {
         $this->query($query);
     }
 
+    public function updatePassword($password, $userID) {
+        $query = sprintf('UPDATE %s SET password = "%s" WHERE user_id = %d',
+            TABLE_USERS, $this->escapeString($password), $userID);
+
+        $this->query($query);
+    }
+
     public function getLoggedInUser() {
         if(isset($_SESSION[SESSION_USER_ID])) {
             return array('user_id' => $_SESSION[SESSION_USER_ID],

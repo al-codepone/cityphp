@@ -3,12 +3,10 @@
 require_once(CITY_PHP . 'IView.php');
 require_once(GUEST_BOOK_PHP . 'html/SettingsMenu.php');
 
-class Settings implements IView {
-    private $username;
+class ChangePassword implements IView {
     private $error;
 
-    public function __construct($username = '', $error = '') {
-        $this->username = htmlspecialchars($username);
+    public function __construct($error = '') {
         $this->error = $error;
     }
 
@@ -23,8 +21,10 @@ class Settings implements IView {
         }
 
 ?>
-<form action="<?=SETTINGS?>" method="post">
-    <div><div>Username</div><div><input type="text" name="xusername" value="<?=$this->username?>"/></div></div>
+<form action="<?=CHANGE_PASSWORD?>" method="post">
+    <div><div>Current Password</div><div><input type="password" name="xcurrpass"/></div></div>
+    <div><div>New Password</div><div><input type="password" name="xnewpass"/></div></div>
+    <div><div>Retype New Password</div><div><input type="password" name="xrepass"/></div></div>
     <div><input type="submit" value="Submit"/></div>
 </form>
 <?php
