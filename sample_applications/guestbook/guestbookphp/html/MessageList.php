@@ -14,9 +14,12 @@ class MessageList implements IView {
             $ob = '<div>';
 
             foreach($this->messages as $message) {
-                $ob .= sprintf('<div class="message"><a href="%s%s">%s</a> %s</div>',
-                    MESSAGE, $message['message_id'],
+                $ob .= sprintf('<div class="message">
+                    <div><a href="%s%s">%s</a> on %s | <a href="%s%s">link</a></div>
+                    <div>%s</div></div>',
+                    USER, $message['username'], $message['username'],
                     date('M j, Y', strtotime($message['creation_date'])),
+                    MESSAGE, $message['message_id'],
                     htmlspecialchars($message['message']));
             }
 

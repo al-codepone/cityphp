@@ -10,7 +10,9 @@ class Message implements IView {
     }
 
     public function draw() {
-        return sprintf('<div class="lonemessage"><span>%s</span>%s</div>',
+        return sprintf('<div class="lonemessage">
+            <div><a href="%s%s">%s</a> on %s</div><div>%s</div></div>',
+            USER, $this->message['username'], $this->message['username'],
             date('M j, Y', strtotime($this->message['creation_date'])),
             htmlspecialchars($this->message['message']));
     }

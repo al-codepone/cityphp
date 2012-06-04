@@ -40,16 +40,19 @@ class DatabaseApi extends MySqlDatabaseHandle {
     }
 
     public function getMessage($messageID) {
-        $query = sprintf('SELECT message_id, creation_date, message FROM %s WHERE message_id = %d',
-            TABLE_MESSAGES, $messageID);
+        $query = sprintf('SELECT message_id, creation_date, message, username
+            FROM %s, %s WHERE messages.user_id = users.user_id AND message_id = %d',
+            TABLE_MESSAGES, TABLE_USERS, $messageID);
 
         $queryData = $this->fetchQuery($query);
         return $queryData[0];
     }
 
     public function getMessages($pageNum) {
-        $query = sprintf('SELECT message_id, creation_date, message FROM %s ORDER BY creation_date DESC LIMIT %d, %d',
-            TABLE_MESSAGES, ($pageNum - 1)*MESSAGES_PER_PAGE, MESSAGES_PER_PAGE);
+        $query = sprintf('SELECT message_id, creation_date, message, username
+            FROM %s, %s WHERE messages.user_id = users.user_id
+            ORDER BY creation_date DESC LIMIT %d, %d',
+            TABLE_MESSAGES, TABLE_USERS, ($pageNum - 1)*MESSAGES_PER_PAGE, MESSAGES_PER_PAGE);
 
         return $this->fetchQuery($query);
     }
