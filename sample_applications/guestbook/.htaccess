@@ -1,5 +1,6 @@
 RewriteEngine On
 RewriteRule ^(signup|login|settings|chngpass)$ ./?r=$1 [NC,L]
+RewriteRule ^(\d+)$ ./?p=$1 [NC,L]
 RewriteRule ^message/(\d+)$ ./?r=message&id=$1 [NC,L]
 RewriteRule ^user/([a-z0-9]{4,16})$ ./?r=user&username=$1 [NC,L]
 RewriteRule ^user/([a-z0-9]{4,16})/(\d+)$ ./?r=user&username=$1&p=$2 [NC,L]

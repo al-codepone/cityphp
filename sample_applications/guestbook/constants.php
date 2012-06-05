@@ -27,6 +27,6 @@ define('SESSION_USERNAME', 'username');
 define('TABLE_MESSAGES', 'messages');
 define('TABLE_USERS', 'users');
 
-define('MESSAGES_PER_PAGE', 10);
+define('MESSAGES_PER_PAGE', 5);
 
 ?>

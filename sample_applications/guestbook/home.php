@@ -28,7 +28,7 @@ $paginator = new Paginator($databaseApi->getNumMessages(), MESSAGES_PER_PAGE, $c
 $messages = $databaseApi->getMessages($paginator->getCurrentPageNum());
 $messageList = new MessageList($messages);
 $pagination = new Pagination($paginator->getNumPages(),
-    $paginator->getCurrentPageNum(), ROOT, '?p=');
+    $paginator->getCurrentPageNum(), ROOT);
 
 $content = new Home($user, $messageList, $pagination, $formError);
 array_push($headTags, '<title>Guest Book</title>',
