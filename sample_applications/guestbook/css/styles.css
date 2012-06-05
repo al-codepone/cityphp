@@ -56,7 +56,7 @@ body {
 }
 
 .lonemessage {
-    font-size:28px;
+    font-size:1.5em;
 }
 
 .lonemessage span {
@@ -66,4 +66,8 @@ body {
 
 .pagination {
     margin-top:16px;
+}
+
+.usertitle {
+    font-size:1.75em;
 }

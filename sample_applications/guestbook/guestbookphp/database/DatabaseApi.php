@@ -34,7 +34,15 @@ class DatabaseApi extends MySqlDatabaseHandle {
     }
 
     public function getNumMessages() {
-        $query = sprintf('SELECT COUNT(*) AS count FROM %s', TABLE_MESSAGES);
+        $query = 'SELECT COUNT(*) AS count FROM ' . TABLE_MESSAGES;
+        $queryData = $this->fetchQuery($query);
+        return $queryData[0]['count'];
+    }
+
+    public function getNumUserMessages($userID) {
+        $query = sprintf('SELECT COUNT(*) AS count FROM %s WHERE user_id = %d',
+            TABLE_MESSAGES, $userID);
+
         $queryData = $this->fetchQuery($query);
         return $queryData[0]['count'];
     }
@@ -50,9 +58,20 @@ class DatabaseApi extends MySqlDatabaseHandle {
 
     public function getMessages($pageNum) {
         $query = sprintf('SELECT message_id, creation_date, message, username
-            FROM %s, %s WHERE messages.user_id = users.user_id
+            FROM %s, %s
+            WHERE messages.user_id = users.user_id
             ORDER BY creation_date DESC LIMIT %d, %d',
             TABLE_MESSAGES, TABLE_USERS, ($pageNum - 1)*MESSAGES_PER_PAGE, MESSAGES_PER_PAGE);
+
+        return $this->fetchQuery($query);
+    }
+
+    public function getUserMessages($pageNum, $userID) {
+        $query = sprintf('SELECT message_id, creation_date, message, username
+            FROM %s, %s
+            WHERE messages.user_id = %d AND messages.user_id = users.user_id
+            ORDER BY creation_date DESC LIMIT %d, %d',
+            TABLE_MESSAGES, TABLE_USERS, $userID, ($pageNum - 1)*MESSAGES_PER_PAGE, MESSAGES_PER_PAGE);
 
         return $this->fetchQuery($query);
     }
