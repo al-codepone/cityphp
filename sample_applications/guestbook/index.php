@@ -22,6 +22,7 @@ $routes = array(NULL => 'home.php',
 'login' => 'login.php',
 'settings' => 'settings.php',
 'chngpass' => 'change_password.php',
+'delacct' => 'delete_account.php',
 'message' => 'message.php',
 'user' => 'user.php');
 

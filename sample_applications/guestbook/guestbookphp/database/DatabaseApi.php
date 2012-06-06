@@ -112,6 +112,16 @@ class DatabaseApi extends MySqlDatabaseHandle {
         $this->query($query);
     }
 
+    public function deleteAccount($userID) {
+        $queries = array();
+        $queries[] = sprintf('DELETE FROM %s WHERE user_id = %d', TABLE_MESSAGES, $userID);
+        $queries[] = sprintf('DELETE FROM %s WHERE user_id = %d', TABLE_USERS, $userID);
+
+        foreach($queries as $query) {
+            $this->query($query);
+        }
+    }
+
     public function getLoggedInUser() {
         if(isset($_SESSION[SESSION_USER_ID])) {
             return array('user_id' => $_SESSION[SESSION_USER_ID],
