@@ -5,9 +5,9 @@ session_start();
 
 //
 require_once('./constants.php');
+require_once(CITY_PHP . 'functions.php');
 require_once(CITY_PHP . 'html/HtmlDoc.php');
 require_once(GUEST_BOOK_PHP . 'database/DatabaseApi.php');
-require_once(GUEST_BOOK_PHP . 'functions.php');
 require_once(GUEST_BOOK_PHP . 'html/GuestBookHtmlBody.php');
 require_once(GUEST_BOOK_PHP . 'html/GuestBookHtmlHead.php');
 
