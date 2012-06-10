@@ -3,6 +3,7 @@ function deleteAccount() {
     var agree = confirm("Delete account?");
 
     if(agree) {
+        form.xdeleteflag.value = 1;
         form.submit();
     }
 }

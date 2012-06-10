@@ -1,13 +1,12 @@
 <?php
 
 require_once(CITY_PHP . 'IView.php');
-require_once(GUEST_BOOK_PHP . 'html/SettingsMenu.php');
 
 class Settings implements IView {
     private $username;
     private $error;
 
-    public function __construct($username = '', $error = '') {
+    public function __construct($username, $error = '') {
         $this->username = htmlspecialchars($username);
         $this->error = $error;
     }
@@ -15,17 +14,19 @@ class Settings implements IView {
     public function draw() {
         ob_start();
 
-        $settingsMenu = new SettingsMenu();
-        print $settingsMenu->draw();
-
         if($this->error) {
             printf('<div class="error">%s</div>', $this->error);
         }
 
 ?>
-<form action="<?=SETTINGS?>" method="post">
+<form action="<?=SETTINGS?>" method="post" id="deleteaccount">
+    <input type="hidden" name="xdeleteflag" value="0"/>
     <div><div>Username</div><div><input type="text" name="xusername" value="<?=$this->username?>"/></div></div>
+    <div><div>New Password</div><div><input type="password" name="xnewpassword"/></div></div>
+    <div><div>Confirm New Password</div><div><input type="password" name="xconfirmpassword"/></div></div>
+    <div><div>Current Password</div><div><input type="password" name="xcurrentpassword"/></div></div>
     <div><input type="submit" value="Submit"/></div>
+    <div><input type="button" value="Delete Account" onClick="deleteAccount();"/></div>
 </form>
 <?php
 

@@ -26,21 +26,6 @@ body {
     padding-right:20px;
 }
 
-#settingsmenu {
-    margin-bottom:10px;
-}
-
-#settingsmenu ul {
-    padding:0;
-    margin:0;
-    list-style-type:none;
-}
-
-#settingsmenu ul li {
-    display:inline;
-    padding-right:20px;
-}
-
 .error {
     color:#ff0000;
     margin-bottom:14px;

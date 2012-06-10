@@ -4,7 +4,12 @@ require_once(CITY_PHP . 'forms/FormHandler.php');
 
 class SettingsFormHandler extends FormHandler {
     public function __construct() {
-        $elementValues = array('xusername' => '');
+        $elementValues = array('xdeleteflag' => false,
+            'xusername' => '',
+            'xnewpassword' => '',
+            'xconfirmpassword' => '',
+            'xcurrentpassword' => '');
+
         parent::__construct($elementValues);
     }
 
@@ -14,6 +19,22 @@ class SettingsFormHandler extends FormHandler {
         }
 
         return 'Invalid username';
+    }
+
+    protected function validate_xnewpassword($value) {
+        if($value == '' || preg_match(REGEX_PASSWORD, $value)) {
+            return '';
+        }
+
+        return 'Invalid new password';
+    }
+
+    protected function validate_xconfirmpassword($value) {
+        if($value == '' || preg_match(REGEX_PASSWORD, $value)) {
+            return '';
+        }
+
+        return 'Invalid confirm password';
     }
 }
 

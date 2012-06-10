@@ -12,8 +12,6 @@ define('SIGN_UP', ROOT . 'signup');
 define('LOGIN', ROOT . 'login');
 define('LOG_OUT', ROOT . 'logout');
 define('SETTINGS', ROOT . 'settings');
-define('CHANGE_PASSWORD', ROOT . 'chngpass');
-define('DELETE_ACCOUNT', ROOT . 'delacct');
 
 define('REGEX_USERNAME', '/^[a-z0-9]{4,16}$/i');
 define('REGEX_PASSWORD', '/^.{6,100}$/');
