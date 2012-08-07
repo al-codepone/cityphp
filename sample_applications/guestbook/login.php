@@ -24,10 +24,14 @@ else if($formHandler->isReady()) {
         $content = new Login($username, 'Incorrect password');
     }
     else {
+        if(isset($_POST['rememberme'])) {
+            $databaseApi->setPersistentLogin($userData['user_id']);
+        }
+
         $_SESSION[SESSION_USER_ID] = $userData['user_id'];
         $_SESSION[SESSION_USERNAME] = $userData['username'];
 
-        header('Location: ' . ROOT);
+        header('Location:' . ROOT);
         exit();
     }
 }

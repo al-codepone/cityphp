@@ -22,6 +22,7 @@ class Login implements IView {
 <form action="<?=LOGIN?>" method="post">
     <div><div>Username</div><div><input type="text" name="xusername" value="<?=$this->username?>"/></div></div>
     <div><div>Password</div><div><input type="password" name="xpassword"/></div></div>
+    <div><input type="checkbox" name="rememberme"/>Remember Me</div>
     <div><input type="submit" value="Login"/></div>
 </form>
 <?php

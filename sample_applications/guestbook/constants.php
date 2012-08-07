@@ -24,9 +24,13 @@ define('DATABASE_NAME', 'myfirstdb');
 define('SESSION_USER_ID', 'user_id');
 define('SESSION_USERNAME', 'username');
 
+define('COOKIE_PERSISTENT_LOGIN', 'persistent_login');
+
 define('TABLE_MESSAGES', 'messages');
 define('TABLE_USERS', 'users');
+define('TABLE_PERSISTENT_LOGIN_TOKENS', 'persistent_login_tokens');
 
 define('MESSAGES_PER_PAGE', 5);
+define('PERSISTENT_LOGIN_DAYS', 7);
 
 ?>
