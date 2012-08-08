@@ -9,12 +9,12 @@ abstract class DatabaseAdapter {
         $this->databaseHandle = $databaseHandle;
     }
 
-    protected function readQuery($query) {
-        return $this->databaseHandle->readQuery($query);
+    protected function query($query) {
+        $this->databaseHandle->query($query);
     }
 
-    protected function writeQuery($query) {
-        $this->databaseHandle->writeQuery($query);
+    protected function fetchQuery($query) {
+        return $this->databaseHandle->fetchQuery($query);
     }
 
     protected function escapeString($string) {
