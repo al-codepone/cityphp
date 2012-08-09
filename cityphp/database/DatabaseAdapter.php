@@ -17,8 +17,8 @@ abstract class DatabaseAdapter {
         return $this->databaseHandle->fetchQuery($query);
     }
 
-    protected function escapeString($string) {
-        return $this->databaseHandle->escapeString($string);
+    protected function esc($string) {
+        return $this->databaseHandle->esc($string);
     }
 
     protected function getConn() {

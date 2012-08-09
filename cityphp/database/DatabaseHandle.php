@@ -16,7 +16,7 @@ abstract class DatabaseHandle {
 
     abstract public function query($query);
     abstract public function fetchQuery($query);
-    abstract public function escapeString($string);
+    abstract public function esc($string);
 
     public function getConn() {
         return $this->conn;

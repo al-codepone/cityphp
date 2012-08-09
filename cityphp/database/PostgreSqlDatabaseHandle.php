@@ -37,7 +37,7 @@ class PostgreSqlDatabaseHandle extends DatabaseHandle {
         return $rows;
     }
 
-    public function escapeString($string) {
+    public function esc($string) {
         return pg_escape_string($this->getConn(), $string);
     }
 }

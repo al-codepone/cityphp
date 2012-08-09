@@ -41,7 +41,7 @@ class MySqlDatabaseHandle extends DatabaseHandle {
         return $rows;
     }
 
-    public function escapeString($string) {
+    public function esc($string) {
         return mysqli_real_escape_string($this->getConn(), $string);
     }
 }
