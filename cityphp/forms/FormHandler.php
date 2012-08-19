@@ -7,8 +7,8 @@ abstract class FormHandler {
         $this->elementValues = $elementValues;
     }
 
-    public function getValue($name) {
-        return $this->elementValues[$name];
+    public function getValue($key) {
+        return $this->elementValues[$key];
     }
 
     public function getValues() {
@@ -16,8 +16,8 @@ abstract class FormHandler {
     }
 
     public function isReady() {
-        foreach($this->elementValues as $name => $notUsed) {
-            if(!isset($_POST[$name])) {
+        foreach(array_keys($this->elementValues) as $key) {
+            if(!isset($_POST[$key])) {
                 return false;
             }
         }
@@ -28,14 +28,16 @@ abstract class FormHandler {
     public function validate() {
         $errors = array();
 
-        foreach($this->elementValues as $name => $notUsed) {
-            $value = $_POST[$name];
-            $methodName = 'validate_' . $name;
-            $this->elementValues[$name] = $value;
-            $error = method_exists($this, $methodName) ? $this->$methodName($value) : '';
+        foreach(array_keys($this->elementValues) as $key) {
+            $value = $_POST[$key];
+            $methodName = 'validate_' . $key;
+            $this->elementValues[$key] = $value;
+            $error = method_exists($this, $methodName)
+                ? $this->$methodName($value)
+                : null;
 
-            if($error != '') {
-                $errors[$name] = $error;
+            if(!is_null($error)) {
+                $errors[$key] = $error;
             }
         }
 
