@@ -1,6 +1,6 @@
 <?php
 
-require_once(CITY_PHP . 'database/DatabaseHandle.php');
+require_once(CITYPHP . 'database/DatabaseHandle.php');
 
 abstract class DatabaseAdapter {
     private $databaseHandle;
