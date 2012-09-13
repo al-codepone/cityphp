@@ -1,45 +1,34 @@
 <?php
 
-//
 require_once(GUEST_BOOK_PHP . 'forms/LoginFormHandler.php');
-require_once(GUEST_BOOK_PHP . 'html/DisplayMessage.php');
-require_once(GUEST_BOOK_PHP . 'html/Login.php');
+require_once(GUEST_BOOK_PHP . 'html/logIn.php');
 
-//
 $formHandler = new LoginFormHandler();
 
 if($user) {
-    $content = new DisplayMessage('You are already logged in.');
+    $content = 'You are already logged in.';
 }
 else if($formHandler->isReady()) {
     $formHandler->validate();
-    $username = $formHandler->getValue('xusername');
-    $password = $formHandler->getValue('xpassword');
-    $userData = $databaseApi->getUserWithUsername($username);
+    $formData = $formHandler->getValues();
+    $userData = $userModel->getUserWithUsername($formData['username']);
 
-    if(!$userData) {
-        $content = new Login($username, 'Unknown username');
-    }
-    else if($userData['password'] != getHash($password, $userData['password'])) {
-        $content = new Login($username, 'Incorrect password');
+    if(!$userData || $userData['password'] != getHash($formData['password'], $userData['password'])) {
+        $content = logIn($formData, 'Incorrect username and password');
     }
     else {
         if(isset($_POST['rememberme'])) {
-            $databaseApi->setPersistentLogin($userData['user_id']);
+            $userModel->setPersistentLogin($userData['user_id']);
         }
 
         $_SESSION[SESSION_USER_ID] = $userData['user_id'];
         $_SESSION[SESSION_USERNAME] = $userData['username'];
-
         header('Location:' . ROOT);
         exit();
     }
 }
 else {
-    $content = new Login();
+    $content = logIn($formHandler->getValues());
 }
-
-array_push($headTags, '<title>Login</title>',
-   '<meta name="description" content=""/>');
 
 ?>

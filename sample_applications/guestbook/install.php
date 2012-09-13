@@ -1,11 +1,11 @@
 <?php
 
 require_once('./constants.php');
-require_once(GUEST_BOOK_PHP . 'database/DatabaseApi.php');
+require_once(GUEST_BOOK_PHP . 'database/MyModelFactory.php');
 
-$databaseApi = new DatabaseApi();
-$databaseApi->install();
+$userModel = MyModelFactory::getModel('UserModel');
+$userModel->install();
 
-printf('Install successful. <a href="%s">Go to Guest Book</a>.', ROOT);
+printf('Install successful. Visit the <a href="%s">home page</a>.', ROOT);
 
 ?>

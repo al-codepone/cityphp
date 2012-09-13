@@ -1,13 +1,12 @@
 <?php
 
-require_once(CITY_PHP . 'forms/FormHandler.php');
+require_once(CITYPHP . 'forms/FormHandler.php');
 
 class LoginFormHandler extends FormHandler {
     public function __construct() {
-        $elementValues = array('xusername' => '',
-                               'xpassword' => '');
-
-        parent::__construct($elementValues);
+        parent::__construct(array(
+            'username' => '',
+            'password' => ''));
     }
 }
 

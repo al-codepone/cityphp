@@ -1,34 +1,14 @@
 <?php
 
-require_once(CITY_PHP . 'IView.php');
+require_once(GUEST_BOOK_PHP . 'html/error.php');
+require_once(GUEST_BOOK_PHP . 'html/input.php');
 
-class Login implements IView {
-    private $username;
-    private $error;
-
-    public function __construct($username = '', $error = '') {
-        $this->username = htmlspecialchars($username);
-        $this->error = $error;
-    }
-
-    public function draw() {
-        ob_start();
-
-        if($this->error) {
-            printf('<div class="error">%s</div>', $this->error);
-        }
-
-?>
-<form action="<?=LOGIN?>" method="post">
-    <div><div>Username</div><div><input type="text" name="xusername" value="<?=$this->username?>"/></div></div>
-    <div><div>Password</div><div><input type="password" name="xpassword"/></div></div>
-    <div><input type="checkbox" name="rememberme"/>Remember Me</div>
-    <div><input type="submit" value="Login"/></div>
-</form>
-<?php
-
-        return ob_get_clean();
-    }
+function logIn($formData, $error = '') {
+    return sprintf('%s<form action="%s" method="post">%s%s'
+        . '<div><input type="checkbox" name="rememberme"/>Remember Me</div>'
+        . '<div><input type="submit" value="Log In"/></div></form>',
+        error($error), LOGIN, input('Username', 'username', $formData['username']),
+        input('Password', 'password', $formData['password'], 'password'));
 }
 
 ?>

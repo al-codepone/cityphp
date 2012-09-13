@@ -1,38 +1,32 @@
 <?php
 
-//
 require_once(GUEST_BOOK_PHP . 'forms/SignUpFormHandler.php');
-require_once(GUEST_BOOK_PHP . 'html/DisplayMessage.php');
-require_once(GUEST_BOOK_PHP . 'html/SignUp.php');
+require_once(GUEST_BOOK_PHP . 'html/signUp.php');
 
-//
 $formHandler = new SignUpFormHandler();
 
 if($user) {
-    $content = new DisplayMessage('You have already signed up.');
+    $content = 'You are already signed up.';
 }
 else if($formHandler->isReady()) {
     $errors = $formHandler->validate();
-    $username = $formHandler->getValue('xusername');
+    $formData = $formHandler->getValues();
 
     if(count($errors) > 0) {
-        $content = new SignUp($username, current($errors));
+        $content = signUp($formData, current($errors));
     }
-    else if($databaseApi->getUserWithUsername($username)) {
-        $content = new SignUp($username, sprintf('"%s" already in use', $username));
+    else if($userModel->getUserWithUsername($formData['username'])) {
+        $content = signUp($formData,
+            sprintf('Username "%s" already in use', $formData['username']));
     }
     else {
-        $password = $formHandler->getValue('xpassword');
-        $passwordHash = getHash($password);
-        $databaseApi->addUser($username, $passwordHash);
-        $content = new DisplayMessage('Thank you for signing up.');
+        $userModel->createUser($formData);
+        $content = 'Thank you for signing up. '
+            . 'Now try to <a href="' . LOGIN . '">log in</a>.';
     }
 }
 else {
-    $content = new SignUp();
+    $content = signUp($formHandler->getValues());
 }
-
-array_push($headTags, '<title>Sign Up</title>',
-   '<meta name="description" content=""/>');
 
 ?>

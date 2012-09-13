@@ -1,40 +1,33 @@
 <?php
 
-require_once(CITY_PHP . 'forms/FormHandler.php');
+require_once(CITYPHP . 'forms/FormHandler.php');
 
 class SettingsFormHandler extends FormHandler {
     public function __construct() {
-        $elementValues = array('xdeleteflag' => false,
-            'xusername' => '',
-            'xnewpassword' => '',
-            'xconfirmpassword' => '',
-            'xcurrentpassword' => '');
-
-        parent::__construct($elementValues);
+        parent::__construct(array(
+            'delete_flag' => false,
+            'username' => '',
+            'new_password' => '',
+            'confirm_password' => '',
+            'current_password' => ''));
     }
 
-    protected function validate_xusername($value) {
-        if(preg_match(REGEX_USERNAME, $value)) {
-            return '';
+    protected function validate_username($value) {
+        if(!preg_match(REGEX_USERNAME, $value)) {
+            return 'Invalid username';
         }
-
-        return 'Invalid username';
     }
 
-    protected function validate_xnewpassword($value) {
-        if($value == '' || preg_match(REGEX_PASSWORD, $value)) {
-            return '';
+    protected function validate_new_password($value) {
+        if($value != '' && !preg_match(REGEX_PASSWORD, $value)) {
+            return 'Invalid new password';
         }
-
-        return 'Invalid new password';
     }
 
-    protected function validate_xconfirmpassword($value) {
-        if($value == '' || preg_match(REGEX_PASSWORD, $value)) {
-            return '';
+    protected function validate_confirm_password($value) {
+        if($value != '' && !preg_match(REGEX_PASSWORD, $value)) {
+            return 'Invalid confirm password';
         }
-
-        return 'Invalid confirm password';
     }
 }
 

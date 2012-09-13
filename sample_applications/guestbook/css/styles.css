@@ -1,58 +1,26 @@
 body {
+    margin:0.75em 0;
     background-color:#ffffff;
 }
 
 #main {
-    width:400px;
+    margin:0 auto;
+    width:28em;
 }
 
-#content {
-    margin-top:10px;
-}
-
-#navigation {
-    padding:3px;
-    background-color:#eeeeee;
-}
-
-#navigation ul {
-    padding:0;
-    margin:0;
+#nav {
+    padding:0.25em;
+    margin:0 0 0.6em 0;
+    background:#f2f2f2;
     list-style-type:none;
 }
 
-#navigation ul li {
+#nav li {
     display:inline;
-    padding-right:20px;
+    padding-right:1.3em;
 }
 
 .error {
     color:#ff0000;
-    margin-bottom:14px;
-}
-
-#xmessage {
-    width:360px;
-    height:56px;
-}
-
-.message {
-    margin-top:14px;
-}
-
-.lonemessage {
-    font-size:1.5em;
-}
-
-.lonemessage span {
-    color:#999999;
-	margin-right:10px;
-}
-
-.pagination {
-    margin-top:16px;
-}
-
-.usertitle {
-    font-size:1.75em;
+    margin-bottom:0.75em;
 }

@@ -1,12 +1,11 @@
 <?php
 
-define('CITY_PHP', 'C:/wamp/www/framework/cityphp/');
+define('CITYPHP', 'C:/wamp/www/framework/cityphp/');
 define('GUEST_BOOK_PHP', 'C:/wamp/www/framework/sample_applications/guestbook/guestbookphp/');
 
 define('ROOT', '/framework/sample_applications/guestbook/');
 define('CSS', ROOT . 'css/');
 define('JAVASCRIPT', ROOT . 'javascript/');
-define('MESSAGE', ROOT . 'message/');
 define('USER', ROOT . 'user/');
 define('SIGN_UP', ROOT . 'signup');
 define('LOGIN', ROOT . 'login');
@@ -26,11 +25,9 @@ define('SESSION_USERNAME', 'username');
 
 define('COOKIE_PERSISTENT_LOGIN', 'persistent_login');
 
-define('TABLE_MESSAGES', 'messages');
 define('TABLE_USERS', 'users');
 define('TABLE_PERSISTENT_LOGIN_TOKENS', 'persistent_login_tokens');
 
-define('MESSAGES_PER_PAGE', 5);
 define('PERSISTENT_LOGIN_DAYS', 7);
 
 ?>

@@ -1,9 +1,9 @@
 function deleteAccount() {
-    var form = document.getElementById('deleteaccount');
+    var form = document.getElementById('settings_form');
     var agree = confirm("Delete account?");
 
     if(agree) {
-        form.xdeleteflag.value = 1;
+        form.delete_flag.value = 1;
         form.submit();
     }
 }
