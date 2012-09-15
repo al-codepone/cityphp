@@ -1,9 +1,9 @@
 <?php
 
 define('CITYPHP', 'C:/wamp/www/framework/cityphp/');
-define('VANILLA', 'C:/wamp/www/framework/sample_applications/guestbook/guestbookphp/');
+define('VANILLA', 'C:/wamp/www/framework/sample_applications/vanilla/guestbookphp/');
 
-define('ROOT', '/framework/sample_applications/guestbook/');
+define('ROOT', '/framework/sample_applications/vanilla/');
 define('CSS', ROOT . 'css/');
 define('JAVASCRIPT', ROOT . 'javascript/');
 define('USER', ROOT . 'user/');
