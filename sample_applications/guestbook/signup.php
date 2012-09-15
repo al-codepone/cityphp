@@ -1,7 +1,7 @@
 <?php
 
-require_once(GUEST_BOOK_PHP . 'forms/SignUpFormHandler.php');
-require_once(GUEST_BOOK_PHP . 'html/signUp.php');
+require_once(VANILLA . 'forms/SignUpFormHandler.php');
+require_once(VANILLA . 'html/signUp.php');
 
 $formHandler = new SignUpFormHandler();
 

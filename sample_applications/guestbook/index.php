@@ -4,8 +4,8 @@ session_start();
 
 require_once('./constants.php');
 require_once(CITYPHP . 'getRoute.php');
-require_once(GUEST_BOOK_PHP . 'database/MyModelFactory.php');
-require_once(GUEST_BOOK_PHP . 'html/navItems.php');
+require_once(VANILLA . 'database/MyModelFactory.php');
+require_once(VANILLA . 'html/navItems.php');
 
 $userModel = MyModelFactory::getModel('UserModel');
 $user = $userModel->getLoggedInUser();
@@ -18,6 +18,6 @@ include(getRoute(array(
     'user' => 'user.php')));
 
 $navItems = navItems($user);
-include(GUEST_BOOK_PHP . 'html/template.php');
+include(VANILLA . 'html/template.php');
 
 ?>

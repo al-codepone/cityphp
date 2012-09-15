@@ -1,7 +1,7 @@
 <?php
 
-require_once(GUEST_BOOK_PHP . 'forms/LoginFormHandler.php');
-require_once(GUEST_BOOK_PHP . 'html/logIn.php');
+require_once(VANILLA . 'forms/LoginFormHandler.php');
+require_once(VANILLA . 'html/logIn.php');
 
 $formHandler = new LoginFormHandler();
 

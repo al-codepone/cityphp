@@ -1,7 +1,7 @@
 <?php
 
 require_once('./constants.php');
-require_once(GUEST_BOOK_PHP . 'database/MyModelFactory.php');
+require_once(VANILLA . 'database/MyModelFactory.php');
 
 $userModel = MyModelFactory::getModel('UserModel');
 $userModel->install();

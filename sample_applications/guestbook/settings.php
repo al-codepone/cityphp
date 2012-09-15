@@ -1,7 +1,7 @@
 <?php
 
-require_once(GUEST_BOOK_PHP . 'forms/SettingsFormHandler.php');
-require_once(GUEST_BOOK_PHP . 'html/settings.php');
+require_once(VANILLA . 'forms/SettingsFormHandler.php');
+require_once(VANILLA . 'html/settings.php');
 
 $formHandler = new SettingsFormHandler();
 

@@ -1,7 +1,7 @@
 <?php
 
-require_once(GUEST_BOOK_PHP . 'html/error.php');
-require_once(GUEST_BOOK_PHP . 'html/input.php');
+require_once(VANILLA . 'html/error.php');
+require_once(VANILLA . 'html/input.php');
 
 function settings($formData, $error = '') {
     ob_start(); 

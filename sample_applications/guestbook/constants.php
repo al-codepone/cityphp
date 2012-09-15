@@ -1,7 +1,7 @@
 <?php
 
 define('CITYPHP', 'C:/wamp/www/framework/cityphp/');
-define('GUEST_BOOK_PHP', 'C:/wamp/www/framework/sample_applications/guestbook/guestbookphp/');
+define('VANILLA', 'C:/wamp/www/framework/sample_applications/guestbook/guestbookphp/');
 
 define('ROOT', '/framework/sample_applications/guestbook/');
 define('CSS', ROOT . 'css/');
