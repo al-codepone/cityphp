@@ -1,4 +1,4 @@
 RewriteEngine On
 RewriteRule ^(signup|login|settings)$ ./?r=$1 [NC,L]
 RewriteRule ^user/([a-z0-9]{4,16})$ ./?r=user&username=$1 [NC,L]
-RewriteRule ^logout$ ./logout.php [NC,L]
+RewriteRule ^logout$ ./log_out.php [NC,L]

@@ -11,7 +11,7 @@ function navItems($user) {
 
         : sprintf('<li><a href="%s">home</a></li>
             <li><a href="%s">sign up</a></li>
-            <li><a href="%s">login</a></li>',
+            <li><a href="%s">log in</a></li>',
             ROOT, SIGN_UP, LOGIN);
 }
 

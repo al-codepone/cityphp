@@ -1,7 +1,7 @@
 <?php
 
 require_once(VANILLA . 'forms/LoginFormHandler.php');
-require_once(VANILLA . 'html/logIn.php');
+require_once(VANILLA . 'html/login.php');
 
 $formHandler = new LoginFormHandler();
 
@@ -14,7 +14,7 @@ else if($formHandler->isReady()) {
     $userData = $userModel->getUserWithUsername($formData['username']);
 
     if(!$userData || $userData['password'] != getHash($formData['password'], $userData['password'])) {
-        $content = logIn($formData, 'Incorrect username and password');
+        $content = login($formData, 'Incorrect username and password');
     }
     else {
         if(isset($_POST['rememberme'])) {
@@ -28,7 +28,7 @@ else if($formHandler->isReady()) {
     }
 }
 else {
-    $content = logIn($formHandler->getValues());
+    $content = login($formHandler->getValues());
 }
 
 ?>

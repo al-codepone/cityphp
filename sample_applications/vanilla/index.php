@@ -12,7 +12,7 @@ $user = $userModel->getLoggedInUser();
 
 include(getRoute(array(
     null => 'home.php',
-    'signup' => 'signup.php',
+    'signup' => 'sign_up.php',
     'login' => 'login.php',
     'settings' => 'settings.php',
     'user' => 'user.php')));
