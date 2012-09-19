@@ -18,7 +18,7 @@ else if($formHandler->isReady()) {
     }
     else {
         if(isset($_POST['rememberme'])) {
-            $userModel->setPersistentLogin($userData['user_id']);
+            $loginModel->createPersistentLogin($userData['user_id']);
         }
 
         $_SESSION[SESSION_USER_ID] = $userData['user_id'];

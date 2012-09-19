@@ -8,7 +8,8 @@ require_once(VANILLA . 'database/MyModelFactory.php');
 require_once(VANILLA . 'html/navItems.php');
 
 $userModel = MyModelFactory::getModel('UserModel');
-$user = $userModel->getLoggedInUser();
+$loginModel = MyModelFactory::getModel('LoginModel');
+$user = $loginModel->getActiveUser();
 
 include(getRoute(array(
     null => 'home.php',
