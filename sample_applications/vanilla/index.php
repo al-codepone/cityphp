@@ -16,7 +16,8 @@ include(getRoute(array(
     'signup' => 'sign_up.php',
     'login' => 'login.php',
     'settings' => 'settings.php',
-    'user' => 'user.php')));
+    'user' => 'user.php',
+    'verifyemail' => 'verify_email.php')));
 
 $navItems = navItems($user);
 include(VANILLA . 'html/template.php');

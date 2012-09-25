@@ -2,45 +2,51 @@
 
 require_once(CITYPHP . 'database/DatabaseAdapter.php');
 require_once(CITYPHP . 'getHash.php');
+require_once(CITYPHP . 'utcDatetime.php');
 
 abstract class TokenModel extends DatabaseAdapter {
     private $tableName;
+    private $ttl;
 
-    public function __construct(DatabaseHandle $databaseHandle, $tableName) {
+    public function __construct(DatabaseHandle $databaseHandle, $tableName, $ttl = 0) {
         parent::__construct($databaseHandle);
         $this->tableName = $tableName;
+        $this->ttl = $ttl;
     }
 
     public function install() {
         $this->query('CREATE TABLE ' . $this->tableName . ' (
             token_id MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
             user_id MEDIUMINT UNSIGNED,
-            creation_date DATETIME,
             token VARCHAR(128),
+            data VARCHAR(255),
+            creation_date DATETIME,
             PRIMARY KEY (token_id))
             ENGINE = MYISAM');
     }
 
-    protected function createToken($userID, $token) {
+    protected function createToken($userID, $token, $data = '') {
         $this->query(sprintf('INSERT INTO %s
-            (token_id, user_id, creation_date, token)
-            VALUES(NULL, %d, "%s", "%s")',
+            (token_id, user_id, token, data, creation_date)
+            VALUES(NULL, %d, "%s", "%s", "%s")',
             $this->tableName,
             $userID,
-            date('Y-m-d H:i:s'),
-            getHash($token)));
+            $this->esc(getHash($token)),
+            $this->esc($data),
+            utcDatetime()));
     }
 
     protected function getToken($userID, $token) {
-        $query = sprintf('SELECT token_id, token, users.user_id, username
+        $alive = $this->ttl ? sprintf('tokens.creation_date > "%s" -
+            INTERVAL %d DAY AND ', utcDatetime(), $this->ttl) : '';
+
+        $query = sprintf('SELECT token_id, token, data, users.user_id, username
             FROM %s AS users, %s AS tokens
-            WHERE tokens.creation_date > "%s" - INTERVAL %d DAY
-            AND tokens.user_id = %d AND tokens.user_id = users.user_id
+            WHERE %stokens.user_id = %d AND tokens.user_id = users.user_id
             ORDER BY tokens.creation_date DESC',
             TABLE_USERS,
             $this->tableName,
-            date('Y-m-d H:i:s'),
-            7,
+            $alive,
             $userID);
 
         foreach($this->fetchQuery($query) as $row) {

@@ -3,6 +3,7 @@
 define('CITYPHP', 'C:/wamp/www/framework/cityphp/');
 define('VANILLA', 'C:/wamp/www/framework/sample_applications/vanilla/vanilla/');
 
+define('DOMAIN', 'http://mysite.com');
 define('ROOT', '/framework/sample_applications/vanilla/');
 define('CSS', ROOT . 'css/');
 define('JAVASCRIPT', ROOT . 'javascript/');
@@ -11,9 +12,12 @@ define('SIGN_UP', ROOT . 'signup');
 define('LOGIN', ROOT . 'login');
 define('LOG_OUT', ROOT . 'logout');
 define('SETTINGS', ROOT . 'settings');
+define('VERIFY_EMAIL', ROOT . 'verifyemail/');
 
 define('REGEX_USERNAME', '/^[a-z0-9]{4,16}$/i');
 define('REGEX_PASSWORD', '/^.{6,100}$/');
+
+define('EMAIL_FROM', 'noreply@mysite.com');
 
 define('DATABASE_HOST', 'localhost');
 define('DATABASE_USERNAME', 'big');
@@ -27,6 +31,7 @@ define('COOKIE_PERSISTENT_LOGIN', 'persistent_login');
 
 define('TABLE_USERS', 'users');
 define('TABLE_PERSISTENT_LOGIN_TOKENS', 'persistent_login_tokens');
+define('TABLE_VERIFY_EMAIL_TOKENS', 'verify_email_tokens');
 
 define('PERSISTENT_LOGIN_DAYS', 7);
 

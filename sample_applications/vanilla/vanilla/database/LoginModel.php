@@ -1,5 +1,6 @@
 <?php
 
+require_once(CITYPHP . 'sha1Token.php');
 require_once(VANILLA . 'database/TokenModel.php');
 
 class LoginModel extends TokenModel {
@@ -8,7 +9,7 @@ class LoginModel extends TokenModel {
     }
 
     public function createPersistentLogin($userID) {
-        $token = sha1(uniqid(mt_rand(), true));
+        $token = sha1Token();
         $this->createToken($userID, $token);
         setcookie(COOKIE_PERSISTENT_LOGIN, "$userID.$token",
             time() + 60*60*24*PERSISTENT_LOGIN_DAYS);
