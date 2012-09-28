@@ -10,6 +10,7 @@ function settings($formData, $error = '') {
 <form action="<?=SETTINGS?>" method="post" id="settings_form">
     <input type="hidden" name="delete_flag" value="0"/>
     <?=input('Username', 'username', $formData['username'])?>
+    <?=input('Email', 'email', $formData['email'], 'email')?>
     <?=input('New Password', 'new_password', $formData['new_password'], 'password')?>
     <?=input('Confirm New Password', 'confirm_password', $formData['confirm_password'], 'password')?>
     <?=input('Current Password', 'current_password', $formData['current_password'], 'password')?>

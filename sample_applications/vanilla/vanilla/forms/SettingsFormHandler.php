@@ -7,6 +7,7 @@ class SettingsFormHandler extends FormHandler {
         parent::__construct(array(
             'delete_flag' => false,
             'username' => '',
+            'email' => '',
             'new_password' => '',
             'confirm_password' => '',
             'current_password' => ''));
@@ -15,6 +16,12 @@ class SettingsFormHandler extends FormHandler {
     protected function validate_username($value) {
         if(!preg_match(REGEX_USERNAME, $value)) {
             return 'Invalid username';
+        }
+    }
+
+    protected function validate_email($value) {
+        if($value != '' && !filter_var($value, FILTER_VALIDATE_EMAIL)) {
+            return 'Invalid email';
         }
     }
 

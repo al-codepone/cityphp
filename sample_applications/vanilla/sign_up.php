@@ -1,6 +1,5 @@
 <?php
 
-require_once(CITYPHP . 'sha1Token.php');
 require_once(VANILLA . 'forms/SignUpFormHandler.php');
 require_once(VANILLA . 'html/signUp.php');
 
@@ -20,7 +19,7 @@ else if($formHandler->isReady()) {
         $content = signUp($formData,
             sprintf('Username "%s" already in use', $formData['username']));
     }
-    else if($formData['email'] && $userModel->getUserWithEmail($formData['email'])) {
+    else if($userModel->getUserWithEmail($formData['email'])) {
         $content = signUp($formData,
             sprintf('Email "%s" already in use', $formData['email']));
     }
@@ -28,17 +27,9 @@ else if($formHandler->isReady()) {
         $userID = $userModel->createUser($formData);
 
         if($formData['email']) {
-            $token = sha1Token();
             $verifyEmailModel = MyModelFactory::getModel('VerifyEmailModel');
-            $verifyEmailModel->createToken($userID, $token, $formData['email']);
-            $to = $formData['email'];
-            $subject = 'Verify Your Email';
-            $message = sprintf("%s,\n\nClick the link to verify your email:\n\n"
-                . '%s%s%d/%s', $formData['username'],
-                DOMAIN, VERIFY_EMAIL, $userID, $token);
-
-            $additionalHeaders = sprintf("From: %s\r\n", EMAIL_FROM);
-            mail($to, $subject, $message, $additionalHeaders);
+            $verifyEmailModel->sendEmail($userID, $formData['username'],
+                $formData['email']);
         }
 
         $emailSentence = $formData['email']

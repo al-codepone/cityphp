@@ -34,8 +34,9 @@ class UserModel extends DatabaseAdapter {
     }
 
     public function getUserWithEmail($email) {
-        return $this->getUser(sprintf('email = "%s"',
-            $this->esc($email)));
+        return $email
+            ? $this->getUser(sprintf('email = "%s"', $this->esc($email)))
+            : null;
     }
 
     public function updateUser($userID, $data) {

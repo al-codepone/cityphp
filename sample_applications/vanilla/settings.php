@@ -11,8 +11,9 @@ if(!$user) {
 else if($formHandler->isReady()) {
     $errors = $formHandler->validate();
     $formData = $formHandler->getValues();
-    $userData = $userModel->getUserWithUsername($user['username']);
-    $formUserData = $userModel->getUserWithUsername($formData['username']);
+    $userData = $userModel->getUserWithUID($user['user_id']);
+    $usernameUserData = $userModel->getUserWithUsername($formData['username']);
+    $emailUserData = $userModel->getUserWithEmail($formData['email']);
 
     if($userData['password'] != getHash($formData['current_password'], $userData['password'])) {
         $content = settings($formData, 'Incorrect current password');
@@ -29,22 +30,49 @@ else if($formHandler->isReady()) {
     else if($formData['new_password'] != $formData['confirm_password']) {
         $content = settings($formData, "New passwords didn't match.");
     }
-    else if($formUserData && $user['user_id'] != $formUserData['user_id']) {
+    else if($usernameUserData && $user['user_id'] != $usernameUserData['user_id']) {
         $content = settings($formData,
             sprintf('Username "%s" already in use', $formData['username']));
     }
+    else if($emailUserData && $user['user_id'] != $emailUserData['user_id']) {
+        $content = settings($formData,
+            sprintf('Email "%s" already in use', $formData['email']));
+    }	
     else {
+        $isNewEmail = !$userData['email'] && $formData['email'];
+        $isDeletedEmail = $userData['email'] && !$formData['email'];
+        $isChangedEmail = $userData['email'] && $formData['email']
+            && $userData['email'] != $formData['email'];
+
+        if($isNewEmail || $isChangedEmail) {
+            $verifyEmailModel = MyModelFactory::getModel('VerifyEmailModel');
+            $verifyEmailModel->sendEmail($user['user_id'], $formData['username'],
+                $formData['email']);
+        }
+
+        if($isDeletedEmail || $isChangedEmail) {
+            $userModel->updateEmail($user['user_id'], '');
+        }
+
         $userModel->updateUser($user['user_id'], $formData);
         $_SESSION[SESSION_USERNAME] = $user['username'] = $formData['username'];
-        $content = 'Your settings have been updated.';
+
+        $content = sprintf('Your settings have been updated.%s',
+            !$isChangedEmail ? !$isNewEmail ? !$isDeletedEmail ? ''
+                : ' Your email was removed from your account.'
+                : ' We emailed you a link to verify your email.'
+                : ' We emailed you a link to verify your updated email.'
+                    . ' Your old email was removed from your account.');
     }
 }
 else {
+    $userData = $userModel->getUserWithUID($user['user_id']);
     $formData = $formHandler->getValues();
-    $formData['username'] = $user['username'];
+    $formData['username'] = $userData['username'];
+    $formData['email'] = $userData['email'];
     $content = settings($formData);
 }
 
-$head = '<script src="' . JAVASCRIPT . 'settings.js"></script>'
+$head = '<script src="' . JAVASCRIPT . 'settings.js"></script>';
 
 ?>
