@@ -5,9 +5,8 @@ function navItems($user) {
         ? sprintf('<li><a href="%s">home</a></li>
             <li><a href="%s">settings</a></li>
             <li><a href="%s">log out</a></li>
-            <li><a href="%s">%s</a></li>',
-            ROOT, SETTINGS, LOG_OUT,
-            USER . $user['username'], $user['username'])
+            <li>%s</li>',
+            ROOT, SETTINGS, LOG_OUT, $user['username'])
 
         : sprintf('<li><a href="%s">home</a></li>
             <li><a href="%s">sign up</a></li>

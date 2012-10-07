@@ -7,7 +7,6 @@ define('DOMAIN', 'http://mysite.com');
 define('ROOT', '/framework/sample_applications/vanilla/');
 define('CSS', ROOT . 'css/');
 define('JAVASCRIPT', ROOT . 'javascript/');
-define('USER', ROOT . 'user/');
 define('SIGN_UP', ROOT . 'signup');
 define('LOGIN', ROOT . 'login');
 define('LOG_OUT', ROOT . 'logout');
