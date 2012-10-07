@@ -1,6 +1,7 @@
 <?php
 
 require_once(VANILLA . 'forms/LoginFormHandler.php');
+require_once(VANILLA . 'html/autofocus.php');
 require_once(VANILLA . 'html/login.php');
 
 $formHandler = new LoginFormHandler();
@@ -28,6 +29,7 @@ else if($formHandler->isReady()) {
     }
 }
 else {
+    $autofocus = autofocus('username');
     $content = login($formHandler->getValues());
 }
 

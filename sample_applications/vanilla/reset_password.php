@@ -1,6 +1,7 @@
 <?php
 
 require_once(VANILLA . 'forms/ResetPasswordFormHandler.php');
+require_once(VANILLA . 'html/autofocus.php');
 require_once(VANILLA . 'html/resetPassword.php');
 
 $passwordResetModel = MyModelFactory::getModel('PasswordResetModel');
@@ -26,6 +27,7 @@ if($data) {
         }
     }
     else {
+        $autofocus = autofocus('password');
         $content = resetPassword($formHandler->getValues());
     }
 }

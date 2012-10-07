@@ -1,6 +1,7 @@
 <?php
 
 require_once(VANILLA . 'forms/ForgotPasswordFormHandler.php');
+require_once(VANILLA . 'html/autofocus.php');
 require_once(VANILLA . 'html/forgotPassword.php');
 
 $formHandler = new ForgotPasswordFormHandler();
@@ -25,6 +26,7 @@ if($formHandler->isReady()) {
     }
 }
 else {
+    $autofocus = autofocus('email');
     $content = forgotPassword($formHandler->getValues());
 }
 

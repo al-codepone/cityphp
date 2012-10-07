@@ -1,6 +1,7 @@
 <?php
 
 require_once(VANILLA . 'forms/SignUpFormHandler.php');
+require_once(VANILLA . 'html/autofocus.php');
 require_once(VANILLA . 'html/signUp.php');
 
 $formHandler = new SignUpFormHandler();
@@ -42,6 +43,7 @@ else if($formHandler->isReady()) {
     }
 }
 else {
+    $autofocus = autofocus('username');
     $content = signUp($formHandler->getValues());
 }
 
