@@ -4,11 +4,11 @@ require_once(VANILLA . 'html/error.php');
 require_once(VANILLA . 'html/input.php');
 
 function settings($formData, $error = '') {
-    ob_start(); 
-    print(error($error)); ?>
+    ob_start(); ?>
 
-<form action="<?=SETTINGS?>" method="post" id="settings_form">
+<form method="post" id="settings_form">
     <input type="hidden" name="delete_flag" value="0"/>
+    <?=error($error)?>
     <?=input('Username', 'username', $formData['username'])?>
     <?=input('Email', 'email', $formData['email'], 'email')?>
     <?=input('New Password', 'new_password', $formData['new_password'], 'password')?>

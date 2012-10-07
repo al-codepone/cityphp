@@ -3,6 +3,10 @@ body {
     background-color:#ffffff;
 }
 
+form div {
+    margin-bottom:0.6em;
+}
+
 #main {
     margin:0 auto;
     width:28em;
@@ -22,5 +26,4 @@ body {
 
 .error {
     color:#ff0000;
-    margin-bottom:0.75em;
 }
