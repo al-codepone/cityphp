@@ -13,6 +13,8 @@ define('LOGIN', ROOT . 'login');
 define('LOG_OUT', ROOT . 'logout');
 define('SETTINGS', ROOT . 'settings');
 define('VERIFY_EMAIL', ROOT . 'verifyemail/');
+define('FORGOT_PASSWORD', ROOT . 'forgotpassword');
+define('RESET_PASSWORD', ROOT . 'resetpassword/');
 
 define('REGEX_USERNAME', '/^[a-z0-9]{4,16}$/i');
 define('REGEX_PASSWORD', '/^.{6,100}$/');
@@ -32,7 +34,9 @@ define('COOKIE_PERSISTENT_LOGIN', 'persistent_login');
 define('TABLE_USERS', 'users');
 define('TABLE_PERSISTENT_LOGIN_TOKENS', 'persistent_login_tokens');
 define('TABLE_VERIFY_EMAIL_TOKENS', 'verify_email_tokens');
+define('TABLE_PASSWORD_RESET_TOKENS', 'password_reset_tokens');
 
 define('PERSISTENT_LOGIN_DAYS', 7);
+define('PASSWORD_RESET_DAYS', 1);
 
 ?>

@@ -58,6 +58,13 @@ class UserModel extends DatabaseAdapter {
             $userID));
     }
 
+    public function updatePassword($userID, $password) {
+       $this->query(sprintf('UPDATE %s SET password = "%s" WHERE user_id = %d',
+            TABLE_USERS,
+            $this->esc(getHash($password)),
+            $userID));
+    }
+
     public function deleteUser($userID) {
         $this->query(sprintf('DELETE FROM %s WHERE user_id = %d',
             TABLE_USERS,

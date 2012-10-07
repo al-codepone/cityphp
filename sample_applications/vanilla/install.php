@@ -3,7 +3,11 @@
 require_once('./constants.php');
 require_once(VANILLA . 'database/MyModelFactory.php');
 
-$modelNames = array('LoginModel', 'UserModel', 'VerifyEmailModel');
+$modelNames = array(
+    'LoginModel',
+    'UserModel',
+    'VerifyEmailModel',
+    'PasswordResetModel');
 
 foreach($modelNames as $modelName) {
     $model = MyModelFactory::getModel($modelName);
