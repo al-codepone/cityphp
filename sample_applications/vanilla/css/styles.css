@@ -7,6 +7,14 @@ form div {
     margin-bottom:0.6em;
 }
 
+label {
+    display:block;
+}
+
+label[for=rememberme] {
+    display:inline;
+}
+
 #main {
     margin:0 auto;
     width:28em;
