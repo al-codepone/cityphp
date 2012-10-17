@@ -6,7 +6,7 @@ define('VANILLA', 'C:/wamp/www/framework/sample_applications/vanilla/vanilla/');
 define('DOMAIN', 'http://mysite.com');
 define('ROOT', '/framework/sample_applications/vanilla/');
 define('CSS', ROOT . 'css/');
-define('JAVASCRIPT', ROOT . 'javascript/');
+define('JS', ROOT . 'js/');
 define('SIGN_UP', ROOT . 'signup');
 define('LOGIN', ROOT . 'login');
 define('LOG_OUT', ROOT . 'logout');

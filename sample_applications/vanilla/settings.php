@@ -71,6 +71,6 @@ else {
     $content = settings($formData);
 }
 
-$head = '<script src="' . JAVASCRIPT . 'settings.js"></script>';
+$head = '<script src="' . JS . 'settings.js"></script>';
 
 ?>
