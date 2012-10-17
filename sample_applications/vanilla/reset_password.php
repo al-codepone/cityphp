@@ -1,6 +1,6 @@
 <?php
 
-require_once(VANILLA . 'forms/ResetPasswordFormHandler.php');
+require_once(VANILLA . 'forms/ResetPasswordValidator.php');
 require_once(VANILLA . 'html/autofocus.php');
 require_once(VANILLA . 'html/resetPassword.php');
 
@@ -8,12 +8,9 @@ $passwordResetModel = MyModelFactory::getModel('PasswordResetModel');
 $data = $passwordResetModel->getToken($_GET['id'], $_GET['token']);
 
 if($data) {
-    $formHandler = new ResetPasswordFormHandler();
+    $validator = new ResetPasswordValidator();
 
-    if($formHandler->isReady()) {
-        $errors = $formHandler->validate();
-        $formData = $formHandler->getValues();
-
+    if(list($formData, $errors) = $validator->validate()) {
         if(count($errors) > 0) {
             $content = resetPassword($formData, current($errors));
         }
@@ -28,7 +25,7 @@ if($data) {
     }
     else {
         $autofocus = autofocus('password');
-        $content = resetPassword($formHandler->getValues());
+        $content = resetPassword($validator->values());
     }
 }
 else {

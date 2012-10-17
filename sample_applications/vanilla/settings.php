@@ -1,16 +1,14 @@
 <?php
 
-require_once(VANILLA . 'forms/SettingsFormHandler.php');
+require_once(VANILLA . 'forms/SettingsValidator.php');
 require_once(VANILLA . 'html/settings.php');
 
-$formHandler = new SettingsFormHandler();
+$validator = new SettingsValidator();
 
 if(!$user) {
     $content = 'Log in to access the settings page.';
 }
-else if($formHandler->isReady()) {
-    $errors = $formHandler->validate();
-    $formData = $formHandler->getValues();
+else if(list($formData, $errors) = $validator->validate()) {
     $userData = $userModel->getUserWithUID($user['user_id']);
     $usernameUserData = $userModel->getUserWithUsername($formData['username']);
     $emailUserData = $userModel->getUserWithEmail($formData['email']);
@@ -67,7 +65,7 @@ else if($formHandler->isReady()) {
 }
 else {
     $userData = $userModel->getUserWithUID($user['user_id']);
-    $formData = $formHandler->getValues();
+    $formData = $validator->values();
     $formData['username'] = $userData['username'];
     $formData['email'] = $userData['email'];
     $content = settings($formData);

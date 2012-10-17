@@ -1,8 +1,8 @@
 <?php
 
-require_once(CITYPHP . 'forms/FormHandler.php');
+require_once(CITYPHP . 'forms/FormValidator.php');
 
-class SettingsFormHandler extends FormHandler {
+class SettingsValidator extends FormValidator {
     public function __construct() {
         parent::__construct(array(
             'delete_flag' => false,

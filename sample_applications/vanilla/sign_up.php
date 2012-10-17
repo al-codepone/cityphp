@@ -1,18 +1,15 @@
 <?php
 
-require_once(VANILLA . 'forms/SignUpFormHandler.php');
+require_once(VANILLA . 'forms/SignUpValidator.php');
 require_once(VANILLA . 'html/autofocus.php');
 require_once(VANILLA . 'html/signUp.php');
 
-$formHandler = new SignUpFormHandler();
+$validator = new SignUpValidator();
 
 if($user) {
     $content = 'You are already signed up.';
 }
-else if($formHandler->isReady()) {
-    $errors = $formHandler->validate();
-    $formData = $formHandler->getValues();
-
+else if(list($formData, $errors) = $validator->validate()) {
     if(count($errors) > 0) {
         $content = signUp($formData, current($errors));
     }
@@ -44,7 +41,7 @@ else if($formHandler->isReady()) {
 }
 else {
     $autofocus = autofocus('username');
-    $content = signUp($formHandler->getValues());
+    $content = signUp($validator->values());
 }
 
 ?>

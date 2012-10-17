@@ -1,15 +1,12 @@
 <?php
 
-require_once(VANILLA . 'forms/ForgotPasswordFormHandler.php');
+require_once(VANILLA . 'forms/ForgotPasswordValidator.php');
 require_once(VANILLA . 'html/autofocus.php');
 require_once(VANILLA . 'html/forgotPassword.php');
 
-$formHandler = new ForgotPasswordFormHandler();
+$validator = new ForgotPasswordValidator();
 
-if($formHandler->isReady()) {
-    $errors = $formHandler->validate();
-    $formData = $formHandler->getValues();
-
+if(list($formData, $errors) = $validator->validate()) {
     if(count($errors) > 0) {
         $content = forgotPassword($formData, current($errors));
     }
@@ -27,7 +24,7 @@ if($formHandler->isReady()) {
 }
 else {
     $autofocus = autofocus('email');
-    $content = forgotPassword($formHandler->getValues());
+    $content = forgotPassword($validator->values());
 }
 
 ?>

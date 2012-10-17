@@ -1,17 +1,15 @@
 <?php
 
-require_once(VANILLA . 'forms/LoginFormHandler.php');
+require_once(VANILLA . 'forms/LoginValidator.php');
 require_once(VANILLA . 'html/autofocus.php');
 require_once(VANILLA . 'html/login.php');
 
-$formHandler = new LoginFormHandler();
+$validator = new LoginValidator();
 
 if($user) {
     $content = 'You are already logged in.';
 }
-else if($formHandler->isReady()) {
-    $formHandler->validate();
-    $formData = $formHandler->getValues();
+else if(list($formData, $errors) = $validator->validate()) {
     $userData = $userModel->getUserWithUsername($formData['username']);
 
     if(!$userData || $userData['password'] != getHash($formData['password'], $userData['password'])) {
@@ -30,7 +28,7 @@ else if($formHandler->isReady()) {
 }
 else {
     $autofocus = autofocus('username');
-    $content = login($formHandler->getValues());
+    $content = login($validator->values());
 }
 
 ?>

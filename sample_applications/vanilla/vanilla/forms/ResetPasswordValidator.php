@@ -1,8 +1,8 @@
 <?php
 
-require_once(CITYPHP . 'forms/FormHandler.php');
+require_once(CITYPHP . 'forms/FormValidator.php');
 
-class ResetPasswordFormHandler extends FormHandler {
+class ResetPasswordValidator extends FormValidator {
     public function __construct() {
         parent::__construct(array(
             'password' => '',
