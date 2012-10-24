@@ -33,9 +33,9 @@ define('COOKIE_PERSISTENT_LOGIN', 'persistent_login');
 define('TABLE_USERS', 'users');
 define('TABLE_PERSISTENT_LOGIN_TOKENS', 'persistent_login_tokens');
 define('TABLE_VERIFY_EMAIL_TOKENS', 'verify_email_tokens');
-define('TABLE_PASSWORD_RESET_TOKENS', 'password_reset_tokens');
+define('TABLE_RESET_PASSWORD_TOKENS', 'reset_password_tokens');
 
 define('PERSISTENT_LOGIN_DAYS', 7);
-define('PASSWORD_RESET_DAYS', 1);
+define('RESET_PASSWORD_DAYS', 1);
 
 ?>

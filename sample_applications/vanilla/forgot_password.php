@@ -14,8 +14,8 @@ if(list($formData, $errors) = $validator->validate()) {
         $emailUserData = $userModel->getUserWithEmail($formData['email']);
 
         if($emailUserData) {
-            $passwordResetModel = MyModelFactory::getModel('PasswordResetModel');
-            $passwordResetModel->sendEmail($emailUserData['user_id'],
+            $resetPasswordModel = MyModelFactory::getModel('ResetPasswordModel');
+            $resetPasswordModel->sendEmail($emailUserData['user_id'],
                 $emailUserData['username'], $formData['email']);
         }
 

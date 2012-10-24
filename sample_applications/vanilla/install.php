@@ -7,7 +7,7 @@ $modelNames = array(
     'LoginModel',
     'UserModel',
     'VerifyEmailModel',
-    'PasswordResetModel');
+    'ResetPasswordModel');
 
 foreach($modelNames as $modelName) {
     $model = MyModelFactory::getModel($modelName);
