@@ -3,7 +3,7 @@
 define('CITYPHP', 'C:/wamp/www/framework/cityphp/');
 define('VANILLA', 'C:/wamp/www/framework/sample-applications/vanilla/vanilla/');
 
-define('DOMAIN', 'http://mysite.com');
+define('SITE', 'https://mysite.com');
 define('ROOT', '/framework/sample-applications/vanilla/');
 define('CSS', ROOT . 'css/');
 define('JS', ROOT . 'js/');

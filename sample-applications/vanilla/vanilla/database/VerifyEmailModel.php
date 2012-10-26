@@ -14,7 +14,7 @@ class VerifyEmailModel extends TokenModel {
         $additionalHeaders = sprintf("From: %s\r\n", EMAIL_FROM);
         $message = sprintf("%s,\n\nClick the link to verify your email:\n\n"
             . '%s%s%d/%s', $username,
-            DOMAIN, VERIFY_EMAIL, $userID, $token);
+            SITE, VERIFY_EMAIL, $userID, $token);
 
         $this->createToken($userID, $token, $email);
         mail($email, $subject, $message, $additionalHeaders);
