@@ -1,19 +1,19 @@
 <?php
 
 define('CITYPHP', 'C:/wamp/www/framework/cityphp/');
-define('VANILLA', 'C:/wamp/www/framework/sample_applications/vanilla/vanilla/');
+define('VANILLA', 'C:/wamp/www/framework/sample-applications/vanilla/vanilla/');
 
 define('DOMAIN', 'http://mysite.com');
-define('ROOT', '/framework/sample_applications/vanilla/');
+define('ROOT', '/framework/sample-applications/vanilla/');
 define('CSS', ROOT . 'css/');
 define('JS', ROOT . 'js/');
 define('SIGN_UP', ROOT . 'signup');
 define('LOGIN', ROOT . 'login');
 define('LOG_OUT', ROOT . 'logout');
 define('SETTINGS', ROOT . 'settings');
-define('VERIFY_EMAIL', ROOT . 'verifyemail/');
-define('FORGOT_PASSWORD', ROOT . 'forgotpassword');
-define('RESET_PASSWORD', ROOT . 'resetpassword/');
+define('VERIFY_EMAIL', ROOT . 'verify-email/');
+define('FORGOT_PASSWORD', ROOT . 'forgot-password');
+define('RESET_PASSWORD', ROOT . 'reset-password/');
 
 define('REGEX_USERNAME', '/^[a-z0-9]{4,16}$/i');
 define('REGEX_PASSWORD', '/^.{6,100}$/');

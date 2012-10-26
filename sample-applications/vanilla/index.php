@@ -13,12 +13,12 @@ $user = $loginModel->getActiveUser();
 
 include(route(array(
     null => 'home.php',
-    'signup' => 'sign_up.php',
+    'signup' => 'sign-up.php',
     'login' => 'login.php',
     'settings' => 'settings.php',
-    'verifyemail' => 'verify_email.php',
-    'forgotpassword' => 'forgot_password.php',
-    'resetpassword' => 'reset_password.php')));
+    'verify-email' => 'verify-email.php',
+    'forgot-password' => 'forgot-password.php',
+    'reset-password' => 'reset-password.php')));
 
 $navItems = navItems($user);
 include(VANILLA . 'html/template.php');
