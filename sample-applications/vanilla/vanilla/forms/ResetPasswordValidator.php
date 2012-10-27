@@ -1,6 +1,7 @@
 <?php
 
 require_once(CITYPHP . 'forms/FormValidator.php');
+require_once(VANILLA . 'forms/isPassword.php');
 
 class ResetPasswordValidator extends FormValidator {
     public function __construct() {
@@ -10,13 +11,13 @@ class ResetPasswordValidator extends FormValidator {
     }
 
     protected function validate_password($value) {
-        if(!preg_match(REGEX_PASSWORD, $value)) {
+        if(!isPassword($value)) {
             return 'Invalid new password';
         }
     }
 
     protected function validate_confirm_password($value) {
-        if(!preg_match(REGEX_PASSWORD, $value)) {
+        if(!isPassword($value)) {
             return 'Invalid confirm password';
         }
     }

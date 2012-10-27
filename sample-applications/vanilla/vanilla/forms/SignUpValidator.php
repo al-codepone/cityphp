@@ -1,6 +1,8 @@
 <?php
 
 require_once(CITYPHP . 'forms/FormValidator.php');
+require_once(VANILLA . 'forms/isPassword.php');
+require_once(VANILLA . 'forms/validateUsername.php');
 
 class SignUpValidator extends FormValidator {
     public function __construct() {
@@ -11,9 +13,7 @@ class SignUpValidator extends FormValidator {
     }
 
     protected function validate_username($value) {
-        if(!preg_match(REGEX_USERNAME, $value)) {
-            return 'Invalid username';
-        }
+        return validateUsername($value);
     }
 
     protected function validate_email($value) {
@@ -23,7 +23,7 @@ class SignUpValidator extends FormValidator {
     }
 
     protected function validate_password($value) {
-        if(!preg_match(REGEX_PASSWORD, $value)) {
+        if(!isPassword($value)) {
             return 'Invalid password';
         }
     }
