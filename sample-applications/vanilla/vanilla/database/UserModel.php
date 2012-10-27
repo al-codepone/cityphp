@@ -40,8 +40,8 @@ class UserModel extends DatabaseAdapter {
     }
 
     public function updateUser($userID, $data) {
-        $setPassword = $data['new_password']
-            ? sprintf(', password = "%s"', $this->esc(getHash($data['new_password'])))
+        $setPassword = $data['password']
+            ? sprintf(', password = "%s"', $this->esc(getHash($data['password'])))
             : '';
 
         $this->query(sprintf('UPDATE %s SET username = "%s"%s WHERE user_id = %d',

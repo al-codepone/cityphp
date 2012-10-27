@@ -10,7 +10,7 @@ class SettingsValidator extends FormValidator {
             'delete_flag' => false,
             'username' => '',
             'email' => '',
-            'new_password' => '',
+            'password' => '',
             'confirm_password' => '',
             'current_password' => ''));
     }
@@ -25,7 +25,7 @@ class SettingsValidator extends FormValidator {
         }
     }
 
-    protected function validate_new_password($value) {
+    protected function validate_password($value) {
         if($value != '' && !isPassword($value)) {
             return 'Invalid new password';
         }

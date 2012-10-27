@@ -11,7 +11,7 @@ function settings($formData, $error = '') {
     <?=error($error)?>
     <?=input('Username', 'username', $formData['username'])?>
     <?=input('Email', 'email', $formData['email'], 'email')?>
-    <?=input('New Password', 'new_password', $formData['new_password'], 'password')?>
+    <?=input('New Password', 'password', $formData['password'], 'password')?>
     <?=input('Confirm New Password', 'confirm_password', $formData['confirm_password'], 'password')?>
     <?=input('Current Password', 'current_password', $formData['current_password'], 'password')?>
     <div><input type="submit" value="Submit"/></div>

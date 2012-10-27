@@ -25,7 +25,7 @@ else if(list($formData, $errors) = $validator->validate()) {
     else if(count($errors) > 0) {
         $content = settings($formData, current($errors));
     }
-    else if($formData['new_password'] != $formData['confirm_password']) {
+    else if($formData['password'] != $formData['confirm_password']) {
         $content = settings($formData, "New passwords didn't match.");
     }
     else if($usernameUserData && $user['user_id'] != $usernameUserData['user_id']) {
