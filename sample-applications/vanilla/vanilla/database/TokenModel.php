@@ -8,7 +8,7 @@ abstract class TokenModel extends DatabaseAdapter {
     private $tableName;
     private $ttl;
 
-    public function __construct(DatabaseHandle $databaseHandle, $tableName, $ttl = 0) {
+    public function __construct(DatabaseHandle $databaseHandle, $tableName, $ttl) {
         parent::__construct($databaseHandle);
         $this->tableName = $tableName;
         $this->ttl = $ttl;
@@ -37,16 +37,15 @@ abstract class TokenModel extends DatabaseAdapter {
     }
 
     protected function getToken($userID, $token) {
-        $alive = $this->ttl ? sprintf('tokens.creation_date > "%s" -
-            INTERVAL %d DAY AND ', utcDatetime(), $this->ttl) : '';
-
         $query = sprintf('SELECT token_id, token, data, users.user_id, username
             FROM %s AS users, %s AS tokens
-            WHERE %stokens.user_id = %d AND tokens.user_id = users.user_id
+            WHERE tokens.creation_date > "%s" - INTERVAL %d DAY
+            AND tokens.user_id = %d AND tokens.user_id = users.user_id
             ORDER BY tokens.creation_date DESC',
             TABLE_USERS,
             $this->tableName,
-            $alive,
+            utcDatetime(),
+            $this->ttl,
             $userID);
 
         foreach($this->fetchQuery($query) as $row) {

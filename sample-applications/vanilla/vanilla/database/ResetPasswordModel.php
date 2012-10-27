@@ -5,7 +5,7 @@ require_once(VANILLA . 'database/TokenModel.php');
 
 class ResetPasswordModel extends TokenModel {
     public function __construct(DatabaseHandle $databaseHandle) {
-        parent::__construct($databaseHandle, TABLE_RESET_PASSWORD_TOKENS, RESET_PASSWORD_DAYS);
+        parent::__construct($databaseHandle, TABLE_RESET_PASSWORD_TOKENS, TTL_RESET_PASSWORD);
     }
 
     public function sendEmail($userID, $username, $email) {

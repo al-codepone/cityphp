@@ -5,7 +5,7 @@ require_once(VANILLA . 'database/TokenModel.php');
 
 class VerifyEmailModel extends TokenModel {
     public function __construct(DatabaseHandle $databaseHandle) {
-        parent::__construct($databaseHandle, TABLE_VERIFY_EMAIL_TOKENS);
+        parent::__construct($databaseHandle, TABLE_VERIFY_EMAIL_TOKENS, TTL_VERIFY_EMAIL);
     }
 
     public function sendEmail($userID, $username, $email) {

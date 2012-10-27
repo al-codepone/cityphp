@@ -5,14 +5,14 @@ require_once(VANILLA . 'database/TokenModel.php');
 
 class LoginModel extends TokenModel {
     public function __construct(DatabaseHandle $databaseHandle) {
-        parent::__construct($databaseHandle, TABLE_PERSISTENT_LOGIN_TOKENS);
+        parent::__construct($databaseHandle, TABLE_PERSISTENT_LOGIN_TOKENS, TTL_PERSISTENT_LOGIN);
     }
 
     public function createPersistentLogin($userID) {
         $token = sha1Token();
         $this->createToken($userID, $token);
         setcookie(COOKIE_PERSISTENT_LOGIN, "$userID.$token",
-            time() + 60*60*24*PERSISTENT_LOGIN_DAYS);
+            time() + 60*60*24*TTL_PERSISTENT_LOGIN);
     }
 
     public function deletePersistentLogin() {
