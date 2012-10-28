@@ -1,5 +1,6 @@
 <?php
 
+require_once(VANILLA . 'html/checkbox.php');
 require_once(VANILLA . 'html/error.php');
 require_once(VANILLA . 'html/input.php');
 
@@ -10,10 +11,7 @@ function login($formData, $error = '') {
     <?=error($error)?>
     <?=input('Username', 'username', $formData['username'])?>
     <?=input('Password', 'password', $formData['password'], 'password')?>
-    <div>
-        <input type="checkbox" id="rememberme" name="rememberme"
-        /><label for="rememberme">Remember Me</label>
-    </div>
+    <?=checkbox('Remember Me', 'remember_me', 'remember_me', $formData['remember_me'])?>
     <div><a href="<?=FORGOT_PASSWORD?>">forgot password</a></div>
     <div><input type="submit" value="Log In"/></div>
 </form>

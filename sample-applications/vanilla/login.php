@@ -16,7 +16,7 @@ else if(list($formData, $errors) = $validator->validate()) {
         $content = login($formData, 'Incorrect username and password');
     }
     else {
-        if(isset($_POST['rememberme'])) {
+        if($formData['remember_me']) {
             $loginModel->createPersistentLogin($userData['user_id']);
         }
 
