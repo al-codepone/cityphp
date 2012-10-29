@@ -17,24 +17,17 @@ class PostgreSqlDatabaseHandle extends DatabaseHandle {
     }
 
     public function fetchQuery($query) {
-        $i = -1;
-        $rows = array();
-        $result = pg_query($this->getConn(), $query);
+        if($result = pg_query($this->getConn(), $query)) {
+            $rows = array();
 
-        if(!$result) {
-            $this->databaseError();
-        }
-
-        while($row = pg_fetch_assoc($result)) { 
-            ++$i;
-            $rows[] = array();
-
-            foreach($row as $key => $value) {
-                $rows[$i][$key] = $value;
+            while($row = pg_fetch_assoc($result)) { 
+                $rows[] = $row;
             }
+
+            return $rows;
         }
 
-        return $rows;
+        $this->databaseError();
     }
 
     public function esc($string) {

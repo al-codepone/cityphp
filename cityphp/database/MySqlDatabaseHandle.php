@@ -21,24 +21,17 @@ class MySqlDatabaseHandle extends DatabaseHandle {
     }
 
     public function fetchQuery($query) {
-        $i = -1;
-        $rows = array();
-        $result = mysqli_query($this->getConn(), $query);
+        if($result = mysqli_query($this->getConn(), $query)) {
+            $rows = array();
 
-        if(!$result) {
-            $this->databaseError();
-        }
-
-        while($row = mysqli_fetch_assoc($result)) { 
-            ++$i;
-            $rows[] = array();
-
-            foreach($row as $key => $value) {
-                $rows[$i][$key] = $value;
+            while($row = mysqli_fetch_assoc($result)) { 
+                $rows[] = $row;
             }
+
+            return $rows;
         }
 
-        return $rows;
+        $this->databaseError();
     }
 
     public function esc($string) {
