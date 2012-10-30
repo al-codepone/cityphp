@@ -8,15 +8,14 @@ class VerifyEmailModel extends TokenModel {
         parent::__construct($databaseHandle, TABLE_VERIFY_EMAIL_TOKENS, TTL_VERIFY_EMAIL);
     }
 
-    public function sendEmail($userID, $username, $email) {
+    public function createToken($userID, $username, $email) {
         $token = sha1Token();
         $subject = 'Verify Your Email';
         $additionalHeaders = sprintf("From: %s\r\n", EMAIL_FROM);
-        $message = sprintf("%s,\n\nClick the link to verify your email:\n\n"
-            . '%s%s%d/%s', $username,
-            SITE, VERIFY_EMAIL, $userID, $token);
+        $message = sprintf("%s,\n\nClick the link to verify your email:\n\n%s%s%d/%s",
+            $username, SITE, VERIFY_EMAIL, $userID, $token);
 
-        $this->createToken($userID, $token, $email);
+        parent::createToken($userID, $token, $email);
         mail($email, $subject, $message, $additionalHeaders);
     }
 

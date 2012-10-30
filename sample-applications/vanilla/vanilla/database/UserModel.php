@@ -15,13 +15,26 @@ class UserModel extends DatabaseAdapter {
     }
 
     public function createUser($data) {
-        $this->query(sprintf('INSERT INTO %s
-            (user_id, username, email, password) VALUES(NULL, "%s", "", "%s")',
-            TABLE_USERS,
-            $this->esc($data['username']),
-            $this->esc(getHash($data['password']))));
+        if($this->getUserWithUsername($data['username'])) {
+            return sprintf('Username "%s" already in use', $data['username']);
+        }
+        else if($this->getUserWithEmail($data['email'])) {
+            return sprintf('Email "%s" already in use', $data['email']);
+        }
+        else {
+            $this->query(sprintf('INSERT INTO %s
+                (user_id, username, email, password) VALUES(NULL, "%s", "", "%s")',
+                TABLE_USERS,
+                $this->esc($data['username']),
+                $this->esc(getHash($data['password']))));
 
-        return $this->getConn()->insert_id;
+            $userID = $this->getConn()->insert_id;
+
+            if($data['email']) {
+                $verifyEmailModel = MyModelFactory::getModel('VerifyEmailModel');
+                $verifyEmailModel->createToken($userID, $data['username'], $data['email']);
+            }
+        }
     }
 
     public function getUserWithUID($userID) {
