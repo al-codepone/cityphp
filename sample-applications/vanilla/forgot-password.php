@@ -7,18 +7,12 @@ require_once(VANILLA . 'html/forgotPassword.php');
 $validator = new ForgotPasswordValidator();
 
 if(list($formData, $errors) = $validator->validate()) {
-    if(count($errors) > 0) {
+    if($errors) {
         $content = forgotPassword($formData, current($errors));
     }
     else {
-        $emailUserData = $userModel->getUserWithEmail($formData['email']);
-
-        if($emailUserData) {
-            $resetPasswordModel = MyModelFactory::getModel('ResetPasswordModel');
-            $resetPasswordModel->sendEmail($emailUserData['user_id'],
-                $emailUserData['username'], $formData['email']);
-        }
-
+        $resetPasswordModel = MyModelFactory::getModel('ResetPasswordModel');
+        $resetPasswordModel->createToken($formData['email']);
         $content = 'We emailed you directions for resetting your password.';
     }
 }
