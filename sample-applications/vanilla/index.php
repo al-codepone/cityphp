@@ -1,11 +1,12 @@
 <?php
 
-session_start();
-
 require_once('./constants.php');
 require_once(CITYPHP . 'route.php');
 require_once(VANILLA . 'database/MyModelFactory.php');
 require_once(VANILLA . 'html/navItems.php');
+
+session_name(SESSION_NAME);
+session_start();
 
 $userModel = MyModelFactory::getModel('UserModel');
 $loginModel = MyModelFactory::getModel('LoginModel');

@@ -22,6 +22,7 @@ define('DATABASE_USERNAME', 'big');
 define('DATABASE_PASSWORD', 'tree');
 define('DATABASE_NAME', 'myfirstdb');
 
+define('SESSION_NAME', 'VSID01');
 define('SESSION_USER_ID', 'user_id');
 define('SESSION_USERNAME', 'username');
 
