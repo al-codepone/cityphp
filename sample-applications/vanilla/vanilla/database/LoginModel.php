@@ -8,19 +8,29 @@ class LoginModel extends TokenModel {
         parent::__construct($databaseHandle, TABLE_PERSISTENT_LOGIN_TOKENS, TTL_PERSISTENT_LOGIN);
     }
 
-    public function createPersistentLogin($userID) {
-        $token = sha1Token();
-        $this->createToken($userID, $token);
-        setcookie(COOKIE_PERSISTENT_LOGIN, "$userID.$token",
-            time() + 60*60*24*TTL_PERSISTENT_LOGIN);
+    public function login($formData) {
+        $userModel = MyModelFactory::getModel('UserModel');
+        $userData = $userModel->getUserWithUsername($formData['username']);
+
+        if(!$userData || $userData['password'] != getHash($formData['password'], $userData['password'])) {
+            return 'Incorrect username and password';
+        }
+
+        if($formData['remember_me']) {
+            $this->createPersistentLogin($userData['user_id']);
+        }
+
+        $_SESSION[SESSION_USER_ID] = $userData['user_id'];
+        $_SESSION[SESSION_USERNAME] = $userData['username'];
     }
 
-    public function deletePersistentLogin() {
+    public function logOut() {
         if($data = $this->getPersistentLogin()) {
             $this->deleteToken($data['token_id']);
         }
 
         setcookie(COOKIE_PERSISTENT_LOGIN, '', time() - 3600);
+        unset($_SESSION[SESSION_USER_ID]);
     }
 
     public function getActiveUser() {
@@ -35,6 +45,13 @@ class LoginModel extends TokenModel {
             $_SESSION[SESSION_USERNAME] = $data['username'];
             return $this->getSessionUser();
         }
+    }
+
+    private function createPersistentLogin($userID) {
+        $token = sha1Token();
+        $this->createToken($userID, $token);
+        setcookie(COOKIE_PERSISTENT_LOGIN, "$userID.$token",
+            time() + 60*60*24*TTL_PERSISTENT_LOGIN);
     }
 
     private function getPersistentLogin() {
