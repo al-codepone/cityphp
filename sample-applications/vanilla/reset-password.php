@@ -5,21 +5,20 @@ require_once(VANILLA . 'html/autofocus.php');
 require_once(VANILLA . 'html/resetPassword.php');
 
 $resetPasswordModel = MyModelFactory::getModel('ResetPasswordModel');
-$data = $resetPasswordModel->getToken($_GET['id'], $_GET['token']);
+$tokenData = $resetPasswordModel->getToken($_GET['id'], $_GET['token']);
 
-if($data) {
+if($tokenData) {
     $validator = new ResetPasswordValidator();
 
     if(list($formData, $errors) = $validator->validate()) {
-        if(count($errors) > 0) {
+        if($errors) {
             $content = resetPassword($formData, current($errors));
         }
-        else if($formData['password'] != $formData['confirm_password']) {
-            $content = resetPassword($formData, "Passwords didn't match.");
+        else if($error = $userModel->updatePassword($tokenData['user_id'], $formData)) {
+            $content = resetPassword($formData, $error);
         }
         else {
-            $userModel->updatePassword($data['user_id'], $formData['password']);
-            $resetPasswordModel->deleteToken($data['token_id']);
+            $resetPasswordModel->deleteToken($tokenData['token_id']);
             $content = 'Your password was successfully reset.';
         }
     }

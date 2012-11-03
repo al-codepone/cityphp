@@ -71,10 +71,14 @@ class UserModel extends DatabaseAdapter {
             $userID));
     }
 
-    public function updatePassword($userID, $password) {
-       $this->query(sprintf('UPDATE %s SET password = "%s" WHERE user_id = %d',
+    public function updatePassword($userID, $data) {
+        if($data['password'] != $data['confirm_password']) {
+            return "Passwords didn't match.";
+        }
+
+        $this->query(sprintf('UPDATE %s SET password = "%s" WHERE user_id = %d',
             TABLE_USERS,
-            $this->esc(getHash($password)),
+            $this->esc(getHash($data['password'])),
             $userID));
     }
 
