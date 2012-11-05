@@ -65,6 +65,10 @@ class UserModel extends DatabaseAdapter {
     }
 
     public function updateEmail($userID, $email) {
+        if($this->getUserWithEmail($email)) {
+            return 'The email you are trying to verify is already in use.';
+        }
+
         $this->query(sprintf('UPDATE %s SET email = "%s" WHERE user_id = %d',
             TABLE_USERS,
             $this->esc($email),
