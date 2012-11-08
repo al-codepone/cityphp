@@ -2,6 +2,9 @@
 
 require_once(CITYPHP . 'database/DatabaseAdapter.php');
 require_once(CITYPHP . 'getHash.php');
+require_once(VANILLA . 'emailStates.php');
+require_once(VANILLA . 'emailTaken.php');
+require_once(VANILLA . 'usernameTaken.php');
 
 class UserModel extends DatabaseAdapter {
     public function install() {
@@ -16,10 +19,10 @@ class UserModel extends DatabaseAdapter {
 
     public function createUser($data) {
         if($this->getUserWithUsername($data['username'])) {
-            return sprintf('Username "%s" already in use', $data['username']);
+            return usernameTaken($data['username']);
         }
         else if($this->getUserWithEmail($data['email'])) {
-            return sprintf('Email "%s" already in use', $data['email']);
+            return emailTaken($data['email']);
         }
         else {
             $this->query(sprintf('INSERT INTO %s
@@ -52,16 +55,45 @@ class UserModel extends DatabaseAdapter {
             : null;
     }
 
-    public function updateUser($userID, $data) {
-        $setPassword = $data['password']
-            ? sprintf(', password = "%s"', $this->esc(getHash($data['password'])))
+    public function updateUser($userID, $formData) {
+        $userData = $this->getUserWithUID($userID);
+        $usernameUserData = $this->getUserWithUsername($formData['username']);
+        $emailUserData = $this->getUserWithEmail($formData['email']);
+        $emailStates = emailStates($userData, $formData);
+
+        if($userData['password'] != getHash($formData['current_password'], $userData['password'])) {
+            return 'Incorrect current password';
+        }
+        else if($formData['password'] != $formData['confirm_password']) {
+            return "New passwords didn't match.";
+        }
+        else if($usernameUserData && $userID != $usernameUserData['user_id']) {
+            return usernameTaken($formData['username']);
+        }
+        else if($emailUserData && $userID != $emailUserData['user_id']) {
+            return emailTaken($formData['email']);
+        }
+
+        if($emailStates['is_new'] || $emailStates['is_changed']) {
+            $verifyEmailModel = MyModelFactory::getModel('VerifyEmailModel');
+            $verifyEmailModel->createToken($userID, $formData['username'], $formData['email']);
+        }
+
+        if($emailStates['is_deleted'] || $emailStates['is_changed']) {
+            $this->updateEmail($userID, '');
+        }
+
+        $setPassword = $formData['password']
+            ? sprintf(', password = "%s"', $this->esc(getHash($formData['password'])))
             : '';
 
         $this->query(sprintf('UPDATE %s SET username = "%s"%s WHERE user_id = %d',
             TABLE_USERS,
-            $this->esc($data['username']),
+            $this->esc($formData['username']),
             $setPassword,
             $userID));
+
+        $_SESSION[SESSION_USERNAME] = $formData['username'];
     }
 
     public function updateEmail($userID, $email) {
@@ -86,10 +118,18 @@ class UserModel extends DatabaseAdapter {
             $userID));
     }
 
-    public function deleteUser($userID) {
+    public function deleteUser($userID, $formData) {
+        $userData = $this->getUserWithUID($userID);
+
+        if($userData['password'] != getHash($formData['current_password'], $userData['password'])) {
+            return 'Incorrect current password';
+        }
+
         $this->query(sprintf('DELETE FROM %s WHERE user_id = %d',
             TABLE_USERS,
             $userID));
+
+        unset($_SESSION[SESSION_USER_ID]);
     }
 
     protected function getUser($condition) {
