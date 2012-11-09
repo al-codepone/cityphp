@@ -1,10 +1,10 @@
 <?php
 
-function getHash($input, $salt = NULL) {
-    if(is_null($salt)) {
+function bcryptHash($input, $salt) {
+    if(is_int($salt)) {
         $chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ./';
         $numChars = strlen($chars);
-        $salt = CRYPT_BLOWFISH ? '$2a$12$' : '$1$';
+        $salt = sprintf('$2a$%02d$', $salt);
 
         for($i = 0; $i < 22; ++$i) {
             $salt .= $chars[mt_rand(0, $numChars - 1)];

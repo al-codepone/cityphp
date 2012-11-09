@@ -1,7 +1,7 @@
 <?php
 
+require_once(CITYPHP . 'bcryptHash.php');
 require_once(CITYPHP . 'database/DatabaseAdapter.php');
-require_once(CITYPHP . 'getHash.php');
 require_once(VANILLA . 'emailStates.php');
 require_once(VANILLA . 'emailTaken.php');
 require_once(VANILLA . 'usernameTaken.php');
@@ -29,7 +29,7 @@ class UserModel extends DatabaseAdapter {
                 (user_id, username, email, password) VALUES(NULL, "%s", "", "%s")',
                 TABLE_USERS,
                 $this->esc($data['username']),
-                $this->esc(getHash($data['password']))));
+                $this->esc(bcryptHash($data['password'], BCRYPT_COST))));
 
             $userID = $this->getConn()->insert_id;
 
@@ -61,7 +61,7 @@ class UserModel extends DatabaseAdapter {
         $emailUserData = $this->getUserWithEmail($formData['email']);
         $emailStates = emailStates($userData, $formData);
 
-        if($userData['password'] != getHash($formData['current_password'], $userData['password'])) {
+        if($userData['password'] != bcryptHash($formData['current_password'], $userData['password'])) {
             return 'Incorrect current password';
         }
         else if($formData['password'] != $formData['confirm_password']) {
@@ -84,7 +84,7 @@ class UserModel extends DatabaseAdapter {
         }
 
         $setPassword = $formData['password']
-            ? sprintf(', password = "%s"', $this->esc(getHash($formData['password'])))
+            ? sprintf(', password = "%s"', $this->esc(bcryptHash($formData['password'], BCRYPT_COST)))
             : '';
 
         $this->query(sprintf('UPDATE %s SET username = "%s"%s WHERE user_id = %d',
@@ -114,14 +114,14 @@ class UserModel extends DatabaseAdapter {
 
         $this->query(sprintf('UPDATE %s SET password = "%s" WHERE user_id = %d',
             TABLE_USERS,
-            $this->esc(getHash($data['password'])),
+            $this->esc(bcryptHash($data['password'], BCRYPT_COST)),
             $userID));
     }
 
     public function deleteUser($userID, $formData) {
         $userData = $this->getUserWithUID($userID);
 
-        if($userData['password'] != getHash($formData['current_password'], $userData['password'])) {
+        if($userData['password'] != bcryptHash($formData['current_password'], $userData['password'])) {
             return 'Incorrect current password';
         }
 

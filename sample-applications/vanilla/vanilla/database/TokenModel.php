@@ -1,7 +1,7 @@
 <?php
 
+require_once(CITYPHP . 'bcryptHash.php');
 require_once(CITYPHP . 'database/DatabaseAdapter.php');
-require_once(CITYPHP . 'getHash.php');
 require_once(CITYPHP . 'utcDatetime.php');
 
 abstract class TokenModel extends DatabaseAdapter {
@@ -31,7 +31,7 @@ abstract class TokenModel extends DatabaseAdapter {
             VALUES(NULL, %d, "%s", "%s", "%s")',
             $this->tableName,
             $userID,
-            $this->esc(getHash($token)),
+            $this->esc(bcryptHash($token, BCRYPT_COST)),
             $this->esc($data),
             utcDatetime()));
     }
@@ -49,7 +49,7 @@ abstract class TokenModel extends DatabaseAdapter {
             $userID);
 
         foreach($this->fetchQuery($query) as $row) {
-            if($row['token'] == getHash($token, $row['token'])) {
+            if($row['token'] == bcryptHash($token, $row['token'])) {
                 return $row;
             }
         }

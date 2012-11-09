@@ -12,7 +12,7 @@ class LoginModel extends TokenModel {
         $userModel = MyModelFactory::getModel('UserModel');
         $userData = $userModel->getUserWithUsername($formData['username']);
 
-        if(!$userData || $userData['password'] != getHash($formData['password'], $userData['password'])) {
+        if(!$userData || $userData['password'] != bcryptHash($formData['password'], $userData['password'])) {
             return 'Incorrect username and password';
         }
 
