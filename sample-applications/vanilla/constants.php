@@ -1,6 +1,7 @@
 <?php
 
 define('CITYPHP', 'C:/wamp/www/framework/cityphp/');
+define('STD_LIB', 'C:/wamp/www/std-lib/');
 define('VANILLA', 'C:/wamp/www/framework/sample-applications/vanilla/vanilla/');
 
 define('SITE', 'https://mysite.com');

@@ -1,7 +1,7 @@
 <?php
 
+require_once(STD_LIB . 'html/autofocus.php');
 require_once(VANILLA . 'forms/ResetPasswordValidator.php');
-require_once(VANILLA . 'html/autofocus.php');
 require_once(VANILLA . 'html/resetPassword.php');
 
 $resetPasswordModel = MyModelFactory::getModel('ResetPasswordModel');
