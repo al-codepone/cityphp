@@ -1,6 +1,6 @@
 <?php
 
-require_once(STD_LIB . 'html/autofocus.php');
+require_once(CITYPHP . 'html/autofocus.php');
 require_once(VANILLA . 'forms/ForgotPasswordValidator.php');
 require_once(VANILLA . 'html/forgotPassword.php');
 

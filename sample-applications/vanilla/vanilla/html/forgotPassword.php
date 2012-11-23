@@ -1,7 +1,7 @@
 <?php
 
-require_once(STD_LIB . 'html/error.php');
-require_once(STD_LIB . 'html/input.php');
+require_once(CITYPHP . 'html/error.php');
+require_once(CITYPHP . 'html/input.php');
 
 function forgotPassword($formData, $error = '') {
     return sprintf('<form method="post">%s%s'

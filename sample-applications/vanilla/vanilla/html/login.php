@@ -1,8 +1,8 @@
 <?php
 
-require_once(STD_LIB . 'html/checkbox.php');
-require_once(STD_LIB . 'html/error.php');
-require_once(STD_LIB . 'html/input.php');
+require_once(CITYPHP . 'html/checkbox.php');
+require_once(CITYPHP . 'html/error.php');
+require_once(CITYPHP . 'html/input.php');
 
 function login($formData, $error = '') {
     ob_start(); ?>
