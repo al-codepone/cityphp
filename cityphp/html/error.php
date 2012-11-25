@@ -1,9 +1,7 @@
 <?php
 
 function error($error) {
-    return $error
-        ? "<div class=\"error\">$error</div>"
-        : '';
+    return $error ? "<div class='error'>$error</div>" : '';
 }
 
 ?>

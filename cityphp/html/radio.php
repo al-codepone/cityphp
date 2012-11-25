@@ -1,9 +1,10 @@
 <?php
 
 function radio($label, $name, $id, $value, $isChecked) {
-    return sprintf('<div><input type="radio" name="%2$s" id="%3$s" value="%4$s"%5$s/>'
-        . '<label for="%3$s">%1$s</label></div>',
-        $label, $name, $id, $value, $isChecked ? ' checked' : '');
+    return sprintf("<div><input type='radio' name='$name' id='$id' value='%s'%s/>"
+        . "<label for='$id'>$label</label></div>",
+        htmlspecialchars($value),
+        $isChecked ? ' checked' : '');
 }
 
 ?>
