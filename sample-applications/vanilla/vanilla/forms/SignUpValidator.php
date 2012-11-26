@@ -9,7 +9,8 @@ class SignUpValidator extends FormValidator {
         parent::__construct(array(
             'username' => '',
             'email' => '',
-            'password' => ''));
+            'password' => '',
+            'confirm_password' => ''));
     }
 
     protected function validate_username($value) {
@@ -25,6 +26,12 @@ class SignUpValidator extends FormValidator {
     protected function validate_password($value) {
         if(!isPassword($value)) {
             return 'Invalid password';
+        }
+    }
+
+    protected function validate_confirm_password($value) {
+        if(!isPassword($value)) {
+            return 'Invalid confirm password';
         }
     }
 }
