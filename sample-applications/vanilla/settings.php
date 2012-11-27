@@ -21,11 +21,11 @@ else if(list($formData, $errors) = $validator->validate()) {
         $user = $error ? $user : null;
     }
     else {
-        $content = ($error = $userModel->updateUser($user['user_id'], $formData))
-            ? settings($formData, $error)
-            : accountUpdated($userModel->getUserWithUID($user['user_id']), $formData);
+        $content = is_array($result = $userModel->updateUser($user['user_id'], $formData))
+            ? accountUpdated($result, $formData)
+            : settings($formData, $result);
 
-        $user['username'] = $error ? $user['username'] : $formData['username'];
+        $user['username'] = is_array($result) ? $formData['username'] : $user['username'];
     }
 }
 else {

@@ -8,10 +8,10 @@ function accountUpdated($userData, $formData) {
         !$emailStates['is_changed'] ? !$emailStates['is_new'] ? !$emailStates['is_deleted'] ? ''
         : ' Your email was removed from your account.'
         : ' We emailed you a link to verify your email.'
-        : ' We emailed you a link to verify your updated email.'
-            . ' Your old email was removed from your account.';
+        : ' We emailed you a link to verify your updated email.
+                Your old email was removed from your account.';
 
-    return sprintf('Your settings have been updated.%s', $emailSentence);
+    return "Your settings have been updated.$emailSentence";
 }
 
 ?>

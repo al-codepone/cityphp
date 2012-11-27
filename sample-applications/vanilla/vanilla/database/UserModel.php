@@ -97,6 +97,7 @@ class UserModel extends DatabaseAdapter {
             $userID));
 
         $_SESSION[SESSION_USERNAME] = $formData['username'];
+        return $userData;
     }
 
     public function updateEmail($userID, $email) {
