@@ -25,6 +25,14 @@ abstract class TokenModel extends DatabaseAdapter {
             ENGINE = MYISAM');
     }
 
+    public function prune() {
+        $this->query(sprintf('DELETE FROM %s
+            WHERE creation_date < "%s" - INTERVAL %d DAY',
+            $this->tableName,
+            utcDatetime(),
+            $this->ttl));
+    }
+
     protected function createToken($userID, $token, $data = '') {
         $this->query(sprintf('INSERT INTO %s
             (token_id, user_id, token, data, creation_date)
