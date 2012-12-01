@@ -28,8 +28,8 @@ class UserModel extends DatabaseAdapter {
             return emailTaken($data['email']);
         }
         else {
-            $this->query(sprintf('INSERT INTO %s
-                (user_id, username, email, password) VALUES(NULL, "%s", "", "%s")',
+            $this->query(sprintf('INSERT INTO %s (username, email, password)
+                VALUES("%s", "", "%s")',
                 TABLE_USERS,
                 $this->esc($data['username']),
                 $this->esc(bcryptHash($data['password'], BCRYPT_COST))));
