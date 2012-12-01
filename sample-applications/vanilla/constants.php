@@ -15,12 +15,15 @@ define('VERIFY_EMAIL', ROOT . 'verify-email/');
 define('FORGOT_PASSWORD', ROOT . 'forgot-password');
 define('RESET_PASSWORD', ROOT . 'reset-password/');
 
-define('EMAIL_FROM', 'noreply@mysite.com');
-
 define('DATABASE_HOST', 'localhost');
 define('DATABASE_USERNAME', 'big');
 define('DATABASE_PASSWORD', 'tree');
 define('DATABASE_NAME', 'myfirstdb');
+
+define('TABLE_USERS', 'users');
+define('TABLE_PERSISTENT_LOGIN_TOKENS', 'persistent_login_tokens');
+define('TABLE_VERIFY_EMAIL_TOKENS', 'verify_email_tokens');
+define('TABLE_RESET_PASSWORD_TOKENS', 'reset_password_tokens');
 
 define('SESSION_NAME', 'VSID01');
 define('SESSION_USER_ID', 'user_id');
@@ -28,10 +31,7 @@ define('SESSION_USERNAME', 'username');
 
 define('COOKIE_PERSISTENT_LOGIN', 'persistent_login');
 
-define('TABLE_USERS', 'users');
-define('TABLE_PERSISTENT_LOGIN_TOKENS', 'persistent_login_tokens');
-define('TABLE_VERIFY_EMAIL_TOKENS', 'verify_email_tokens');
-define('TABLE_RESET_PASSWORD_TOKENS', 'reset_password_tokens');
+define('EMAIL_FROM', 'noreply@mysite.com');
 
 define('TTL_PERSISTENT_LOGIN', 7);
 define('TTL_VERIFY_EMAIL', 30);
