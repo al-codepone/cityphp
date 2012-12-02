@@ -10,7 +10,7 @@ class UserModel extends DatabaseAdapter {
     public function install() {
         $this->query('CREATE TABLE ' . TABLE_USERS . ' (
             user_id MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
-            username VARCHAR(32),
+            username VARCHAR(32) UNIQUE,
             email VARCHAR(255) DEFAULT "",
             password VARCHAR(128),
             PRIMARY KEY (user_id))
