@@ -10,8 +10,8 @@ class UserModel extends DatabaseAdapter {
     public function install() {
         $this->query('CREATE TABLE ' . TABLE_USERS . ' (
             user_id MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
-			username VARCHAR(32),
-            email VARCHAR(255),
+            username VARCHAR(32),
+            email VARCHAR(255) DEFAULT "",
             password VARCHAR(128),
             PRIMARY KEY (user_id))
             ENGINE = MYISAM');
@@ -28,8 +28,7 @@ class UserModel extends DatabaseAdapter {
             return emailTaken($data['email']);
         }
         else {
-            $this->query(sprintf('INSERT INTO %s (username, email, password)
-                VALUES("%s", "", "%s")',
+            $this->query(sprintf('INSERT INTO %s (username, password) VALUES("%s", "%s")',
                 TABLE_USERS,
                 $this->esc($data['username']),
                 $this->esc(bcryptHash($data['password'], BCRYPT_COST))));
