@@ -29,4 +29,6 @@ else {
     $content = signUp($validator->values());
 }
 
+$head = '<title>Sign Up</title>';
+
 ?>

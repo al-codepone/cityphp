@@ -21,4 +21,6 @@ else {
     $content = forgotPassword($validator->values());
 }
 
+$head = '<title>Forgot Password</title>';
+
 ?>

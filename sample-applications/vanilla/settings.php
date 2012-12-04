@@ -36,6 +36,7 @@ else {
     $content = settings($formData);
 }
 
-$head = '<script src="' . JS . 'settings.js"></script>';
+$head = '<title>Settings</title>
+    <script src="' . JS . 'settings.js"></script>';
 
 ?>

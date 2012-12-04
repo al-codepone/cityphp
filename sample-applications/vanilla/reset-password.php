@@ -31,4 +31,6 @@ else {
     $content = 'Invalid password reset.';
 }
 
+$head = '<title>Reset Password</title>';
+
 ?>
