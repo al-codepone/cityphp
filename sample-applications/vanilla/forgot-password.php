@@ -12,8 +12,9 @@ if(list($formData, $errors) = $validator->validate()) {
     }
     else {
         $resetPasswordModel = MyModelFactory::getModel('ResetPasswordModel');
-        $resetPasswordModel->createToken($formData['email']);
-        $content = 'We emailed you directions for resetting your password.';
+        $content = ($error = $resetPasswordModel->createToken($formData['email']))
+            ? forgotPassword($formData, $error)
+            : 'We emailed you directions for resetting your password.';
     }
 }
 else {
