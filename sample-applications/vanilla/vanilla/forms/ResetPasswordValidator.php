@@ -12,13 +12,13 @@ class ResetPasswordValidator extends FormValidator {
 
     protected function validate_password($value) {
         if(!isPassword($value)) {
-            return 'Invalid new password';
+            return 'New password must be at least 8 characters';
         }
     }
 
     protected function validate_confirm_password($value) {
         if(!isPassword($value)) {
-            return 'Invalid confirm password';
+            return 'Confirm new password must be at least 8 characters';
         }
     }
 }

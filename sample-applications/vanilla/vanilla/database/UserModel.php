@@ -112,7 +112,7 @@ class UserModel extends DatabaseAdapter {
 
     public function updatePassword($userID, $data) {
         if($data['password'] != $data['confirm_password']) {
-            return "Passwords didn't match.";
+            return "Passwords didn't match";
         }
 
         $this->query(sprintf('UPDATE %s SET password = "%s" WHERE user_id = %d',
