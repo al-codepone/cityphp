@@ -67,7 +67,7 @@ class UserModel extends DatabaseAdapter {
             return 'Incorrect current password';
         }
         else if($formData['password'] != $formData['confirm_password']) {
-            return "New passwords didn't match.";
+            return "New passwords didn't match";
         }
         else if($usernameUserData && $userID != $usernameUserData['user_id']) {
             return usernameTaken($formData['username']);
