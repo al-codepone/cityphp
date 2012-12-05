@@ -19,7 +19,7 @@ class UserModel extends DatabaseAdapter {
 
     public function createUser($data) {
         if($data['password'] != $data['confirm_password']) {
-            return "Passwords didn't match.";
+            return "Passwords didn't match";
         }
         else if($this->getUserWithUsername($data['username'])) {
             return usernameTaken($data['username']);

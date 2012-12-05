@@ -25,13 +25,13 @@ class SignUpValidator extends FormValidator {
 
     protected function validate_password($value) {
         if(!isPassword($value)) {
-            return 'Invalid password';
+            return 'Password must be at least 8 characters';
         }
     }
 
     protected function validate_confirm_password($value) {
         if(!isPassword($value)) {
-            return 'Invalid confirm password';
+            return 'Confirm password must be at least 8 characters';
         }
     }
 }
