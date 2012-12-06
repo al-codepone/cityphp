@@ -10,7 +10,10 @@ if($user) {
     $content = 'You are already logged in.';
 }
 else if(list($formData, $errors) = $validator->validate()) {
-    if($error = $loginModel->login($formData)) {
+    if($errors) {
+        $content = login($formData, current($errors));
+    }
+    else if($error = $loginModel->login($formData)) {
         $content = login($formData, $error);
     }
     else {
