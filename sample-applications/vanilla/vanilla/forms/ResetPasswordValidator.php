@@ -1,7 +1,7 @@
 <?php
 
 require_once(CITYPHP . 'forms/FormValidator.php');
-require_once(VANILLA . 'forms/isPassword.php');
+require_once(VANILLA . 'validatePassword.php');
 
 class ResetPasswordValidator extends FormValidator {
     public function __construct() {
@@ -11,15 +11,11 @@ class ResetPasswordValidator extends FormValidator {
     }
 
     protected function validate_password($value) {
-        if(!isPassword($value)) {
-            return 'New password must be at least 8 characters';
-        }
+        return validatePassword($value, 'New password');
     }
 
     protected function validate_confirm_password($value) {
-        if(!isPassword($value)) {
-            return 'Confirm new password must be at least 8 characters';
-        }
+        return validatePassword($value, 'Confirm new password');
     }
 }
 
