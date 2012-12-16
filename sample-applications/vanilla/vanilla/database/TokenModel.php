@@ -35,7 +35,7 @@ abstract class TokenModel extends DatabaseAdapter {
 
     protected function createToken($userID, $token, $data = '') {
         $this->query(sprintf('INSERT INTO %s (user_id, token, data, creation_date)
-            VALUES(%d, "%s", "%s", "%s")',
+            VALUES (%d, "%s", "%s", "%s")',
             $this->tableName,
             $userID,
             $this->esc(bcryptHash($token, BCRYPT_COST)),
