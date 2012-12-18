@@ -3,10 +3,10 @@
 require_once(CITYPHP . 'html/error.php');
 require_once(CITYPHP . 'html/input.php');
 
-function settings($formData, $error = '') {
+function editAccount($formData, $error = '') {
     ob_start(); ?>
 
-<form method="post" id="settings_form">
+<form method="post" id="edit_account_form">
     <input type="hidden" name="delete_flag" value="0"/>
     <div>
         Use this form to edit your account info.

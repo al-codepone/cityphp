@@ -10,7 +10,7 @@ define('JS', ROOT . 'js/');
 define('SIGN_UP', ROOT . 'signup');
 define('LOGIN', ROOT . 'login');
 define('LOG_OUT', ROOT . 'logout');
-define('SETTINGS', ROOT . 'settings');
+define('EDIT_ACCOUNT', ROOT . 'edit-account');
 define('VERIFY_EMAIL', ROOT . 'verify-email/');
 define('FORGOT_PASSWORD', ROOT . 'forgot-password');
 define('RESET_PASSWORD', ROOT . 'reset-password/');

@@ -11,7 +11,7 @@ function accountUpdated($userData, $formData) {
         : ' We emailed you a link to verify your updated email.
                 Your old email was removed from your account.';
 
-    return "Your settings have been updated.$emailSentence";
+    return "Your account has been updated.$emailSentence";
 }
 
 ?>

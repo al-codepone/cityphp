@@ -1,21 +1,21 @@
 <?php
 
-require_once(VANILLA . 'forms/SettingsValidator.php');
+require_once(VANILLA . 'forms/EditAccountValidator.php');
 require_once(VANILLA . 'html/accountUpdated.php');
-require_once(VANILLA . 'html/settings.php');
+require_once(VANILLA . 'html/editAccount.php');
 
-$validator = new SettingsValidator();
+$validator = new EditAccountValidator();
 
 if(!$user) {
-    $content = 'Log in to access the settings page.';
+    $content = 'Log in to edit your account.';
 }
 else if(list($formData, $errors) = $validator->validate()) {
     if($errors) {
-        $content = settings($formData, current($errors));
+        $content = editAccount($formData, current($errors));
     }
     else if($formData['delete_flag']) {
         $content = ($error = $userModel->deleteUser($user['user_id'], $formData))
-            ? settings($formData, $error)
+            ? editAccount($formData, $error)
             : 'Your account was successfully deleted.';
 
         $user = $error ? $user : null;
@@ -23,7 +23,7 @@ else if(list($formData, $errors) = $validator->validate()) {
     else {
         $content = is_array($result = $userModel->updateUser($user['user_id'], $formData))
             ? accountUpdated($result, $formData)
-            : settings($formData, $result);
+            : editAccount($formData, $result);
 
         $user['username'] = is_array($result) ? $formData['username'] : $user['username'];
     }
@@ -33,10 +33,10 @@ else {
     $formData = $validator->values();
     $formData['username'] = $userData['username'];
     $formData['email'] = $userData['email'];
-    $content = settings($formData);
+    $content = editAccount($formData);
 }
 
-$head = '<title>Settings</title>
-    <script src="' . JS . 'settings.js"></script>';
+$head = '<title>Edit Account</title>
+    <script src="' . JS . 'edit-account.js"></script>';
 
 ?>

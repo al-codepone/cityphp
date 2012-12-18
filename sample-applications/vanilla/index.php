@@ -16,7 +16,7 @@ include(route(array(
     null => 'home.php',
     'signup' => 'sign-up.php',
     'login' => 'login.php',
-    'settings' => 'settings.php',
+    'edit-account' => 'edit-account.php',
     'verify-email' => 'verify-email.php',
     'forgot-password' => 'forgot-password.php',
     'reset-password' => 'reset-password.php')));

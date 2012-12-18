@@ -5,7 +5,7 @@ require_once(VANILLA . 'invalidPassword.php');
 require_once(VANILLA . 'isPassword.php');
 require_once(VANILLA . 'validateUsername.php');
 
-class SettingsValidator extends FormValidator {
+class EditAccountValidator extends FormValidator {
     public function __construct() {
         parent::__construct(array(
             'delete_flag' => false,
