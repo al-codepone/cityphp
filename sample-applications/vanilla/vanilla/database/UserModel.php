@@ -36,7 +36,7 @@ class UserModel extends DatabaseAdapter {
             $userID = $this->getConn()->insert_id;
 
             if($data['email']) {
-                $verifyEmailModel = MyModelFactory::getModel('VerifyEmailModel');
+                $verifyEmailModel = ModelFactory::get('VerifyEmailModel');
                 $verifyEmailModel->createToken($userID, $data['username'], $data['email']);
             }
         }
@@ -77,7 +77,7 @@ class UserModel extends DatabaseAdapter {
         }
 
         if($emailStates['is_new'] || $emailStates['is_changed']) {
-            $verifyEmailModel = MyModelFactory::getModel('VerifyEmailModel');
+            $verifyEmailModel = ModelFactory::get('VerifyEmailModel');
             $verifyEmailModel->createToken($userID, $formData['username'], $formData['email']);
         }
 

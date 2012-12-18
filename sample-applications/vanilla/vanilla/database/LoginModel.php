@@ -9,7 +9,7 @@ class LoginModel extends TokenModel {
     }
 
     public function login($formData) {
-        $userModel = MyModelFactory::getModel('UserModel');
+        $userModel = ModelFactory::get('UserModel');
         $userData = $userModel->getUserWithUsername($formData['username']);
 
         if(!$userData || $userData['password'] != bcryptHash($formData['password'], $userData['password'])) {

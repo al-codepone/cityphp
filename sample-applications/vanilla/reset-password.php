@@ -4,7 +4,7 @@ require_once(CITYPHP . 'html/autofocus.php');
 require_once(VANILLA . 'forms/ResetPasswordValidator.php');
 require_once(VANILLA . 'html/resetPassword.php');
 
-$resetPasswordModel = MyModelFactory::getModel('ResetPasswordModel');
+$resetPasswordModel = ModelFactory::get('ResetPasswordModel');
 $tokenData = $resetPasswordModel->getToken($_GET['id'], $_GET['token']);
 
 if($tokenData) {

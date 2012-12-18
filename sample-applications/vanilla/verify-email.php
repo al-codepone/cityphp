@@ -1,6 +1,6 @@
 <?php
 
-$verifyEmailModel = MyModelFactory::getModel('VerifyEmailModel');
+$verifyEmailModel = ModelFactory::get('VerifyEmailModel');
 $data = $verifyEmailModel->getToken($_GET['id'], $_GET['token']);
 
 if($data) {

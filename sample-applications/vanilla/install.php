@@ -1,7 +1,7 @@
 <?php
 
 require_once('./constants.php');
-require_once(VANILLA . 'database/MyModelFactory.php');
+require_once(VANILLA . 'database/ModelFactory.php');
 
 $modelNames = array(
     'LoginModel',
@@ -10,7 +10,7 @@ $modelNames = array(
     'ResetPasswordModel');
 
 foreach($modelNames as $modelName) {
-    $model = MyModelFactory::getModel($modelName);
+    $model = ModelFactory::get($modelName);
     $model->install();
 }
 

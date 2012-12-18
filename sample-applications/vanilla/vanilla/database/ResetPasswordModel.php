@@ -9,7 +9,7 @@ class ResetPasswordModel extends TokenModel {
     }
 
     public function createToken($email) {
-        $userModel = MyModelFactory::getModel('UserModel');
+        $userModel = ModelFactory::get('UserModel');
         $userData = $userModel->getUserWithEmail($email);
 
         if(!$userData) {
