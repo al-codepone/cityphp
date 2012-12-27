@@ -2,7 +2,7 @@
 
 require_once(CITYPHP . 'bcryptHash.php');
 require_once(CITYPHP . 'database/DatabaseAdapter.php');
-require_once(CITYPHP . 'utcDatetime.php');
+require_once(CITYPHP . 'time/datetimeNow.php');
 
 abstract class TokenModel extends DatabaseAdapter {
     private $tableName;
@@ -29,7 +29,7 @@ abstract class TokenModel extends DatabaseAdapter {
         $this->query(sprintf('DELETE FROM %s
             WHERE creation_date < "%s" - INTERVAL %d DAY',
             $this->tableName,
-            utcDatetime(),
+            datetimeNow(),
             $this->ttl));
     }
 
@@ -40,7 +40,7 @@ abstract class TokenModel extends DatabaseAdapter {
             $userID,
             $this->esc(bcryptHash($token, BCRYPT_COST)),
             $this->esc($data),
-            utcDatetime()));
+            datetimeNow()));
     }
 
     protected function getToken($userID, $token) {
@@ -51,7 +51,7 @@ abstract class TokenModel extends DatabaseAdapter {
             ORDER BY tokens.creation_date DESC',
             TABLE_USERS,
             $this->tableName,
-            utcDatetime(),
+            datetimeNow(),
             $this->ttl,
             $userID);
 
