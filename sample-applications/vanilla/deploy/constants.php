@@ -1,10 +1,10 @@
 <?php
 
 define('CITYPHP', 'C:/wamp/www/framework/cityphp/');
-define('VANILLA', 'C:/wamp/www/framework/sample-applications/vanilla/vanilla/');
+define('VANILLA', 'C:/wamp/www/framework/sample-applications/vanilla/deploy/vanilla/');
 
 define('SITE', 'https://mysite.com');
-define('ROOT', '/framework/sample-applications/vanilla/');
+define('ROOT', '/framework/sample-applications/vanilla/deploy/');
 define('CSS', ROOT . 'css/');
 define('JS', ROOT . 'js/');
 define('SIGN_UP', ROOT . 'signup');
