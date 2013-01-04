@@ -6,3 +6,9 @@
     - Add local Git repository.
     - New developer manual.
     - Refactor framework and sample applications.
+- 2013-01-03, 0.3.0
+    - New user-based sample application.
+    - Add URL routing, bcrypt hashing, token generation, common HTML snippets and datetime handling.
+    - Improve database layer.
+    - Remove OOP template system.
+    - New documentation.
