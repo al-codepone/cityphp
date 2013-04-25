@@ -19,7 +19,8 @@ include(route(array(
     'edit-account' => 'edit-account.php',
     'verify-email' => 'verify-email.php',
     'forgot-password' => 'forgot-password.php',
-    'reset-password' => 'reset-password.php')));
+    'reset-password' => 'reset-password.php'),
+    VANILLA . 'routes/'));
 
 $navItems = navItems($user);
 include(VANILLA . 'html/template.php');
