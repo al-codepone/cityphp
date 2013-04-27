@@ -3,15 +3,21 @@
 require_once(VANILLA . 'emailStates.php');
 
 function accountUpdated($userData, $formData) {
-    $emailStates = emailStates($userData, $formData);
-    $emailSentence =
-        !$emailStates['is_changed'] ? !$emailStates['is_new'] ? !$emailStates['is_deleted'] ? ''
-        : ' Your email was removed from your account.'
-        : ' We emailed you a link to verify your email.'
-        : ' We emailed you a link to verify your updated email.
-                Your old email was removed from your account.';
+    $state = emailStates($userData, $formData);
+    $sentence = '';
 
-    return "Your account has been updated.$emailSentence";
+    if($state['is_changed']) {
+        $sentence = ' We emailed you a link to verify your updated email.
+            Your old email was removed from your account.';
+    }
+    else if($state['is_new']) {
+        $sentence = ' We emailed you a link to verify your email.';
+    }
+    else if($state['is_deleted']) {
+        $sentence = ' Your email was removed from your account.';
+    }
+
+    return "Your account has been updated.$sentence";
 }
 
 ?>
