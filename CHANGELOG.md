@@ -12,3 +12,8 @@
     - Improve database layer.
     - Remove OOP template system.
     - New documentation.
+- 2013-04-27, 0.3.1
+    - Use the unlicense license
+    - add route() base path parameter
+    - remove nested ternary operators
+    - add clamp() function
