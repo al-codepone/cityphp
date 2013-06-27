@@ -16,6 +16,9 @@ abstract class FormValidator {
 
     public function validate() {
         if($this->isReady()) {
+            $values = array();
+            $errors = array();
+
             foreach(array_keys($this->values) as $key) {
                 $value = isset($_POST[$key]) ? $_POST[$key] : $this->values[$key];
                 $methodName = 'validate_' . $key;
