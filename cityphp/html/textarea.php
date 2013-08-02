@@ -1,27 +1,42 @@
 <?php
 
-function textarea($label, $id, $value = '',
-    $attributes = array(), $isContainer = true)
+require_once CITYPHP . 'html/attributes.php';
+
+function textarea(
+    $textareaAttributes = array(),
+    $content = '',
+    $label = '',
+    $isContainer = true,
+    $labelAttributes = array(),
+    $containerAttributes = array())
 {
-    ob_start();
-    print $isContainer ? "<div id=\"c_$id\">" : '';
-    print ($label == '')
-        ? ''
-        : sprintf("<label id=\"l_$id\" for=\"$id\">%s</label>",
-            htmlspecialchars($label));
-
-    print '<textarea ';
-
-    foreach($attributes as $i => $v) {
-        print is_int($i)
-            ? "$v "
-            : "$i=\"$v\" ";
+    if($id = $textareaAttributes['id']) {
+        $textareaAttributes['name'] = $id;
+        $labelAttributes['id'] = "l_$id";
+        $labelAttributes['for'] = $id;
+        $containerAttributes['id'] = "c_$id";
     }
 
-    printf("name=\"$id\" id=\"$id\">%s</textarea>",
-        htmlspecialchars($value));
+    ob_start();
 
-    print $isContainer ? '</div>' : '';
+    echo
+        $isContainer
+            ? sprintf('<div%s>', attributes($containerAttributes))
+            : '',
+
+        ($label != '')
+            ? sprintf("<label%s>%s</label>",
+                attributes($labelAttributes),
+                htmlspecialchars($label))
+
+            : '',
+
+        sprintf('<textarea%s>%s</textarea>',
+            attributes($textareaAttributes),
+            htmlspecialchars($content)),
+
+        $isContainer ? '</div>' : '';
+
     return ob_get_clean();
 }
 
