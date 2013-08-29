@@ -17,27 +17,23 @@ function textarea(
         $containerAttributes['id'] = "c_$id";
     }
 
-    ob_start();
-
-    echo
-        $isContainer
+    return
+        ($isContainer
             ? sprintf('<div%s>', attributes($containerAttributes))
-            : '',
+            : '')
 
-        ($label != '')
-            ? sprintf("<label%s>%s</label>",
+        . (($label != '')
+            ? sprintf('<label%s>%s</label>',
                 attributes($labelAttributes),
                 htmlspecialchars($label))
 
-            : '',
+            : '')
 
-        sprintf('<textarea%s>%s</textarea>',
+        . sprintf('<textarea%s>%s</textarea>',
             attributes($textareaAttributes),
-            htmlspecialchars($content)),
+            htmlspecialchars($content))
 
-        $isContainer ? '</div>' : '';
-
-    return ob_get_clean();
+        . ($isContainer ? '</div>' : '');
 }
 
 ?>
