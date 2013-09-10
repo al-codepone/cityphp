@@ -1,5 +1,7 @@
 <?php
 
+namespace cityphp\database;
+
 abstract class AdapterFactory {
     public static $format;
     private static $databaseHandle;

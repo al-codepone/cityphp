@@ -1,5 +1,7 @@
 <?php
 
+namespace cityphp\forms;
+
 abstract class FormValidator {
     private $values;
     private $optionalKeys;

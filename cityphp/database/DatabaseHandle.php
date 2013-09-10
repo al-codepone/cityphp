@@ -1,5 +1,7 @@
 <?php
 
+namespace cityphp\database;
+
 abstract class DatabaseHandle {
     private $errorMessage;
     private $conn;

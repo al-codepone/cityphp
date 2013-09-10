@@ -1,6 +1,6 @@
 <?php
 
-require_once(CITYPHP . 'database/DatabaseHandle.php');
+namespace cityphp\database;
 
 class MySqlDatabaseHandle extends DatabaseHandle {
     public function __construct($host = null,

@@ -1,6 +1,6 @@
 <?php
 
-require_once(CITYPHP . 'database/DatabaseHandle.php');
+namespace cityphp\database;
 
 class PostgreSqlDatabaseHandle extends DatabaseHandle {
     public function __construct($connectionString,
