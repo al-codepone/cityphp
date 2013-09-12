@@ -7,6 +7,7 @@ function radioButtons(
     $radioButtons,
     $name,
     $checkedValue = null,
+    $title = '',
     $isContainer = true,
     $containerAttributes = array())
 {
@@ -16,6 +17,12 @@ function radioButtons(
 
     print $isContainer
         ? sprintf('<div%s>', attributes($containerAttributes))
+        : '';
+
+    print ($title != '')
+        ? sprintf("<span%s>$title</span>",
+            attributes(array('id' => "t_$name")))
+
         : '';
 
     foreach($radioButtons as $value => $label) {

@@ -7,6 +7,7 @@ function checkboxes(
     $checkboxes,
     $name,
     $checkedValues = array(),
+    $title = '',
     $isContainer = true,
     $containerAttributes = array())
 {
@@ -16,6 +17,12 @@ function checkboxes(
 
     print $isContainer
         ? sprintf('<div%s>', attributes($containerAttributes))
+        : '';
+
+    print ($title != '')
+        ? sprintf("<span%s>$title</span>",
+            attributes(array('id' => "t_$name")))
+
         : '';
 
     foreach($checkboxes as $value => $label) {
