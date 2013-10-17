@@ -1,5 +1,7 @@
 <?php
 
+use vanilla\database\ModelFactory;
+
 $verifyEmailModel = ModelFactory::get('vanilla\database\VerifyEmailModel');
 $data = $verifyEmailModel->getToken($_GET['id'], $_GET['token']);
 

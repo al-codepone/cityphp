@@ -3,6 +3,7 @@
 require_once CITYPHP . 'html/autofocus.php';
 require_once VANILLA . 'html/forgotPassword.php';
 
+use vanilla\database\ModelFactory;
 use vanilla\forms\ForgotPasswordValidator;
 
 $validator = new ForgotPasswordValidator();
