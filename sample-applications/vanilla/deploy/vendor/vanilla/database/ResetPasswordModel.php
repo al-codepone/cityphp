@@ -3,6 +3,7 @@
 namespace vanilla\database;
 
 require_once CITYPHP . 'sha1Token.php';
+require_once VANILLA . 'email.php';
 
 use cityphp\database\DatabaseHandle;
 use vanilla\database\ModelFactory;
@@ -24,7 +25,7 @@ class ResetPasswordModel extends TokenModel {
                 $userData['username'], SITE, RESET_PASSWORD, $userData['user_id'], $token);
 
             parent::createToken($userData['user_id'], $token);
-            mail($email, $subject, $message, $additionalHeaders);
+            email($email, $subject, $message, $additionalHeaders);
         }
     }
 

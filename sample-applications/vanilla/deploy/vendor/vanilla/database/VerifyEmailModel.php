@@ -3,6 +3,7 @@
 namespace vanilla\database;
 
 require_once CITYPHP . 'sha1Token.php';
+require_once VANILLA . 'email.php';
 
 use cityphp\database\DatabaseHandle;
 
@@ -19,7 +20,7 @@ class VerifyEmailModel extends TokenModel {
             $username, SITE, VERIFY_EMAIL, $userID, $token);
 
         parent::createToken($userID, $token, $email);
-        mail($email, $subject, $message, $additionalHeaders);
+        email($email, $subject, $message, $additionalHeaders);
     }
 
     public function getToken($userID, $token) {

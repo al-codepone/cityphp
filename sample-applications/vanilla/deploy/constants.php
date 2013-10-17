@@ -4,7 +4,7 @@ define('VENDOR', 'C:/wamp/www/cityphp/sample-applications/vanilla/deploy/vendor/
 define('CITYPHP', VENDOR . 'cityphp/');
 define('VANILLA', VENDOR . 'vanilla/');
 
-define('SITE', 'https://mysite.com');
+define('SITE', 'localhost');
 define('ROOT', '/cityphp/sample-applications/vanilla/deploy/');
 define('CSS', ROOT . 'css/');
 define('JS', ROOT . 'js/');
@@ -33,6 +33,9 @@ define('SESSION_USERNAME', 'username');
 define('COOKIE_PERSISTENT_LOGIN', 'persistent_login');
 
 define('EMAIL_FROM', 'noreply@mysite.com');
+define('EMAIL_IS_SEND', false);
+define('EMAIL_IS_LOG', true);
+define('EMAIL_LOG_FILE', 'C:/wamp/vanilla-log.txt');
 
 define('TTL_PERSISTENT_LOGIN', 7);
 define('TTL_VERIFY_EMAIL', 30);
