@@ -1,18 +1,20 @@
 <?php
 
-require_once('./constants.php');
-require_once(CITYPHP . 'route.php');
-require_once(VANILLA . 'database/ModelFactory.php');
-require_once(VANILLA . 'html/navItems.php');
+require_once 'constants.php';
+require_once CITYPHP . '__autoload.php';
+require_once CITYPHP . 'route.php';
+require_once VANILLA . 'html/navItems.php';
+
+use vanilla\database\ModelFactory;
 
 session_name(SESSION_NAME);
 session_start();
 
-$userModel = ModelFactory::get('UserModel');
-$loginModel = ModelFactory::get('LoginModel');
+$userModel = ModelFactory::get('vanilla\database\UserModel');
+$loginModel = ModelFactory::get('vanilla\database\LoginModel');
 $user = $loginModel->getActiveUser();
 
-include(route(array(
+include route(array(
     null => 'home.php',
     'signup' => 'sign-up.php',
     'login' => 'login.php',
@@ -20,9 +22,9 @@ include(route(array(
     'verify-email' => 'verify-email.php',
     'forgot-password' => 'forgot-password.php',
     'reset-password' => 'reset-password.php'),
-    VANILLA . 'routes/'));
+    VANILLA . 'routes/');
 
 $navItems = navItems($user);
-include(VANILLA . 'html/template.php');
+include VANILLA . 'html/template.php';
 
 ?>

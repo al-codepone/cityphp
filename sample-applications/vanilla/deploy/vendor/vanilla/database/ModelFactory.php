@@ -1,11 +1,9 @@
 <?php
 
-require_once(CITYPHP . 'database/AdapterFactory.php');
-require_once(CITYPHP . 'database/MySqlDatabaseHandle.php');
-require_once(VANILLA . 'database/LoginModel.php');
-require_once(VANILLA . 'database/ResetPasswordModel.php');
-require_once(VANILLA . 'database/UserModel.php');
-require_once(VANILLA . 'database/VerifyEmailModel.php');
+namespace vanilla\database;
+
+use cityphp\database\AdapterFactory;
+use cityphp\database\MySqlDatabaseHandle;
 
 class ModelFactory extends AdapterFactory {
     protected static function getDatabaseHandle() {

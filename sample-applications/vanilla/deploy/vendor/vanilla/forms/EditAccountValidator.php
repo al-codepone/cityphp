@@ -1,9 +1,12 @@
 <?php
 
-require_once(CITYPHP . 'forms/FormValidator.php');
-require_once(VANILLA . 'invalidPassword.php');
-require_once(VANILLA . 'isPassword.php');
-require_once(VANILLA . 'validateUsername.php');
+namespace vanilla\forms;
+
+require_once VANILLA . 'invalidPassword.php';
+require_once VANILLA . 'isPassword.php';
+require_once VANILLA . 'validateUsername.php';
+
+use cityphp\forms\FormValidator;
 
 class EditAccountValidator extends FormValidator {
     public function __construct() {

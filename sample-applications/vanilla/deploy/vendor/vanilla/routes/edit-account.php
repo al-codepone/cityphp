@@ -1,8 +1,9 @@
 <?php
 
-require_once(VANILLA . 'forms/EditAccountValidator.php');
-require_once(VANILLA . 'html/accountUpdated.php');
-require_once(VANILLA . 'html/editAccount.php');
+require_once VANILLA . 'html/accountUpdated.php';
+require_once VANILLA . 'html/editAccount.php';
+
+use vanilla\forms\EditAccountValidator;
 
 $validator = new EditAccountValidator();
 
@@ -11,7 +12,7 @@ if(!$user) {
 }
 else if(list($formData, $errors) = $validator->validate()) {
     if($errors) {
-        $content = editAccount($formData, current($errors));
+        $content = editAccount($formData, $errors);
     }
     else if($formData['delete_flag']) {
         $content = ($error = $userModel->deleteUser($user['user_id'], $formData))

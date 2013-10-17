@@ -1,6 +1,8 @@
 <?php
 
-require_once(CITYPHP . 'forms/FormValidator.php');
+namespace vanilla\forms;
+
+use cityphp\forms\FormValidator;
 
 class LoginValidator extends FormValidator {
     public function __construct() {

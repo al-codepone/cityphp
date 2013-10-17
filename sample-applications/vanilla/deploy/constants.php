@@ -1,7 +1,8 @@
 <?php
 
-define('CITYPHP', 'C:/wamp/www/cityphp/cityphp/');
-define('VANILLA', 'C:/wamp/www/cityphp/sample-applications/vanilla/deploy/vanilla/');
+define('VENDOR', 'C:/wamp/www/cityphp/sample-applications/vanilla/deploy/vendor/');
+define('CITYPHP', VENDOR . 'cityphp/');
+define('VANILLA', VENDOR . 'vanilla/');
 
 define('SITE', 'https://mysite.com');
 define('ROOT', '/cityphp/sample-applications/vanilla/deploy/');

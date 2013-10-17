@@ -1,7 +1,10 @@
 <?php
 
-require_once(CITYPHP . 'forms/FormValidator.php');
-require_once(VANILLA . 'validatePassword.php');
+namespace vanilla\forms;
+
+require_once VANILLA . 'validatePassword.php';
+
+use cityphp\forms\FormValidator;
 
 class ResetPasswordValidator extends FormValidator {
     public function __construct() {

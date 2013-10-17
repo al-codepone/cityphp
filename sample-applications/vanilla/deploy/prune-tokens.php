@@ -1,12 +1,14 @@
 <?php
 
-require_once('./constants.php');
-require_once(VANILLA . 'database/ModelFactory.php');
+require_once 'constants.php';
+require_once CITYPHP . '__autoload.php';
+
+use vanilla\database\ModelFactory;
 
 $modelNames = array(
-    'LoginModel',
-    'VerifyEmailModel',
-    'ResetPasswordModel');
+    'vanilla\database\LoginModel',
+    'vanilla\database\VerifyEmailModel',
+    'vanilla\database\ResetPasswordModel');
 
 foreach($modelNames as $modelName) {
     $model = ModelFactory::get($modelName);

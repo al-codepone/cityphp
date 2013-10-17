@@ -1,8 +1,9 @@
 <?php
 
-require_once(CITYPHP . 'html/autofocus.php');
-require_once(VANILLA . 'forms/SignUpValidator.php');
-require_once(VANILLA . 'html/signUp.php');
+require_once CITYPHP . 'html/autofocus.php';
+require_once VANILLA . 'html/signUp.php';
+
+use vanilla\forms\SignUpValidator;
 
 $validator = new SignUpValidator();
 
@@ -11,7 +12,7 @@ if($user) {
 }
 else if(list($formData, $errors) = $validator->validate()) {
     if($errors) {
-        $content = signUp($formData, current($errors));
+        $content = signUp($formData, $errors);
     }
     else if($error = $userModel->createUser($formData)) {
         $content = signUp($formData, $error);
