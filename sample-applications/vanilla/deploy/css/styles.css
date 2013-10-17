@@ -32,6 +32,17 @@ label[for=remember_me] {
     padding-right:1.3em;
 }
 
+#c_remember_me {
+    unicode-bidi:embed;
+    direction:rtl;
+    text-align:left;
+}
+
+#c_remember_me * {
+    unicode-bidi:embed;
+    direction:ltr;
+}
+
 .error {
     color:#ff0000;
 }
