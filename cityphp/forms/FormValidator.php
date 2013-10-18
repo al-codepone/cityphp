@@ -23,7 +23,7 @@ abstract class FormValidator {
 
             foreach(array_keys($this->values) as $key) {
                 $value = isset($_POST[$key]) ? $_POST[$key] : $this->values[$key];
-                $methodName = 'validate_' . $key;
+                $methodName = "validate_$key";
                 $values[$key] = $value;
                 $error = method_exists($this, $methodName)
                     ? $this->$methodName($value)
