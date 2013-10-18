@@ -30,19 +30,16 @@ function editAccount($formData, $errors = array()) {
 
     <?=input(array(
         'id' => 'password',
-        'value' => $formData['password'],
         'type' => 'password'),
         'New Password')?>
 
     <?=input(array(
         'id' => 'confirm_password',
-        'value' => $formData['confirm_password'],
         'type' => 'password'),
         'Confirm New Password')?>
 
     <?=input(array(
         'id' => 'current_password',
-        'value' => $formData['current_password'],
         'type' => 'password'),
         'Current Password')?>
 

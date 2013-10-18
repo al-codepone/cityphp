@@ -12,13 +12,11 @@ function resetPassword($formData, $errors = array()) {
 
     <?=input(array(
         'id' => 'password',
-        'value' => $formData['password'],
         'type' => 'password'),
         'New Password')?>
 
     <?=input(array(
         'id' => 'confirm_password',
-        'value' => $formData['confirm_password'],
         'type' => 'password'),
         'Confirm New Password')?>
 

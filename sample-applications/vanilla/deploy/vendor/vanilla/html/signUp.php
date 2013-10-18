@@ -22,13 +22,11 @@ function signUp($formData, $errors = array()) {
 
     <?=input(array(
         'id' => 'password',
-        'value' => $formData['password'],
         'type' => 'password'),
         'Password')?>
 
     <?=input(array(
         'id' => 'confirm_password',
-        'value' => $formData['confirm_password'],
         'type' => 'password'),
         'Confirm Password')?>
 

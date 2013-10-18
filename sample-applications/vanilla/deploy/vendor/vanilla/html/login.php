@@ -16,7 +16,6 @@ function login($formData, $errors = array()) {
 
     <?=input(array(
         'id' => 'password',
-        'value' => $formData['password'],
         'type' => 'password'),
         'Password')?>
 
