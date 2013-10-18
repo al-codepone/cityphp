@@ -20,6 +20,12 @@ class ResetPasswordValidator extends FormValidator {
     protected function validate_confirm_password($value) {
         return validatePassword($value, 'Confirm new password');
     }
+
+    protected function validateOther($values) {
+        if($values['password'] != $values['confirm_password']) {
+            return "Passwords didn't match";
+        }
+    }
 }
 
 ?>

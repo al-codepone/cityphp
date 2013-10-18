@@ -22,10 +22,7 @@ class UserModel extends DatabaseAdapter {
     }
 
     public function createUser($data) {
-        if($data['password'] != $data['confirm_password']) {
-            return "Passwords didn't match";
-        }
-        else if($this->getUserWithUsername($data['username'])) {
+        if($this->getUserWithUsername($data['username'])) {
             return usernameTaken($data['username']);
         }
         else if($this->getUserWithEmail($data['email'])) {
@@ -70,9 +67,6 @@ class UserModel extends DatabaseAdapter {
         if($userData['password'] != bcryptHash($formData['current_password'], $userData['password'])) {
             return 'Incorrect current password';
         }
-        else if($formData['password'] != $formData['confirm_password']) {
-            return "New passwords didn't match";
-        }
         else if($usernameUserData && $userID != $usernameUserData['user_id']) {
             return usernameTaken($formData['username']);
         }
@@ -115,10 +109,6 @@ class UserModel extends DatabaseAdapter {
     }
 
     public function updatePassword($userID, $data) {
-        if($data['password'] != $data['confirm_password']) {
-            return "Passwords didn't match";
-        }
-
         $this->query(sprintf('UPDATE %s SET password = "%s" WHERE user_id = %d',
             TABLE_USERS,
             $this->esc(bcryptHash($data['password'], BCRYPT_COST)),

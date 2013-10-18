@@ -40,6 +40,12 @@ class EditAccountValidator extends FormValidator {
             return invalidPassword('Confirm new password');
         }
     }
+
+    protected function validateOther($values) {
+        if($values['password'] != $values['confirm_password']) {
+            return "New passwords didn't match";
+        }
+    }
 }
 
 ?>

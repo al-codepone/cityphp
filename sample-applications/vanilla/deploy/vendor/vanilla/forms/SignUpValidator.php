@@ -34,6 +34,12 @@ class SignUpValidator extends FormValidator {
     protected function validate_confirm_password($value) {
         return validatePassword($value, 'Confirm password');
     }
+
+    protected function validateOther($values) {
+        if($values['password'] != $values['confirm_password']) {
+            return "Passwords didn't match";
+        }
+    }
 }
 
 ?>
