@@ -8,10 +8,30 @@ function signUp($formData, $errors = array()) {
 
 <form method="post">
     <?=ulist($errors, array('class' => 'error'))?>
-    <?=input(array('id' => 'username', 'value' => $formData['username']), 'Username')?>
-    <?=input(array('id' => 'email', 'value' => $formData['email'], 'type' => 'email'), 'Email(optional)')?>
-    <?=input(array('id' => 'password', 'value' => $formData['password'], 'type' => 'password'), 'Password')?>
-    <?=input(array('id' => 'confirm_password', 'value' => $formData['confirm_password'], 'type' => 'password'), 'Confirm Password')?>
+
+    <?=input(array(
+        'id' => 'username',
+        'value' => $formData['username']),
+        'Username')?>
+
+    <?=input(array(
+        'id' => 'email',
+        'value' => $formData['email'],
+        'type' => 'email'),
+        'Email(optional)')?>
+
+    <?=input(array(
+        'id' => 'password',
+        'value' => $formData['password'],
+        'type' => 'password'),
+        'Password')?>
+
+    <?=input(array(
+        'id' => 'confirm_password',
+        'value' => $formData['confirm_password'],
+        'type' => 'password'),
+        'Confirm Password')?>
+
     <div><input type="submit" value="Sign Up"/></div>
 </form>
 
