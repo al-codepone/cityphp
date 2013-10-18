@@ -34,6 +34,15 @@ abstract class FormValidator {
                 }
             }
 
+            if(method_exists($this, 'validateOther')) {
+                $otherErrors = $this->validateOther($values);
+
+                if(!is_null($otherErrors)) {
+                    $errors = array_merge($errors,
+                        is_array($otherErrors) ? $otherErrors : array($otherErrors));
+                }
+            }
+
             return array($values, $errors);
         }
     }
