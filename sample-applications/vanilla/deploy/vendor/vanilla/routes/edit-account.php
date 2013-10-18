@@ -11,15 +11,15 @@ if(!$user) {
     $content = 'Log in to edit your account.';
 }
 else if(list($formData, $errors) = $validator->validate()) {
-    if($errors) {
-        $content = editAccount($formData, $errors);
-    }
-    else if($formData['delete_flag']) {
+    if($formData['delete_flag']) {
         $content = ($error = $userModel->deleteUser($user['user_id'], $formData))
             ? editAccount($formData, $error)
             : 'Your account was successfully deleted.';
 
         $user = $error ? $user : null;
+    }
+    else if($errors) {
+        $content = editAccount($formData, $errors);
     }
     else {
         $content = is_array($result = $userModel->updateUser($user['user_id'], $formData))
