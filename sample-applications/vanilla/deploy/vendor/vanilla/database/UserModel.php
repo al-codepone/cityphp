@@ -17,7 +17,7 @@ class UserModel extends DatabaseAdapter {
             username VARCHAR(32) UNIQUE,
             email VARCHAR(255) DEFAULT "",
             password VARCHAR(128),
-            PRIMARY KEY (user_id))
+            PRIMARY KEY(user_id))
             ENGINE = MYISAM');
     }
 
@@ -29,7 +29,7 @@ class UserModel extends DatabaseAdapter {
             return emailTaken($data['email']);
         }
         else {
-            $this->query(sprintf('INSERT INTO %s (username, password) VALUES ("%s", "%s")',
+            $this->query(sprintf('INSERT INTO %s (username, password) VALUES("%s", "%s")',
                 TABLE_USERS,
                 $this->esc($data['username']),
                 $this->esc(bcryptHash($data['password'], BCRYPT_COST))));
