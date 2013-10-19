@@ -48,16 +48,15 @@ abstract class TokenModel extends DatabaseAdapter {
     }
 
     protected function getToken($userID, $token) {
-        $query = sprintf('SELECT token_id, token, data, users.user_id, username
-            FROM %s AS users, %s AS tokens
-            WHERE tokens.creation_date > "%s" - INTERVAL %d DAY
-            AND tokens.user_id = %d AND tokens.user_id = users.user_id
-            ORDER BY tokens.creation_date DESC',
-            TABLE_USERS,
+        $query = sprintf('SELECT t.token_id, t.token, t.data, u.user_id, u.username
+            FROM %s t JOIN %s u ON t.user_id = u.user_id
+            WHERE t.user_id = %d AND t.creation_date > "%s" - INTERVAL %d DAY
+            ORDER BY t.creation_date DESC',
             $this->tableName,
+            TABLE_USERS,
+            $userID,
             datetimeNow(),
-            $this->ttl,
-            $userID);
+            $this->ttl);
 
         foreach($this->fetchQuery($query) as $row) {
             if($row['token'] == bcryptHash($token, $row['token'])) {
