@@ -9,8 +9,10 @@ function ulist($items, $ulAttributes = array()) {
         ob_start();
         printf('<ul%s>', attributes($ulAttributes));
 
-        foreach($items as $item) {
-            print "<li>$item</li>";
+        foreach($items as $i => $v) {
+            print is_array($v)
+                ? sprintf("<li%s>$i</li>", attributes($v))
+                : "<li>$v</li>";
         }
 
         print '</ul>';
