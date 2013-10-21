@@ -2,12 +2,13 @@
 
 require_once CITYPHP . 'html/attributes.php';
 
-function ulist($items, $ulAttributes = array()) {
+function blist($items, $listAttributes = array(), $isOrdered = false) {
     $items = is_array($items) ? $items : array($items);
+    $listType = $isOrdered ? 'ol' : 'ul';
 
     if($items) {
         ob_start();
-        printf('<ul%s>', attributes($ulAttributes));
+        printf("<$listType%s>", attributes($listAttributes));
 
         foreach($items as $i => $v) {
             print is_array($v)
@@ -15,7 +16,7 @@ function ulist($items, $ulAttributes = array()) {
                 : "<li>$v</li>";
         }
 
-        print '</ul>';
+        print "</$listType>";
         return ob_get_clean();
     }
 }
