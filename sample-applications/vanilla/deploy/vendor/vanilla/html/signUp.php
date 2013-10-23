@@ -1,13 +1,13 @@
 <?php
 
+require_once CITYPHP . 'html/blist.php';
 require_once CITYPHP . 'html/input.php';
-require_once CITYPHP . 'html/ulist.php';
 
 function signUp($formData, $errors = array()) {
     ob_start(); ?>
 
 <form method="post">
-    <?=ulist($errors, array('class' => 'error'))?>
+    <?=blist($errors, array('class' => 'error'))?>
 
     <?=input(array(
         'id' => 'username',

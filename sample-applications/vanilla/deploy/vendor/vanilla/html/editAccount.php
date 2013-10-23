@@ -1,7 +1,7 @@
 <?php
 
+require_once CITYPHP . 'html/blist.php';
 require_once CITYPHP . 'html/input.php';
-require_once CITYPHP . 'html/ulist.php';
 
 function editAccount($formData, $errors = array()) {
     ob_start(); ?>
@@ -15,7 +15,7 @@ function editAccount($formData, $errors = array()) {
         If you change your email, then your account email will be blank
         until you verify the new email.
     </div>
-    <?=ulist($errors, array('class' => 'error'))?>
+    <?=blist($errors, array('class' => 'error'))?>
 
     <?=input(array(
         'id' => 'username',
