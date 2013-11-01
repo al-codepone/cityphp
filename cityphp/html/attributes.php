@@ -1,6 +1,6 @@
 <?php
 
-function attributes($attributes = array()) {
+function attributes($attributes) {
     ob_start();
 
     foreach($attributes as $i => $v) {
