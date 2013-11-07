@@ -4,12 +4,12 @@ require_once CITYPHP . 'html/attributes.php';
 require_once CITYPHP . 'html/input.php';
 
 function checkboxes(
-    $checkboxes,
+    array $checkboxes,
     $name,
-    $checkedValues = array(),
+    array $checkedValues = array(),
     $title = '',
     $isContainer = true,
-    $containerAttributes = array())
+    array $containerAttributes = array())
 {
     $containerAttributes['id'] = "c_$name";
     $i = 0;

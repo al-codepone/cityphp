@@ -4,12 +4,12 @@ require_once CITYPHP . 'html/attributes.php';
 require_once CITYPHP . 'html/input.php';
 
 function radioButtons(
-    $radioButtons,
+    array $radioButtons,
     $name,
     $checkedValue = null,
     $title = '',
     $isContainer = true,
-    $containerAttributes = array())
+    array $containerAttributes = array())
 {
     $containerAttributes['id'] = "c_$name";
     $i = 0;

@@ -2,7 +2,7 @@
 
 require_once CITYPHP . 'html/attributes.php';
 
-function blist($items, $listAttributes = array(), $isOrdered = false) {
+function blist($items, array $listAttributes = array(), $isOrdered = false) {
     $items = is_array($items) ? $items : array($items);
     $listType = $isOrdered ? 'ol' : 'ul';
 

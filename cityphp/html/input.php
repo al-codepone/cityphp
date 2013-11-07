@@ -3,11 +3,11 @@
 require_once CITYPHP . 'html/attributes.php';
 
 function input(
-    $inputAttributes = array(),
+    array $inputAttributes = array(),
     $label = '',
     $isContainer = true,
-    $labelAttributes = array(),
-    $containerAttributes = array())
+    array $labelAttributes = array(),
+    array $containerAttributes = array())
 {
     if($id = $inputAttributes['id']) {
         $inputAttributes['name'] = $inputAttributes['name']

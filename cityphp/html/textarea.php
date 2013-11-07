@@ -3,12 +3,12 @@
 require_once CITYPHP . 'html/attributes.php';
 
 function textarea(
-    $textareaAttributes = array(),
+    array $textareaAttributes = array(),
     $content = '',
     $label = '',
     $isContainer = true,
-    $labelAttributes = array(),
-    $containerAttributes = array())
+    array $labelAttributes = array(),
+    array $containerAttributes = array())
 {
     if($id = $textareaAttributes['id']) {
         $textareaAttributes['name'] = $id;

@@ -3,13 +3,13 @@
 require_once CITYPHP . 'html/attributes.php';
 
 function select(
-    $options,
-    $selectAttributes = array(),
+    array $options,
+    array $selectAttributes = array(),
     $label = '',
     $selectedValues = array(),
     $isContainer = true,
-    $labelAttributes = array(),
-    $containerAttributes = array())
+    array $labelAttributes = array(),
+    array $containerAttributes = array())
 {
     if($id = $selectAttributes['id']) {
         $selectAttributes['name'] = $id;
