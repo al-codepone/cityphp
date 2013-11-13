@@ -5,9 +5,11 @@ function attributes(array $attributes) {
 
     foreach($attributes as $i => $v) {
         if($v !== '') {
+            $v = htmlspecialchars($v);
+
             print is_int($i)
                 ? " $v"
-                : sprintf(" $i=\"%s\"", htmlspecialchars($v));
+                : " $i=\"$v\"";
         }
     }
 
