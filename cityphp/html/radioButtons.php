@@ -31,7 +31,7 @@ function radioButtons(
                 'name' => $name,
                 'type' => 'radio',
                 'value' => $value,
-                $value == $checkedValue ? 'checked' : ''),
+                !is_null($checkedValue) && $value == $checkedValue ? 'checked' : ''),
             $label);
     }
 
