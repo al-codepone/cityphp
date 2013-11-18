@@ -25,8 +25,8 @@ abstract class DatabaseAdapter {
         return $this->databaseHandle->getConn();
     }
 
-    protected function databaseError() {
-        $this->databaseHandle->databaseError();
+    protected function error() {
+        $this->databaseHandle->error();
     }
 }
 

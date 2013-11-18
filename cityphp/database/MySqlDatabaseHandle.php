@@ -3,20 +3,23 @@
 namespace cityphp\database;
 
 class MySqlDatabaseHandle extends DatabaseHandle {
-    public function __construct($host = null,
-                                $username = null,
-                                $password = null,
-                                $databaseName = '',
-                                $port = null,
-                                $socket = null,
-                                $errorMessage = 'database error') {
+    public function __construct(
+        $host = null,
+        $username = null,
+        $password = null,
+        $databaseName = '',
+        $port = null,
+        $socket = null,
+        $errorMessage = 'database error',
+        $debug = false)
+    {
         $conn = mysqli_connect($host, $username, $password, $databaseName, $port, $socket);
-        parent::__construct($errorMessage, $conn);
+        parent::__construct($errorMessage, $debug, $conn);
     }
 
     public function query($query) {
         if(!mysqli_query($this->getConn(), $query)) {
-            $this->databaseError();
+            $this->error();
         }
     }
 
@@ -31,11 +34,15 @@ class MySqlDatabaseHandle extends DatabaseHandle {
             return $rows;
         }
 
-        $this->databaseError();
+        $this->error();
     }
 
     public function esc($string) {
         return mysqli_real_escape_string($this->getConn(), $string);
+    }
+
+    protected function connError() {
+        return $this->getConn()->error;
     }
 }
 

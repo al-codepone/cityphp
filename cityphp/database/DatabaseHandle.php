@@ -4,13 +4,15 @@ namespace cityphp\database;
 
 abstract class DatabaseHandle {
     private $errorMessage;
+    private $debug;
     private $conn;
 
-    public function __construct($errorMessage, $conn) {
+    public function __construct($errorMessage, $debug, $conn) {
         $this->errorMessage = $errorMessage;
+        $this->debug = $debug;
 
         if(!$conn) {
-            $this->databaseError();
+            $this->error();
         }
 
         $this->conn = $conn;
@@ -24,9 +26,11 @@ abstract class DatabaseHandle {
         return $this->conn;
     }
 
-    public function databaseError() {
-        die($this->errorMessage);
+    public function error() {
+        die($this->debug ? $this->connError() : $this->errorMessage);
     }
+
+    abstract protected function connError();
 }
 
 ?>

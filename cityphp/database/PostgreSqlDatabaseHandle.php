@@ -3,16 +3,19 @@
 namespace cityphp\database;
 
 class PostgreSqlDatabaseHandle extends DatabaseHandle {
-    public function __construct($connectionString,
-                                $connectType = null,
-                                $errorMessage = 'database error') {
+    public function __construct(
+        $connectionString,
+        $connectType = null,
+        $errorMessage = 'database error',
+        $debug = false)
+    {
         $conn = pg_connect($connectionString, $connectType);
-        parent::__construct($errorMessage, $conn);
+        parent::__construct($errorMessage, $debug, $conn);
     }
 
     public function query($query) {
         if(!pg_query($this->getConn(), $query)) {
-            $this->databaseError();
+            $this->error();
         }
     }
 
@@ -27,11 +30,15 @@ class PostgreSqlDatabaseHandle extends DatabaseHandle {
             return $rows;
         }
 
-        $this->databaseError();
+        $this->error();
     }
 
     public function esc($string) {
         return pg_escape_string($this->getConn(), $string);
+    }
+
+    protected function connError() {
+        return pg_last_error($this->getConn());
     }
 }
 
