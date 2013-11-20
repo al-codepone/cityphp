@@ -1,0 +1,12 @@
+/*container*/
+#c_input2, #c_input4 div {
+    unicode-bidi:embed;
+    direction:rtl;
+    text-align:left;
+}
+
+/*everything inside container*/
+#c_input2 *, #c_input4 div * {
+    unicode-bidi:embed;
+    direction:ltr;
+}
