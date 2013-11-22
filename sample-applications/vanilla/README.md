@@ -4,7 +4,7 @@ vanilla is a skeleton user-based web application. It's built with PHP/MySQL and 
 
 ## Installation
 
-Upload the cityphp directory to your web server. Create a MySQL database for your application. Set these variables in deploy/constants.php:
+Upload the cityphp directory to your web server. Create a MySQL database for your application. Set these variables in deploy/const.php:
 
 - CITYPHP - an absolute path pointing to the cityphp directory
 - VANILLA - an absolute path pointing to the vanilla directory
