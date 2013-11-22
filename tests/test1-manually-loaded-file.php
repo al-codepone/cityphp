@@ -1,6 +1,6 @@
 <?php
 
-require_once 'constants.php';
+require_once 'const.php';
 
 //manually load a file
 require_once CITYPHP . 'sha1Token.php';
