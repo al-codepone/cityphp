@@ -5,13 +5,13 @@ require_once CITYPHP . '__autoload.php';
 require_once CITYPHP . 'route.php';
 require_once VANILLA . 'html/navItems.php';
 
-use vanilla\database\ModelFactory;
+use vanilla\db\ModelFactory;
 
 session_name(SESSION_NAME);
 session_start();
 
-$userModel = ModelFactory::get('vanilla\database\UserModel');
-$loginModel = ModelFactory::get('vanilla\database\LoginModel');
+$userModel = ModelFactory::get('vanilla\db\UserModel');
+$loginModel = ModelFactory::get('vanilla\db\LoginModel');
 $user = $loginModel->getActiveUser();
 
 include route(array(

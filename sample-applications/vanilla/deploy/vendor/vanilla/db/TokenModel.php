@@ -1,6 +1,6 @@
 <?php
 
-namespace vanilla\database;
+namespace vanilla\db;
 
 require_once CITYPHP . 'bcryptHash.php';
 require_once CITYPHP . 'time/datetimeNow.php';

@@ -1,6 +1,6 @@
 <?php
 
-namespace vanilla\database;
+namespace vanilla\db;
 
 require_once CITYPHP . 'sha1Token.php';
 require_once VANILLA . 'email.php';

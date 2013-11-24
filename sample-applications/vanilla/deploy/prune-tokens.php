@@ -3,12 +3,12 @@
 require_once 'const.php';
 require_once CITYPHP . '__autoload.php';
 
-use vanilla\database\ModelFactory;
+use vanilla\db\ModelFactory;
 
 $modelNames = array(
-    'vanilla\database\LoginModel',
-    'vanilla\database\VerifyEmailModel',
-    'vanilla\database\ResetPasswordModel');
+    'vanilla\db\LoginModel',
+    'vanilla\db\VerifyEmailModel',
+    'vanilla\db\ResetPasswordModel');
 
 foreach($modelNames as $modelName) {
     $model = ModelFactory::get($modelName);

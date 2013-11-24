@@ -1,12 +1,12 @@
 <?php
 
-namespace vanilla\database;
+namespace vanilla\db;
 
 require_once CITYPHP . 'sha1Token.php';
 require_once VANILLA . 'email.php';
 
 use cityphp\db\DatabaseHandle;
-use vanilla\database\ModelFactory;
+use vanilla\db\ModelFactory;
 
 class ResetPasswordModel extends TokenModel {
     public function __construct(DatabaseHandle $databaseHandle) {
@@ -14,7 +14,7 @@ class ResetPasswordModel extends TokenModel {
     }
 
     public function createToken($email) {
-        $userModel = ModelFactory::get('vanilla\database\UserModel');
+        $userModel = ModelFactory::get('vanilla\db\UserModel');
         $userData = $userModel->getUserWithEmail($email);
 
         if($userData) {

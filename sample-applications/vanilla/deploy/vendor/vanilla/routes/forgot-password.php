@@ -3,7 +3,7 @@
 require_once CITYPHP . 'html/autofocus.php';
 require_once VANILLA . 'html/forgotPassword.php';
 
-use vanilla\database\ModelFactory;
+use vanilla\db\ModelFactory;
 use vanilla\forms\ForgotPasswordValidator;
 
 $validator = new ForgotPasswordValidator();
@@ -13,7 +13,7 @@ if(list($formData, $errors) = $validator->validate()) {
         $content = forgotPassword($formData, $errors);
     }
     else {
-        $resetPasswordModel = ModelFactory::get('vanilla\database\ResetPasswordModel');
+        $resetPasswordModel = ModelFactory::get('vanilla\db\ResetPasswordModel');
         $resetPasswordModel->createToken($formData['email']);
         $content = sprintf("If the email address you entered, %s,
             is associated with a user account, then you will receive

@@ -1,6 +1,6 @@
 <?php
 
-namespace vanilla\database;
+namespace vanilla\db;
 
 require_once CITYPHP . 'bcryptHash.php';
 require_once VANILLA . 'emailStates.php';
@@ -8,7 +8,7 @@ require_once VANILLA . 'emailTaken.php';
 require_once VANILLA . 'usernameTaken.php';
 
 use cityphp\db\DatabaseAdapter;
-use vanilla\database\ModelFactory;
+use vanilla\db\ModelFactory;
 
 class UserModel extends DatabaseAdapter {
     public function install() {
@@ -37,7 +37,7 @@ class UserModel extends DatabaseAdapter {
             $userID = $this->getConn()->insert_id;
 
             if($data['email']) {
-                $verifyEmailModel = ModelFactory::get('vanilla\database\VerifyEmailModel');
+                $verifyEmailModel = ModelFactory::get('vanilla\db\VerifyEmailModel');
                 $verifyEmailModel->createToken($userID, $data['username'], $data['email']);
             }
         }
@@ -75,7 +75,7 @@ class UserModel extends DatabaseAdapter {
         }
 
         if($emailStates['is_new'] || $emailStates['is_changed']) {
-            $verifyEmailModel = ModelFactory::get('vanilla\database\VerifyEmailModel');
+            $verifyEmailModel = ModelFactory::get('vanilla\db\VerifyEmailModel');
             $verifyEmailModel->createToken($userID, $formData['username'], $formData['email']);
         }
 

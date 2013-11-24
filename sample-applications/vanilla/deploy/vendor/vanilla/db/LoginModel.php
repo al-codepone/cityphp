@@ -1,11 +1,11 @@
 <?php
 
-namespace vanilla\database;
+namespace vanilla\db;
 
 require_once CITYPHP . 'sha1Token.php';
 
 use cityphp\db\DatabaseHandle;
-use vanilla\database\ModelFactory;
+use vanilla\db\ModelFactory;
 
 class LoginModel extends TokenModel {
     public function __construct(DatabaseHandle $databaseHandle) {
@@ -13,7 +13,7 @@ class LoginModel extends TokenModel {
     }
 
     public function login($formData) {
-        $userModel = ModelFactory::get('vanilla\database\UserModel');
+        $userModel = ModelFactory::get('vanilla\db\UserModel');
         $userData = $userModel->getUserWithUsername($formData['username']);
 
         if(!$userData || $userData['password'] != bcryptHash($formData['password'], $userData['password'])) {
