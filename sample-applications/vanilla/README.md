@@ -10,10 +10,10 @@ Upload the cityphp directory to your web server. Create a MySQL database for you
 - VANILLA - an absolute path pointing to the vanilla directory
 - SITE - set this to http plus the domain name with no trailing slash. For example, `https://mysite.com`
 - ROOT - an absolute path pointing to your web application root. For example, if the application is at `https://mysite.com/` then ROOT is `/`. As another example, if the application is at `https://mysite.com/myapp/` then ROOT is `/myapp/`.
-- DATABASE_HOST - the MySQL database host
-- DATABASE_USERNAME - the MySQL database username
-- DATABASE_PASSWORD - the MySQL database password
-- DATABASE_NAME - the MySQL database name
+- DB_HOST - the MySQL database host
+- DB_USERNAME - the MySQL database username
+- DB_PASSWORD - the MySQL database password
+- DB_NAME - the MySQL database name
 - SESSION_NAME - if you have multiple instances of vanilla running on the same server, then this value must be different for each instance.
 - EMAIL_FROM - the administrative email used to send users things such as email verification and password reset
 - BCRYPT_COST - the bcrypt hash cost. Must be between 4-31 inclusive. It's recommended you use something between 10-12.
