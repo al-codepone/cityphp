@@ -2,8 +2,8 @@
 
 namespace vanilla\database;
 
-use cityphp\database\AdapterFactory;
-use cityphp\database\Mysql;
+use cityphp\db\AdapterFactory;
+use cityphp\db\Mysql;
 
 class ModelFactory extends AdapterFactory {
     protected static function getDatabaseHandle() {

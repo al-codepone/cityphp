@@ -7,7 +7,7 @@ require_once VANILLA . 'emailStates.php';
 require_once VANILLA . 'emailTaken.php';
 require_once VANILLA . 'usernameTaken.php';
 
-use cityphp\database\DatabaseAdapter;
+use cityphp\db\DatabaseAdapter;
 use vanilla\database\ModelFactory;
 
 class UserModel extends DatabaseAdapter {

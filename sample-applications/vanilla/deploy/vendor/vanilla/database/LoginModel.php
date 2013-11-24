@@ -4,7 +4,7 @@ namespace vanilla\database;
 
 require_once CITYPHP . 'sha1Token.php';
 
-use cityphp\database\DatabaseHandle;
+use cityphp\db\DatabaseHandle;
 use vanilla\database\ModelFactory;
 
 class LoginModel extends TokenModel {

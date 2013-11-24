@@ -5,7 +5,7 @@ namespace vanilla\database;
 require_once CITYPHP . 'sha1Token.php';
 require_once VANILLA . 'email.php';
 
-use cityphp\database\DatabaseHandle;
+use cityphp\db\DatabaseHandle;
 
 class VerifyEmailModel extends TokenModel {
     public function __construct(DatabaseHandle $databaseHandle) {

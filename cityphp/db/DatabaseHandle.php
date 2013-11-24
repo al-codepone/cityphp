@@ -1,6 +1,6 @@
 <?php
 
-namespace cityphp\database;
+namespace cityphp\db;
 
 abstract class DatabaseHandle {
     private $errorMessage;

@@ -5,8 +5,8 @@ namespace vanilla\database;
 require_once CITYPHP . 'bcryptHash.php';
 require_once CITYPHP . 'time/datetimeNow.php';
 
-use cityphp\database\DatabaseAdapter;
-use cityphp\database\DatabaseHandle;
+use cityphp\db\DatabaseAdapter;
+use cityphp\db\DatabaseHandle;
 
 abstract class TokenModel extends DatabaseAdapter {
     private $tableName;

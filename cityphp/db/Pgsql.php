@@ -1,6 +1,6 @@
 <?php
 
-namespace cityphp\database;
+namespace cityphp\db;
 
 class Pgsql extends DatabaseHandle {
     public function __construct(
