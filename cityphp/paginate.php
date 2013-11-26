@@ -1,6 +1,6 @@
 <?php
 
-require_once(CITYPHP . 'clamp.php');
+require_once CITYPHP . 'clamp.php';
 
 function paginate($numItems, $itemsPerPage, $currentPageNum) {
     $numPages = max(1, ceil($numItems/$itemsPerPage));
