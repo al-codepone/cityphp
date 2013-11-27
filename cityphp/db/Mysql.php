@@ -17,13 +17,13 @@ class Mysql extends DatabaseHandle {
         parent::__construct($errorMessage, $debug, $conn);
     }
 
-    public function query($query) {
+    public function exec($query) {
         if(!mysqli_query($this->getConn(), $query)) {
             $this->error();
         }
     }
 
-    public function fetchQuery($query) {
+    public function query($query) {
         if($result = mysqli_query($this->getConn(), $query)) {
             $rows = array();
 

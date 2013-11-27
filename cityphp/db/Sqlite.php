@@ -14,13 +14,13 @@ class Sqlite extends DatabaseHandle {
         parent::__construct($errorMessage, $debug, $conn);
     }
 
-    public function query($query) {
+    public function exec($query) {
         if(!$this->getConn()->exec($query)) {
             $this->error();
         }
     }
 
-    public function fetchQuery($query) {
+    public function query($query) {
         if($result = $this->getConn()->query($query)) {
             $rows = array();
 

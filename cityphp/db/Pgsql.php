@@ -13,13 +13,13 @@ class Pgsql extends DatabaseHandle {
         parent::__construct($errorMessage, $debug, $conn);
     }
 
-    public function query($query) {
+    public function exec($query) {
         if(!pg_query($this->getConn(), $query)) {
             $this->error();
         }
     }
 
-    public function fetchQuery($query) {
+    public function query($query) {
         if($result = pg_query($this->getConn(), $query)) {
             $rows = array();
 

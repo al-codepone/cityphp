@@ -19,7 +19,7 @@ abstract class TokenModel extends DatabaseAdapter {
     }
 
     public function install() {
-        $this->query('CREATE TABLE ' . $this->tableName . ' (
+        $this->exec('CREATE TABLE ' . $this->tableName . ' (
             token_id MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
             user_id MEDIUMINT UNSIGNED,
             token VARCHAR(128),
@@ -30,7 +30,7 @@ abstract class TokenModel extends DatabaseAdapter {
     }
 
     public function prune() {
-        $this->query(sprintf('DELETE FROM %s
+        $this->exec(sprintf('DELETE FROM %s
             WHERE creation_date < "%s" - INTERVAL %d DAY',
             $this->tableName,
             datetimeNow(),
@@ -38,7 +38,7 @@ abstract class TokenModel extends DatabaseAdapter {
     }
 
     protected function createToken($userID, $token, $data = '') {
-        $this->query(sprintf('INSERT INTO %s (user_id, token, data, creation_date)
+        $this->exec(sprintf('INSERT INTO %s (user_id, token, data, creation_date)
             VALUES(%d, "%s", "%s", "%s")',
             $this->tableName,
             $userID,
@@ -58,7 +58,7 @@ abstract class TokenModel extends DatabaseAdapter {
             datetimeNow(),
             $this->ttl);
 
-        foreach($this->fetchQuery($query) as $row) {
+        foreach($this->query($query) as $row) {
             if($row['token'] == bcryptHash($token, $row['token'])) {
                 return $row;
             }
@@ -66,7 +66,7 @@ abstract class TokenModel extends DatabaseAdapter {
     }
 
     protected function deleteToken($tokenID) {
-        $this->query(sprintf('DELETE FROM %s WHERE token_id = %d',
+        $this->exec(sprintf('DELETE FROM %s WHERE token_id = %d',
             $this->tableName,
             $tokenID));
     }    

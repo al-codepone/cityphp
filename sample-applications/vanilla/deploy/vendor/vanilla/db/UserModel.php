@@ -12,7 +12,7 @@ use vanilla\db\ModelFactory;
 
 class UserModel extends DatabaseAdapter {
     public function install() {
-        $this->query('CREATE TABLE ' . TABLE_USERS . ' (
+        $this->exec('CREATE TABLE ' . TABLE_USERS . ' (
             user_id MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
             username VARCHAR(32) UNIQUE,
             email VARCHAR(255) DEFAULT "",
@@ -29,7 +29,7 @@ class UserModel extends DatabaseAdapter {
             return emailTaken($data['email']);
         }
         else {
-            $this->query(sprintf('INSERT INTO %s (username, password) VALUES("%s", "%s")',
+            $this->exec(sprintf('INSERT INTO %s (username, password) VALUES("%s", "%s")',
                 TABLE_USERS,
                 $this->esc($data['username']),
                 $this->esc(bcryptHash($data['password'], BCRYPT_COST))));
@@ -87,7 +87,7 @@ class UserModel extends DatabaseAdapter {
             ? sprintf(', password = "%s"', $this->esc(bcryptHash($formData['password'], BCRYPT_COST)))
             : '';
 
-        $this->query(sprintf('UPDATE %s SET username = "%s"%s WHERE user_id = %d',
+        $this->exec(sprintf('UPDATE %s SET username = "%s"%s WHERE user_id = %d',
             TABLE_USERS,
             $this->esc($formData['username']),
             $setPassword,
@@ -102,14 +102,14 @@ class UserModel extends DatabaseAdapter {
             return emailTaken($email);
         }
 
-        $this->query(sprintf('UPDATE %s SET email = "%s" WHERE user_id = %d',
+        $this->exec(sprintf('UPDATE %s SET email = "%s" WHERE user_id = %d',
             TABLE_USERS,
             $this->esc($email),
             $userID));
     }
 
     public function updatePassword($userID, $data) {
-        $this->query(sprintf('UPDATE %s SET password = "%s" WHERE user_id = %d',
+        $this->exec(sprintf('UPDATE %s SET password = "%s" WHERE user_id = %d',
             TABLE_USERS,
             $this->esc(bcryptHash($data['password'], BCRYPT_COST)),
             $userID));
@@ -122,7 +122,7 @@ class UserModel extends DatabaseAdapter {
             return 'Incorrect current password';
         }
 
-        $this->query(sprintf('DELETE FROM %s WHERE user_id = %d',
+        $this->exec(sprintf('DELETE FROM %s WHERE user_id = %d',
             TABLE_USERS,
             $userID));
 
@@ -130,7 +130,7 @@ class UserModel extends DatabaseAdapter {
     }
 
     protected function getUser($condition) {
-        $queryData = $this->fetchQuery(sprintf('SELECT user_id, username, email, password
+        $queryData = $this->query(sprintf('SELECT user_id, username, email, password
             FROM %s WHERE %s',
             TABLE_USERS,
             $condition));
