@@ -22,7 +22,7 @@ abstract class DatabaseHandle {
     abstract public function query($query);
     abstract public function esc($string);
 
-    public function getConn() {
+    public function conn() {
         return $this->conn;
     }
 

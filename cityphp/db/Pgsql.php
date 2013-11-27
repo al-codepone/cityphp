@@ -14,13 +14,13 @@ class Pgsql extends DatabaseHandle {
     }
 
     public function exec($query) {
-        if(!pg_query($this->getConn(), $query)) {
+        if(!pg_query($this->conn(), $query)) {
             $this->error();
         }
     }
 
     public function query($query) {
-        if($result = pg_query($this->getConn(), $query)) {
+        if($result = pg_query($this->conn(), $query)) {
             $rows = array();
 
             while($row = pg_fetch_assoc($result)) { 
@@ -34,11 +34,11 @@ class Pgsql extends DatabaseHandle {
     }
 
     public function esc($string) {
-        return pg_escape_string($this->getConn(), $string);
+        return pg_escape_string($this->conn(), $string);
     }
 
     protected function connError() {
-        return pg_last_error($this->getConn());
+        return pg_last_error($this->conn());
     }
 }
 

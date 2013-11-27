@@ -15,13 +15,13 @@ class Sqlite extends DatabaseHandle {
     }
 
     public function exec($query) {
-        if(!$this->getConn()->exec($query)) {
+        if(!$this->conn()->exec($query)) {
             $this->error();
         }
     }
 
     public function query($query) {
-        if($result = $this->getConn()->query($query)) {
+        if($result = $this->conn()->query($query)) {
             $rows = array();
 
             while($row = $result->fetchArray(SQLITE3_ASSOC)) {
@@ -39,7 +39,7 @@ class Sqlite extends DatabaseHandle {
     }
 
     protected function connError() {
-        return $this->getConn()->lastErrorMsg();
+        return $this->conn()->lastErrorMsg();
     }
 }
 

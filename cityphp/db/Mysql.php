@@ -18,13 +18,13 @@ class Mysql extends DatabaseHandle {
     }
 
     public function exec($query) {
-        if(!mysqli_query($this->getConn(), $query)) {
+        if(!mysqli_query($this->conn(), $query)) {
             $this->error();
         }
     }
 
     public function query($query) {
-        if($result = mysqli_query($this->getConn(), $query)) {
+        if($result = mysqli_query($this->conn(), $query)) {
             $rows = array();
 
             while($row = mysqli_fetch_assoc($result)) { 
@@ -38,11 +38,11 @@ class Mysql extends DatabaseHandle {
     }
 
     public function esc($string) {
-        return mysqli_real_escape_string($this->getConn(), $string);
+        return mysqli_real_escape_string($this->conn(), $string);
     }
 
     protected function connError() {
-        return $this->getConn()->error;
+        return $this->conn()->error;
     }
 }
 

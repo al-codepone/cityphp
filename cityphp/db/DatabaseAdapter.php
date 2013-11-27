@@ -21,8 +21,8 @@ abstract class DatabaseAdapter {
         return $this->databaseHandle->esc($string);
     }
 
-    protected function getConn() {
-        return $this->databaseHandle->getConn();
+    protected function conn() {
+        return $this->databaseHandle->conn();
     }
 
     protected function error() {

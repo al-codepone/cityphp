@@ -34,7 +34,7 @@ class UserModel extends DatabaseAdapter {
                 $this->esc($data['username']),
                 $this->esc(bcryptHash($data['password'], BCRYPT_COST))));
 
-            $userID = $this->getConn()->insert_id;
+            $userID = $this->conn()->insert_id;
 
             if($data['email']) {
                 $verifyEmailModel = ModelFactory::get('vanilla\db\VerifyEmailModel');
