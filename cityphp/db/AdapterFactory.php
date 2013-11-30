@@ -8,13 +8,13 @@ abstract class AdapterFactory {
 
     public static function get($adapterName) {
         if(!self::$databaseHandle) {
-            self::$databaseHandle = static::getDatabaseHandle();
+            self::$databaseHandle = static::databaseHandle();
         }
 
         return new $adapterName(self::$databaseHandle);
     }
 
-    abstract protected static function getDatabaseHandle();
+    abstract protected static function databaseHandle();
 }
 
 ?>
