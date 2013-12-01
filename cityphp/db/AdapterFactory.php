@@ -3,7 +3,6 @@
 namespace cityphp\db;
 
 abstract class AdapterFactory {
-    public static $format;
     private static $databaseHandle;
 
     public static function get($adapterName) {
