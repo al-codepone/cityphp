@@ -8,11 +8,10 @@ use purple\db\ModelFactory;
 
 $wordModel = ModelFactory::get('purple\db\WordModel');
 
-include route(array(
+include PURPLE . 'routes/' . route(array(
     null => 'word-list.php',
     'add' => 'add-word.php',
-    'about' => 'about.php'),
-    PURPLE . 'routes/');
+    'about' => 'about.php'));
 
 include PURPLE . 'html/template4.php';
 

@@ -1,11 +1,8 @@
 <?php
 
-function route(array $routes, $basePath = '', $key = 'r') {
-    foreach($routes as $route => $script) {
-        if($route == $_GET[$key]) {
-            return $basePath . $script;
-        }
-    }
+function route(array $array, $key = false) {
+    $key = ($key === false) ? $_GET['r'] : $key;
+    return $array[$key];
 }
 
 ?>
