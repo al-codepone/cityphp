@@ -5,11 +5,18 @@ namespace cityphp\forms;
 abstract class FormValidator {
     private $values;
     private $optionalKeys;
+    private $submittedValues;
 
-    public function __construct(array $values = array(),
-                                array $optionalKeys = array()) {
+    public function __construct(
+        array $values = array(),
+        array $optionalKeys = array(),
+        array $submittedValues = null)
+    {
         $this->values = $values;
         $this->optionalKeys = $optionalKeys;
+        $this->submittedValues = is_null($submittedValues)
+            ? $_POST
+            : $submittedValues;
     }
 
     public function values() {
@@ -22,7 +29,10 @@ abstract class FormValidator {
             $errors = array();
 
             foreach(array_keys($this->values) as $key) {
-                $value = isset($_POST[$key]) ? $_POST[$key] : $this->values[$key];
+                $value = isset($this->submittedValues[$key])
+                    ? $this->submittedValues[$key]
+                    : $this->values[$key];
+
                 $methodName = "validate_$key";
                 $values[$key] = $value;
                 $error = method_exists($this, $methodName)
@@ -57,7 +67,7 @@ abstract class FormValidator {
 
     private function isReady() {
         foreach(array_keys($this->values) as $key) {
-            if(!isset($_POST[$key]) && !in_array($key, $this->optionalKeys)) {
+            if(!isset($this->submittedValues[$key]) && !in_array($key, $this->optionalKeys)) {
                 return false;
             }
         }
