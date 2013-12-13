@@ -2,12 +2,13 @@
 
 require_once 'const.php';
 
-//manually load the autoloader
+//enable autoload
 require_once CITYPHP . '__autoload.php';
 
-//autoload and import the Monster class
+//import
 use purple\Monster;
 
+//autoload
 $monster = new Monster();
 $monster->talk();
 

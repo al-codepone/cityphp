@@ -2,7 +2,8 @@
 
 //this constant is for autoloading files
 //it must be named VENDOR
-//separate multiple directories with whitespace
+//list each directory that contains at least one namespaced package
+//separate directories with whitespace
 //each directory must be an absolute path
 define('VENDOR', 'C:/wamp/www/cityphp/ C:/wamp/www/cityphp/tests/vendor/');
 
