@@ -21,9 +21,9 @@ label[for=remember_me] {
 }
 
 #nav {
-    padding:0.25em;
+    padding:.5em;
     margin:0 0 0.6em 0;
-    background:#f2f2f2;
+    background:#e2e2e2;
     list-style-type:none;
 }
 
