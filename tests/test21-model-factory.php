@@ -5,7 +5,7 @@ require_once CITYPHP . '__autoload.php';
 
 use purple\db\ModelFactory;
 
-//must use full namespace
+//must pass full namespace to get()
 $wordModel = ModelFactory::get('purple\db\WordModel');
 
 $wordModel->install();
