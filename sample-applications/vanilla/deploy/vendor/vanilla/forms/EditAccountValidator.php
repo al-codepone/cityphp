@@ -41,7 +41,7 @@ class EditAccountValidator extends FormValidator {
         }
     }
 
-    protected function validateOther($values) {
+    protected function validateMore($values) {
         if($values['password'] != $values['confirm_password']) {
             return "New passwords didn't match";
         }

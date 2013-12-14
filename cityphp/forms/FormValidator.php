@@ -44,12 +44,12 @@ abstract class FormValidator {
                 }
             }
 
-            if(method_exists($this, 'validateOther')) {
-                $otherErrors = $this->validateOther($values);
+            if(method_exists($this, 'validateMore')) {
+                $moreErrors = $this->validateMore($values);
 
-                if(!is_null($otherErrors)) {
+                if(!is_null($moreErrors)) {
                     $errors = array_merge($errors,
-                        is_array($otherErrors) ? $otherErrors : array($otherErrors));
+                        is_array($moreErrors) ? $moreErrors : array($moreErrors));
                 }
             }
 

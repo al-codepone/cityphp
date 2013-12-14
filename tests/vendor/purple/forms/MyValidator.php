@@ -41,7 +41,7 @@ class MyValidator extends FormValidator {
 
     //perform more validation using any input value
     //if invalid, return an error message or an array of error messages
-    protected function validateOther($values) {
+    protected function validateMore($values) {
         if($values['input2'] != $values['input3']) {
             return 'Inputs 2 and 3 must be the same';
         }
