@@ -14,14 +14,9 @@ $loginHash = bcryptHash($loginPassword, $signUpHash);
 
 $correct = ($signUpHash == $loginHash);
 
-echo 
-    '<pre>',
-
-    implode("\n\n", array(
-        '$signUpHash = ' . $signUpHash,
-        '$loginHash = ' . $loginHash,
-        '$correct = ' . var_export($correct, true))),
-
-    '</pre>';
+echo implode("<br/>\n", array(
+    '$signUpHash = ' . $signUpHash,
+    '$loginHash = ' . $loginHash,
+    '$correct = ' . var_export($correct, true)));
 
 ?>
