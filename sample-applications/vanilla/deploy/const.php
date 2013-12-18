@@ -18,10 +18,10 @@ define('VERIFY_EMAIL', ROOT . 'verify-email/');
 define('FORGOT_PASSWORD', ROOT . 'forgot-password');
 define('RESET_PASSWORD', ROOT . 'reset-password/');
 
-define('DB_HOST', 'localhost');
-define('DB_USERNAME', 'big');
-define('DB_PASSWORD', 'tree');
-define('DB_NAME', 'myfirstdb');
+define('MYSQL_HOST', 'localhost');
+define('MYSQL_USERNAME', 'big');
+define('MYSQL_PASSWORD', 'tree');
+define('MYSQL_NAME', 'myfirstdb');
 
 define('TABLE_USERS', 'users');
 define('TABLE_PERSISTENT_LOGIN_TOKENS', 'persistent_login_tokens');
