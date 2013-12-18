@@ -3,7 +3,7 @@
 require_once CITYPHP . 'html/blist.php';
 require_once CITYPHP . 'html/input.php';
 
-function forgotPassword($formData, $errors = array()) {
+function forgotPassword(array $formData, $errors = array()) {
     ob_start(); ?>
 
 <form method="post">

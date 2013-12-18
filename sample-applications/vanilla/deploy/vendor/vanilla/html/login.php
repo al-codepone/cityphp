@@ -3,7 +3,7 @@
 require_once CITYPHP . 'html/blist.php';
 require_once CITYPHP . 'html/input.php';
 
-function login($formData, $errors = array()) {
+function login(array $formData, $errors = array()) {
     ob_start(); ?>
 
 <form method="post">

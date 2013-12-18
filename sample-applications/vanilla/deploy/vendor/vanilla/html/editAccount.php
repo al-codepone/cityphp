@@ -3,7 +3,7 @@
 require_once CITYPHP . 'html/blist.php';
 require_once CITYPHP . 'html/input.php';
 
-function editAccount($formData, $errors = array()) {
+function editAccount(array $formData, $errors = array()) {
     ob_start(); ?>
 
 <form method="post" id="edit_account_form">
