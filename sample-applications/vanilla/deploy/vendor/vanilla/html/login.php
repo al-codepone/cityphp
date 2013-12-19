@@ -4,33 +4,34 @@ require_once CITYPHP . 'html/blist.php';
 require_once CITYPHP . 'html/input.php';
 
 function login(array $formData, $errors = array()) {
-    ob_start(); ?>
+    return
+        '<form method="post">'
+        . blist($errors, array('class' => 'error'))
+        . input(array(
+            'id' => 'username',
+            'value' => $formData['username']),
+            'Username')
 
-<form method="post">
-    <?=blist($errors, array('class' => 'error'))?>
+        . input(array(
+            'id' => 'password',
+            'type' => 'password'),
+            'Password')
 
-    <?=input(array(
-        'id' => 'username',
-        'value' => $formData['username']),
-        'Username')?>
+        . input(array(
+            'id' => 'remember_me',
+            'value' => 1,
+            'type' => 'checkbox',
+            $formData['remember_me'] ? 'checked' : ''),
+            'Remember Me')
 
-    <?=input(array(
-        'id' => 'password',
-        'type' => 'password'),
-        'Password')?>
+        . sprintf('<div><a href="%s">forgot password</a></div>',
+            FORGOT_PASSWORD)
 
-    <?=input(array(
-        'id' => 'remember_me',
-        'value' => 1,
-        'type' => 'checkbox',
-        $formData['remember_me'] ? 'checked' : ''),
-        'Remember Me')?>
+        . input(array(
+            'type' => 'submit',
+            'value' => 'Log In'))
 
-    <div><a href="<?=FORGOT_PASSWORD?>">forgot password</a></div>
-    <div><input type="submit" value="Log In"/></div>
-</form>
-
-    <?php return ob_get_clean();
+        . '</form>';
 }
 
 ?>

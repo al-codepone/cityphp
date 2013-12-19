@@ -4,36 +4,35 @@ require_once CITYPHP . 'html/blist.php';
 require_once CITYPHP . 'html/input.php';
 
 function signUp(array $formData, $errors = array()) {
-    ob_start(); ?>
+    return
+        '<form method="post">'
+        . blist($errors, array('class' => 'error'))
+        . input(array(
+            'id' => 'username',
+            'value' => $formData['username']),
+            'Username')
 
-<form method="post">
-    <?=blist($errors, array('class' => 'error'))?>
+        . input(array(
+            'id' => 'email',
+            'value' => $formData['email'],
+            'type' => 'email'),
+            'Email(optional)')
 
-    <?=input(array(
-        'id' => 'username',
-        'value' => $formData['username']),
-        'Username')?>
+        . input(array(
+            'id' => 'password',
+            'type' => 'password'),
+            'Password')
 
-    <?=input(array(
-        'id' => 'email',
-        'value' => $formData['email'],
-        'type' => 'email'),
-        'Email(optional)')?>
+        . input(array(
+            'id' => 'confirm_password',
+            'type' => 'password'),
+            'Confirm Password')
 
-    <?=input(array(
-        'id' => 'password',
-        'type' => 'password'),
-        'Password')?>
+        . input(array(
+            'type' => 'submit',
+            'value' => 'Sign Up'))
 
-    <?=input(array(
-        'id' => 'confirm_password',
-        'type' => 'password'),
-        'Confirm Password')?>
-
-    <div><input type="submit" value="Sign Up"/></div>
-</form>
-
-    <?php return ob_get_clean();
+        . '</form>';
 }
 
 ?>
