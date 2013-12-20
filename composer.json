@@ -1,0 +1,21 @@
+{
+    "name": "cityphp/cityphp",
+    "description": "A PHP web application library",
+    "keywords": ["cityphp", "php", "sql", "routing", "datetime", "html"],
+    "homepage": "https://github.com/al-codepone/cityphp",
+    "license": "Unlicense",
+    "authors": [
+        {
+            "name": "Ry Ferguson",
+            "email": "rytf12@gmail.com",
+            "homepage": "http://ikitovagn.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "autoload": {
+        "psr-0": {"cityphp\\": ""}
+    }
+}
