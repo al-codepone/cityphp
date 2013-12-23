@@ -1,7 +1,5 @@
 <?php
 
-require_once CITYPHP . 'html/attributes.php';
-
 function input(
     array $inputAttributes = array(),
     $label = '',

@@ -1,7 +1,5 @@
 <?php
 
-require_once CITYPHP . 'html/attributes.php';
-
 function textarea(
     array $textareaAttributes = array(),
     $content = '',

@@ -1,8 +1,5 @@
 <?php
 
-require_once CITYPHP . 'html/attributes.php';
-require_once CITYPHP . 'html/input.php';
-
 function radioButtons(
     array $radioButtons,
     $name,

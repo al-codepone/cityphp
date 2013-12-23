@@ -1,7 +1,5 @@
 <?php
 
-require_once CITYPHP . 'html/attributes.php';
-
 function select(
     array $options,
     array $selectAttributes = array(),
