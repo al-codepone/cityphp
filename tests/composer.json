@@ -1,0 +1,13 @@
+{
+    "require": {
+        "cityphp/cityphp": "0.4.0"
+    },
+    "autoload": {
+        "psr-0": {"purple\\": "src/"},
+        "files": [
+            "src/purple/html/dummyForm.php",
+            "src/purple/html/dummyForm2.php",
+            "src/purple/html/myForm.php"
+        ]
+    }
+}

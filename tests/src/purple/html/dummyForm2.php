@@ -1,8 +1,5 @@
 <?php
 
-require_once CITYPHP . 'html/checkboxes.php';
-require_once CITYPHP . 'html/input.php';
-
 function dummyForm2() {
     return
         '<form method="post">'

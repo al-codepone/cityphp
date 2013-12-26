@@ -1,7 +1,5 @@
 <?php
 
-require_once CITYPHP . 'html/input.php';
-
 function dummyForm() {
     return
         '<form method="post">'

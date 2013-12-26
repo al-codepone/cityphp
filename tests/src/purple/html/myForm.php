@@ -1,9 +1,5 @@
 <?php
 
-require_once CITYPHP . 'html/blist.php';
-require_once CITYPHP . 'html/checkboxes.php';
-require_once CITYPHP . 'html/input.php';
-
 function myForm(array $inputValues, $errors = array()) {
     return
         '<form method="post">'
