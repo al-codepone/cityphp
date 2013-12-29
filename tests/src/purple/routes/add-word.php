@@ -1,11 +1,6 @@
 <?php
 
-require_once CITYPHP . 'html/autofocus.php';
-require_once PURPLE . 'html/myForm.php';
-
-use purple\forms\MyValidator;
- 
-$validator = new MyValidator();
+$validator = new purple\forms\MyValidator();
  
 if(list($inputValues, $errors) = $validator->validate()) {
     if($errors) {

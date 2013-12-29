@@ -1,7 +1,6 @@
 <?php
 
-require_once 'const.php';
-require_once CITYPHP . 'html/radioButtons.php';
+require 'vendor/autoload.php';
 
 echo implode("\n\n", array(
     radioButtons(

@@ -1,7 +1,6 @@
 <?php
 
-require_once 'const.php';
-require_once CITYPHP . 'route.php';
+require 'vendor/autoload.php';
 
 //when routing you'd replace echo with include
 
@@ -13,7 +12,7 @@ echo route(array(
 print ', ';
 
 //use a base path
-echo PURPLE . 'routes/' . route(array(
+echo 'src/purple/routes/' . route(array(
     null => 'word-list.php',
     'about' => 'about.php'));
 

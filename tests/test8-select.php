@@ -1,7 +1,6 @@
 <?php
 
-require_once 'const.php';
-require_once CITYPHP . 'html/select.php';
+require 'vendor/autoload.php';
 
 echo implode("\n\n", array(
     select(array('red', 'blue', 'gold')),

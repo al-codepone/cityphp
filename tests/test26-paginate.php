@@ -1,7 +1,6 @@
 <?php
 
-require_once 'const.php';
-require_once CITYPHP . 'paginate.php';
+require 'vendor/autoload.php';
  
 $numItems = 87;
 $itemsPerPage = 10;

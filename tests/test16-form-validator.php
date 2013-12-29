@@ -1,9 +1,6 @@
 <?php
 
-require_once 'const.php';
-require_once CITYPHP . '__autoload.php';
-require_once CITYPHP . 'html/autofocus.php';
-require_once PURPLE . 'html/myForm.php';
+require 'vendor/autoload.php';
  
 $validator = new purple\forms\MyValidator();
  
@@ -17,6 +14,6 @@ else {
     $autofocus = autofocus('input1');
 }
 
-include PURPLE . 'html/template3.php';
+include 'src/purple/html/template3.php';
 
 ?>

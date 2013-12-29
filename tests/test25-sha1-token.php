@@ -1,7 +1,6 @@
 <?php
 
-require_once 'const.php';
-require_once CITYPHP . 'sha1Token.php';
+require 'vendor/autoload.php';
 
 echo sha1Token();
 

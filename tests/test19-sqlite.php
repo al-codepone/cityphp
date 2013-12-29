@@ -1,11 +1,9 @@
 <?php
 
-require_once 'const.php';
-require_once CITYPHP . '__autoload.php';
+require 'const.php';
+require 'vendor/autoload.php';
 
-use cityphp\db\Sqlite;
-
-$db = new Sqlite(
+$db = new cityphp\db\Sqlite(
     SQLITE_FILENAME,
     SQLITE3_OPEN_READWRITE | SQLITE3_OPEN_CREATE,
     '',

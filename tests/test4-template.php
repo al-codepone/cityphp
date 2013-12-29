@@ -1,11 +1,10 @@
 <?php
 
-require_once 'const.php';
-require_once CITYPHP . 'html/blist.php';
+require 'vendor/autoload.php';
 
 $title = 'Page Title';
 $content = blist(array('one', 'two', 'three'));
 
-include PURPLE . 'html/template.php';
+include 'src/purple/html/template.php';
 
 ?>

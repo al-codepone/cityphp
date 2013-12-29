@@ -1,11 +1,10 @@
 <?php
 
-require_once 'const.php';
-require_once PURPLE . 'html/dummyForm.php';
+require 'vendor/autoload.php';
 
 $title = 'Page Title';
 $content = dummyForm();
 
-include PURPLE . 'html/template.php';
+include 'src/purple/html/template.php';
 
 ?>

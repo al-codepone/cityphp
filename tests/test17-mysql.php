@@ -1,12 +1,10 @@
 <?php
 
-require_once 'const.php';
-require_once CITYPHP . '__autoload.php';
-
-use cityphp\db\Mysql;
+require 'const.php';
+require 'vendor/autoload.php';
 
 //connect to db
-$db = new Mysql(
+$db = new cityphp\db\Mysql(
     MYSQL_HOST,
     MYSQL_USERNAME,
     MYSQL_PASSWORD,

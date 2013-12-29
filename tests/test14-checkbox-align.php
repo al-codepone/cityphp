@@ -1,11 +1,10 @@
 <?php
 
-require_once 'const.php';
-require_once PURPLE . 'html/dummyForm2.php';
+require 'vendor/autoload.php';
 
 $head = '<link rel="stylesheet" href="css/checkbox-align.css"/>';
 $content = dummyForm2();
 
-include PURPLE . 'html/template2.php';
+include 'src/purple/html/template2.php';
 
 ?>

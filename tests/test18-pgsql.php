@@ -1,11 +1,9 @@
 <?php
 
-require_once 'const.php';
-require_once CITYPHP . '__autoload.php';
+require 'const.php';
+require 'vendor/autoload.php';
 
-use cityphp\db\Pgsql;
-
-$db = new Pgsql(
+$db = new cityphp\db\Pgsql(
     PGSQL_CONN_STRING,
     null,
     'my database error',

@@ -1,7 +1,6 @@
 <?php
 
-require_once 'const.php';
-require_once CITYPHP . 'html/autofocus.php';
+require 'vendor/autoload.php';
 
 echo autofocus('input1');
 

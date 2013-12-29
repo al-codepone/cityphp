@@ -1,7 +1,6 @@
 <?php
 
-require_once 'const.php';
-require_once CITYPHP . 'clamp.php';
+require 'vendor/autoload.php';
 
 echo implode(', ', array(
     clamp(5, 1, 10),

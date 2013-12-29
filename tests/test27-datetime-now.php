@@ -1,7 +1,6 @@
 <?php
 
-require_once 'const.php';
-require_once CITYPHP . 'time/datetimeNow.php';
+require 'vendor/autoload.php';
  
 echo 'datetimeNow(): ' . datetimeNow();
 

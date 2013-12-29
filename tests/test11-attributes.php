@@ -1,7 +1,6 @@
 <?php
 
-require_once 'const.php';
-require_once CITYPHP . 'html/attributes.php';
+require 'vendor/autoload.php';
 
 echo implode("\n\n", array(
     sprintf('<tag%s/>', attributes(array(

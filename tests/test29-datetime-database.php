@@ -1,13 +1,9 @@
 <?php
 
-require_once 'const.php';
-require_once CITYPHP . '__autoload.php';
-require_once CITYPHP . 'time/datetimeNow.php';
-require_once CITYPHP . 'time/datetimeTo.php';
-
-use cityphp\db\Mysql;
+require 'const.php';
+require 'vendor/autoload.php';
  
-$db = new MySql(
+$db = new cityphp\db\Mysql(
     MYSQL_HOST,
     MYSQL_USERNAME,
     MYSQL_PASSWORD,

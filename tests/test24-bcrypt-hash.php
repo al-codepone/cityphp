@@ -1,12 +1,11 @@
 <?php
 
-require_once 'const.php';
-require_once CITYPHP . 'bcryptHash.php';
+require 'vendor/autoload.php';
 
 $signUpPassword = 'password';
 $loginPassword = 'password';
 
-//store in database
+//store this value in a database
 $signUpHash = bcryptHash($signUpPassword, 10);
 
 //get hash using previous hash
