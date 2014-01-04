@@ -1,17 +1,33 @@
 <?php
 
-//include composer autoload
+//enable access to cityphp and project files
 require 'vendor/autoload.php';
-
-//use a class from the project package
-$monster = new purple\Monster();
 
 //use a function from cityphp
 $token = sha1Token();
 
-echo
-    $token,
-    ', ',
-    $monster->talk();
+//use a class from cityphp
+//this class definition should go in a separate file
+class Validator extends cityphp\forms\FormValidator {
+	public function __construct() {
+		parent::__construct(array(
+			'username' => '',
+			'password' => ''));
+	}
+}
+
+$validator = new Validator();
+
+//use a function from the project package
+$thing = thing();
+
+//use a class from the project package
+$monster = new purple\Monster();
+
+echo implode("<br/>\n", array(
+	$token,
+	print_r($validator->values(), true),
+	$thing,
+	$monster->talk()));
 
 ?>

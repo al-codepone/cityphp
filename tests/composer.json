@@ -5,6 +5,7 @@
     "autoload": {
         "psr-0": {"purple\\": "src/"},
         "files": [
+            "src/purple/thing.php",
             "src/purple/html/dummyForm.php",
             "src/purple/html/dummyForm2.php",
             "src/purple/html/myForm.php"
