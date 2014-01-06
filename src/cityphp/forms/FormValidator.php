@@ -12,7 +12,17 @@ abstract class FormValidator {
         array $optionalKeys = array(),
         array $submittedValues = null)
     {
-        $this->values = $values;
+        $this->values = array();
+
+        foreach($values as $i => $v) {
+            if(is_int($i)) {
+                $this->values[$v] = '';
+            }
+            else {
+                $this->values[$i] = $v;
+            }
+        }
+
         $this->optionalKeys = $optionalKeys;
         $this->submittedValues = is_null($submittedValues)
             ? $_POST
