@@ -7,12 +7,11 @@ require 'vendor/autoload.php';
 $token = sha1Token();
 
 //use a class from cityphp
-//this class definition should go in a separate file
 class Validator extends cityphp\forms\FormValidator {
     public function __construct() {
         parent::__construct(array(
-            'username' => '',
-            'password' => ''));
+            'username',
+            'password'));
     }
 }
 
