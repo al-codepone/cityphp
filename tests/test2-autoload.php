@@ -9,11 +9,11 @@ $token = sha1Token();
 //use a class from cityphp
 //this class definition should go in a separate file
 class Validator extends cityphp\forms\FormValidator {
-	public function __construct() {
-		parent::__construct(array(
-			'username' => '',
-			'password' => ''));
-	}
+    public function __construct() {
+        parent::__construct(array(
+            'username' => '',
+            'password' => ''));
+    }
 }
 
 $validator = new Validator();
@@ -25,9 +25,9 @@ $thing = thing();
 $monster = new purple\Monster();
 
 echo implode("<br/>\n", array(
-	$token,
-	print_r($validator->values(), true),
-	$thing,
-	$monster->talk()));
+    $token,
+    print_r($validator->values(), true),
+    $thing,
+    $monster->talk()));
 
 ?>

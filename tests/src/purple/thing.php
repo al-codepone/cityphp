@@ -1,7 +1,7 @@
 <?php
 
 function thing() {
-	return 'thing';
+    return 'thing';
 }
 
 ?>
