@@ -3,34 +3,24 @@
 namespace cityphp\forms;
 
 abstract class FormValidator {
-    private $values;
-    private $optionalKeys;
-    private $submittedValues;
+    private $inputs;
+    private $optionalInputs;
+    private $submittedInputs;
 
     public function __construct(
-        array $values = array(),
-        array $optionalKeys = array(),
-        array $submittedValues = null)
+        array $inputs = array(),
+        array $optionalInputs = array(),
+        array $submittedInputs = null)
     {
-        $this->values = array();
-
-        foreach($values as $i => $v) {
-            if(is_int($i)) {
-                $this->values[$v] = '';
-            }
-            else {
-                $this->values[$i] = $v;
-            }
-        }
-
-        $this->optionalKeys = $optionalKeys;
-        $this->submittedValues = is_null($submittedValues)
+        $this->inputs = $this->normalizeInputs($inputs);
+        $this->optionalInputs = $optionalInputs;
+        $this->submittedInputs = is_null($submittedInputs)
             ? $_POST
-            : $submittedValues;
+            : $submittedInputs;
     }
 
     public function values() {
-        return $this->values;
+        return $this->inputs;
     }
 
     public function validate() {
@@ -38,10 +28,10 @@ abstract class FormValidator {
             $values = array();
             $errors = array();
 
-            foreach(array_keys($this->values) as $key) {
-                $value = isset($this->submittedValues[$key])
-                    ? $this->submittedValues[$key]
-                    : $this->values[$key];
+            foreach(array_keys($this->inputs) as $key) {
+                $value = isset($this->submittedInputs[$key])
+                    ? $this->submittedInputs[$key]
+                    : $this->inputs[$key];
 
                 $methodName = "validate_$key";
                 $values[$key] = $value;
@@ -67,22 +57,39 @@ abstract class FormValidator {
         }
     }
 
-    protected function addValues(array $values) {
-        $this->values = array_merge($this->values, $values);
+    protected function addInputs(array $inputs) {
+        $this->inputs = array_merge($this->inputs, $this->normalizeInputs($inputs));
     }
 
-    protected function addOptionalKeys(array $keys) {
-        $this->optionalKeys = array_merge($this->optionalKeys, $keys);
+    protected function addOptionalInputs(array $inputs) {
+        $this->optionalInputs = array_merge($this->optionalInputs, $inputs);
     }
 
     private function isReady() {
-        foreach(array_keys($this->values) as $key) {
-            if(!isset($this->submittedValues[$key]) && !in_array($key, $this->optionalKeys)) {
+        foreach(array_keys($this->inputs) as $key) {
+            if(!isset($this->submittedInputs[$key])
+                && !in_array($key, $this->optionalInputs))
+            {
                 return false;
             }
         }
 
         return true;
+    }
+
+    private function normalizeInputs(array $inputs) {
+        $normalizedInputs = array();
+        
+        foreach($inputs as $i => $v) {
+            if(is_int($i)) {
+                $normalizedInputs[$v] = '';
+            }
+            else {
+                $normalizedInputs[$i] = $v;
+            }
+        }
+
+        return $normalizedInputs;
     }
 }
 
