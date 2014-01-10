@@ -9,10 +9,11 @@ class MyValidator extends FormValidator {
         parent::__construct(
 
             //set the input names and default values
+            //the first one is the same as 'input1' => ''
             array(
-                'input1' => '',
+                'input1',
                 'input2' => '',
-                'input3' => '',
+                'input3' => 'default value',
                 'food' => array()),
 
             //set the optional inputs
