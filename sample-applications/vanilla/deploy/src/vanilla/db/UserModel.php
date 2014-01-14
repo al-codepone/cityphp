@@ -2,11 +2,6 @@
 
 namespace vanilla\db;
 
-require_once CITYPHP . 'bcryptHash.php';
-require_once VANILLA . 'emailStates.php';
-require_once VANILLA . 'emailTaken.php';
-require_once VANILLA . 'usernameTaken.php';
-
 use cityphp\db\DatabaseAdapter;
 use vanilla\db\ModelFactory;
 

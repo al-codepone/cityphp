@@ -1,8 +1,5 @@
 <?php
 
-require_once CITYPHP . 'html/blist.php';
-require_once CITYPHP . 'html/input.php';
-
 function resetPassword(array $formData, $errors = array()) {
     return
         '<form method="post">

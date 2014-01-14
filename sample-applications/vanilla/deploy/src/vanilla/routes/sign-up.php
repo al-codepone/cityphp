@@ -1,11 +1,6 @@
 <?php
 
-require_once CITYPHP . 'html/autofocus.php';
-require_once VANILLA . 'html/signUp.php';
-
-use vanilla\forms\SignUpValidator;
-
-$validator = new SignUpValidator();
+$validator = new vanilla\forms\SignUpValidator();
 
 if($user) {
     $content = 'You are already signed up.';

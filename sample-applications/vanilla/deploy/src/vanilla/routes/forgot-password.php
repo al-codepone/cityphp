@@ -1,12 +1,8 @@
 <?php
 
-require_once CITYPHP . 'html/autofocus.php';
-require_once VANILLA . 'html/forgotPassword.php';
-
 use vanilla\db\ModelFactory;
-use vanilla\forms\ForgotPasswordValidator;
 
-$validator = new ForgotPasswordValidator();
+$validator = new vanilla\forms\ForgotPasswordValidator();
 
 if(list($formData, $errors) = $validator->validate()) {
     if($errors) {

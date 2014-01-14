@@ -1,11 +1,6 @@
 <?php
 
-require_once VANILLA . 'html/accountUpdated.php';
-require_once VANILLA . 'html/editAccount.php';
-
-use vanilla\forms\EditAccountValidator;
-
-$validator = new EditAccountValidator();
+$validator = new vanilla\forms\EditAccountValidator();
 
 if(!$user) {
     $content = 'Log in to edit your account.';

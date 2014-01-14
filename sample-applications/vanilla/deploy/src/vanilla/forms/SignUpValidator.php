@@ -3,9 +3,6 @@
 
 namespace vanilla\forms;
 
-require_once VANILLA . 'validatePassword.php';
-require_once VANILLA . 'validateUsername.php';
-
 use cityphp\forms\FormValidator;
 
 class SignUpValidator extends FormValidator {

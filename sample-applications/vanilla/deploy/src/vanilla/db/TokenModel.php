@@ -2,9 +2,6 @@
 
 namespace vanilla\db;
 
-require_once CITYPHP . 'bcryptHash.php';
-require_once CITYPHP . 'time/datetimeNow.php';
-
 use cityphp\db\DatabaseAdapter;
 use cityphp\db\DatabaseHandle;
 

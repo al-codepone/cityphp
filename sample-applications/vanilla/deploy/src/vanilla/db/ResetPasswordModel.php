@@ -2,9 +2,6 @@
 
 namespace vanilla\db;
 
-require_once CITYPHP . 'sha1Token.php';
-require_once VANILLA . 'email.php';
-
 use cityphp\db\DatabaseHandle;
 use vanilla\db\ModelFactory;
 

@@ -2,8 +2,6 @@
 
 namespace vanilla\forms;
 
-require_once VANILLA . 'validatePassword.php';
-
 use cityphp\forms\FormValidator;
 
 class ResetPasswordValidator extends FormValidator {

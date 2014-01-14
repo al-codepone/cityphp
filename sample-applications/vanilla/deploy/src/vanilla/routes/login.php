@@ -1,11 +1,6 @@
 <?php
 
-require_once CITYPHP . 'html/autofocus.php';
-require_once VANILLA . 'html/login.php';
-
-use vanilla\forms\LoginValidator;
-
-$validator = new LoginValidator();
+$validator = new vanilla\forms\LoginValidator();
 
 if($user) {
     $content = 'You are already logged in.';

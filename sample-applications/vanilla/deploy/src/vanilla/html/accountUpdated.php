@@ -1,7 +1,5 @@
 <?php
 
-require_once VANILLA . 'emailStates.php';
-
 function accountUpdated($userData, $formData) {
     $state = emailStates($userData, $formData);
     $sentence = '';

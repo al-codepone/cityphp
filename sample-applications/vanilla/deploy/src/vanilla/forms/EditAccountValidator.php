@@ -2,10 +2,6 @@
 
 namespace vanilla\forms;
 
-require_once VANILLA . 'invalidPassword.php';
-require_once VANILLA . 'isPassword.php';
-require_once VANILLA . 'validateUsername.php';
-
 use cityphp\forms\FormValidator;
 
 class EditAccountValidator extends FormValidator {

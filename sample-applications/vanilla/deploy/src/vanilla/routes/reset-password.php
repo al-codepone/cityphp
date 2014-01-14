@@ -1,16 +1,12 @@
 <?php
 
-require_once CITYPHP . 'html/autofocus.php';
-require_once VANILLA . 'html/resetPassword.php';
-
 use vanilla\db\ModelFactory;
-use vanilla\forms\ResetPasswordValidator;
 
 $resetPasswordModel = ModelFactory::get('vanilla\db\ResetPasswordModel');
 $tokenData = $resetPasswordModel->getToken($_GET['id'], $_GET['token']);
 
 if($tokenData) {
-    $validator = new ResetPasswordValidator();
+    $validator = new vanilla\forms\ResetPasswordValidator();
 
     if(list($formData, $errors) = $validator->validate()) {
         if($errors) {
