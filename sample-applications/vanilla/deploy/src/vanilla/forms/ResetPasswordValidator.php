@@ -7,8 +7,8 @@ use cityphp\forms\FormValidator;
 class ResetPasswordValidator extends FormValidator {
     public function __construct() {
         parent::__construct(array(
-            'password' => '',
-            'confirm_password' => ''));
+            'password',
+            'confirm_password'));
     }
 
     protected function validate_password($value) {

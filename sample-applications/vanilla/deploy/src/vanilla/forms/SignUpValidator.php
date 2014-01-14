@@ -8,10 +8,10 @@ use cityphp\forms\FormValidator;
 class SignUpValidator extends FormValidator {
     public function __construct() {
         parent::__construct(array(
-            'username' => '',
-            'email' => '',
-            'password' => '',
-            'confirm_password' => ''));
+            'username',
+            'email',
+            'password',
+            'confirm_password'));
     }
 
     protected function validate_username($value) {

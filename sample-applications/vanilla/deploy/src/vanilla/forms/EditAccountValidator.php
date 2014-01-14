@@ -8,11 +8,11 @@ class EditAccountValidator extends FormValidator {
     public function __construct() {
         parent::__construct(array(
             'delete_flag' => false,
-            'username' => '',
-            'email' => '',
-            'password' => '',
-            'confirm_password' => '',
-            'current_password' => ''));
+            'username',
+            'email',
+            'password',
+            'confirm_password',
+            'current_password'));
     }
 
     protected function validate_username($value) {

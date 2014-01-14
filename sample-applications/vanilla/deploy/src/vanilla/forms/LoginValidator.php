@@ -8,8 +8,8 @@ class LoginValidator extends FormValidator {
     public function __construct() {
         parent::__construct(
             array(
-                'username' => '',
-                'password' => '',
+                'username',
+                'password',
                 'remember_me' => false),
             array(
                 'remember_me'));
