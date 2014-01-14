@@ -1,11 +1,5 @@
 <?php
 
-define('VENDOR', 'C:/wamp/www/cityphp/
-    C:/wamp/www/cityphp/sample-applications/vanilla/deploy/vendor/');
-
-define('CITYPHP', 'C:/wamp/www/cityphp/cityphp/');
-define('VANILLA', 'C:/wamp/www/cityphp/sample-applications/vanilla/deploy/vendor/vanilla/');
-
 define('SITE', 'localhost');
 define('ROOT', '/cityphp/sample-applications/vanilla/deploy/');
 define('CSS', ROOT . 'css/');
