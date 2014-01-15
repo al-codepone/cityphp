@@ -19,7 +19,7 @@
 - `EMAIL_LOG_FILE` - if `EMAIL_IS_LOG` is `true` then automated emails will be logged to the file specified by this constant
 - `BCRYPT_COST` - the bcrypt hash cost. Must be between 4-31 inclusive. As of the year 2014 it's recommended you use something between 10-12.
 
-Upload all the files in the `deploy` directory to the web application root on your web server. Using a web browser visit `install.php`. If the installation is successful, then you'll see a link to the home page. Delete `install.php` from your web server.
+Disable magic quotes. Upload all the files in the `deploy` directory to the web application root on your web server. Using a web browser visit `install.php`. If the installation is successful, then you'll see a link to the home page. Delete `install.php` from your web server.
 
 ## Other Notes
 
