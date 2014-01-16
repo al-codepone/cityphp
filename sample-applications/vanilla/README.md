@@ -11,7 +11,7 @@
 - `MYSQL_HOST` - the MySQL database host
 - `MYSQL_USERNAME` - the MySQL database username
 - `MYSQL_PASSWORD` - the MySQL database password
-- `MYSQL_NAME` - the MySQL database name
+- `MYSQL_DBNAME` - the MySQL database name
 - `SESSION_NAME` - if you have multiple instances of `vanilla` running on the same server, then this value must be different for each instance.
 - `EMAIL_FROM` - the email address used to send users automated emails such as email verification and password reset
 - `EMAIL_IS_SEND` - if `false` then automated emails will not be sent to users

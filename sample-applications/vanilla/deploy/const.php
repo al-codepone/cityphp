@@ -15,7 +15,7 @@ define('RESET_PASSWORD', ROOT . 'reset-password/');
 define('MYSQL_HOST', 'localhost');
 define('MYSQL_USERNAME', 'big');
 define('MYSQL_PASSWORD', 'tree');
-define('MYSQL_NAME', 'myfirstdb');
+define('MYSQL_DBNAME', 'myfirstdb');
 define('MYSQL_DEBUG', false);
 
 define('TABLE_USERS', 'users');
