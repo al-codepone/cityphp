@@ -17,3 +17,13 @@
     - add route() base path parameter
     - remove nested ternary operators
     - add clamp() function
+- 2014-01-20, 0.4.0
+    - Use namespaces for classes.
+    - Autoload classes.
+    - Improve HTML snippet functions.
+    - Add composer support.
+    - Add 30 tests.
+    - Allow form validator to validate against data other than POST.
+    - Add debug flag to database system.
+    - New documentation.
+    - Minor improvements to vanilla sample application.
