@@ -27,3 +27,4 @@
     - Add debug flag to database system.
     - New documentation.
     - Minor improvements to vanilla sample application.
+    - Add SQLite support.
