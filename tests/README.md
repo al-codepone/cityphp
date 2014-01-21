@@ -1,6 +1,6 @@
 # cityphp tests
 
-These are all the cityphp tests. These tests make up all the code in the [cityphp manual](http://ikitovagn.com/t/cityphp-manual-0.4.0.html).
+These are all the cityphp tests. These tests make up all the code in the [cityphp manual](http://ikitovagn.com/t/cityphp-0.4.0-manual.html).
 
 ## Installation
 
