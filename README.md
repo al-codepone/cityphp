@@ -4,7 +4,7 @@
 [Corn Wand](https://github.com/al-codepone/corn-wand),
 [pajamaSQL](https://github.com/al-codepone/pajamaSQL),
 [Paper Cello](https://github.com/al-codepone/paper-cello),
-[Bouncer's Book](https://github.com/al-codepone/bouncers-book),
+[Bouncer's Book](https://github.com/al-codepone/bouncers-book) and
 [Screen Name](https://github.com/al-codepone/screen-name).
 
 cityphp is a full featured PHP 5.3.0+ web application library.
